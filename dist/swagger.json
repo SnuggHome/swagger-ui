@@ -1,1069 +1,2532 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Maps4News API",
-        "version": "0.1"
-    },
-    "host": "api.maps4news.com",
-    "schemes": [
-        "https"
-    ],
-    "basePath": "/v1",
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/login": {
-            "post": {
-                "description": "This endpoint allows the user to authenticate and obtain an api key.\n",
-                "parameters": [
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "The user's email",
-                        "required": true,
-                        "type": "string",
-                        "format": "email"
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "The user's password",
-                        "required": true,
-                        "type": "string",
-                        "format": "password"
-                    }
-                ],
-                "tags": [
-                    "User",
-                    "Authentication"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Api Token",
-                        "schema": {
-                            "$ref": "#/definitions/Token"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid or missing api token",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Snugg Pro API",
+    "description": "Access <a href='https://snuggpro.com'>Snugg Pro</a> programmatically through our API. <br/><a href='https://snuggpro.com/help'>Visit our knowledge base</a> for help on using Snugg Pro"
+  },
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/companies/{companyId}/accounts": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
         },
-        "/users": {
-            "get": {
-                "description": "Get all users you have acess to.\n\n- Organisation admins will get all users in their organisation.\n\n- Normal users will only get their own user object.\n",
-                "tags": [
-                    "User"
-                ],
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Array of user objects.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/User"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid or missing api token.",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{id}": {
-            "get": {
-                "description": "Used to get a user that you have access to.",
-                "tags": [
-                    "User"
-                ],
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/id"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User object.",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid or missing api token.",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/me": {
-            "get": {
-                "description": "Alias of `/users/{id}`. (All subroutes are compatible. e.g. `/users/me/svgs`)\n\nGet the current users's object\n",
-                "tags": [
-                    "User"
-                ],
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Array of svg objects.",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid or missing api token.",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{id}/dimensions": {
-            "get": {
-                "description": "Get all the dimensions the user has access to.",
-                "tags": [
-                    "User",
-                    "Dimension"
-                ],
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/id"
-                    },
-                    {
-                        "$ref": "#/parameters/page"
-                    },
-                    {
-                        "$ref": "#/parameters/per_page"
-                    },
-                    {
-                        "$ref": "#/parameters/X-Page"
-                    },
-                    {
-                        "$ref": "#/parameters/X-Per-Page"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Array of dimension objects.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Dimension"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid or missing api token.",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{id}/svgs": {
-            "get": {
-                "description": "Get all the svgs the user has access to.",
-                "tags": [
-                    "User",
-                    "Svg"
-                ],
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/id"
-                    },
-                    {
-                        "$ref": "#/parameters/page"
-                    },
-                    {
-                        "$ref": "#/parameters/per_page"
-                    },
-                    {
-                        "$ref": "#/parameters/X-Page"
-                    },
-                    {
-                        "$ref": "#/parameters/X-Per-Page"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Array of svg objects.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Svg"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid or missing api token.",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "parameters": {
-        "id": {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the resource.",
-            "required": true,
+        "summary": "List of accounts",
+        "description": "Returns a list of all active Snugg Pro users for a company.",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
             "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/accounts"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
         },
-        "page": {
-            "name": "page",
-            "in": "query",
-            "description": "The page you want to visit.\n\n- Default: 1\n",
-            "required": false,
+        "summary": "Account",
+        "description": "A single Snugg Pro user by account ID",
+        "parameters": [
+          {
+            "name": "accountId",
+            "description": "Account Id",
             "type": "integer"
-        },
-        "per_page": {
-            "name": "per_page",
-            "in": "query",
-            "description": "The number of resources on one page\n\n- Default: 12\n\n- Minimum: 1\n\n- Maximum: 50\n",
-            "type": "integer",
-            "required": false
-        },
-        "X-Per-Page": {
-            "name": "X-Per-Page",
-            "in": "header",
-            "description": "Same as `per_page`",
-            "type": "integer",
-            "required": false
-        },
-        "X-Page": {
-            "name": "X-Page",
-            "in": "header",
-            "type": "integer",
-            "description": "Same as `page`",
-            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/accounts"
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
         }
+      }
     },
-    "securityDefinitions": {
-        "api_key": {
-            "type": "apiKey",
-            "name": "X-Api-Token",
-            "description": "The api token",
-            "in": "header"
+    "/companies/{companyId}/programs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "List of programs",
+        "description": "A list of all programs that a company is associated with.",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/programs"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
         }
+      }
     },
-    "definitions": {
-        "timestamp": {
-            "type": "string",
-            "format": "DateTime",
-            "description": "ISO 8601/RFC3339 formatted DateTime",
-            "example": "2016-03-17T16:35:01.000Z"
+    "/companies/{companyId}/jobs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
         },
-        "Token": {
-            "type": "object",
-            "properties": {
-                "token": {
-                    "type": "string",
-                    "description": "Unique user token used for identification",
-                    "example": "Pjde6XYkfOhRErZaFn0ibNVbXGP4CE8UcUpMDBg4"
-                }
+        "summary": "List of jobs",
+        "description": "All the jobs for a given company",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/jobs"
+              }
             }
-        },
-        "Error": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string",
-                    "description": "Error message",
-                    "example": "An error occoured"
-                }
-            }
-        },
-        "Contract": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "string"
-                },
-                "organisation": {
-                    "$ref": "#/definitions/Organisation"
-                },
-                "credits": {
-                    "type": "integer",
-                    "description": "The amount of credits that this contract adds to the organisation. If the value is 0 then the contract is a flatrate contract.",
-                    "example": 100
-                },
-                "credit_period": {
-                    "type": "integer",
-                    "description": "The number of credits that can be used within a certain period."
-                },
-                "period_length": {
-                    "type": "integer",
-                    "description": "The lenght of a period, in days."
-                },
-                "date_start": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "date_end": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "Dimension": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 47
-                },
-                "dimension_set_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "A5 landscape"
-                },
-                "width": {
-                    "type": "number",
-                    "format": "float"
-                },
-                "height": {
-                    "type": "number",
-                    "format": "float"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "DimensionSet": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "Standard"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "dimensions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Dimension"
-                    }
-                }
-            }
-        },
-        "Faq": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "Identifier",
-                    "example": 1
-                },
-                "title": {
-                    "type": "string",
-                    "description": "Question",
-                    "example": "Frequently asked question"
-                },
-                "description": {
-                    "type": "string",
-                    "description": "Answer",
-                    "example": "Unescaped HTML formatted answer"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "Feature": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 4
-                },
-                "name": {
-                    "type": "string",
-                    "example": "Web"
-                },
-                "description": {
-                    "type": "string",
-                    "example": "Allows web output"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "Font": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "Helvetica-Condensed-Bold"
-                },
-                "style": {
-                    "type": "string",
-                    "enum": [
-                        "normal",
-                        "italic",
-                        "oblique",
-                        "bold",
-                        "thin"
-                    ],
-                    "example": "normal"
-                },
-                "weight": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "example": 700
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "FontFamily": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "Helvetica Condensed"
-                },
-                "fonts": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Font"
-                    }
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "IP": {
-            "type": "object",
-            "properties": {
-                "user_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "ip_address": {
-                    "type": "string",
-                    "description": "IPv4 or IPv6 address"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "Job": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "user_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "mapstyle_set": {
-                    "$ref": "#/definitions/MapstyleSet"
-                },
-                "title": {
-                    "type": "string",
-                    "description": "Title for the job"
-                },
-                "description": {
-                    "type": "string",
-                    "description": "Description of the job"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "JobResult": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "job": {
-                    "$ref": "#/definitions/Job"
-                },
-                "job_revision": {
-                    "$ref": "#/definitions/JobRevision"
-                },
-                "mapstyle": {
-                    "$ref": "#/definitions/Mapstyle"
-                },
-                "status": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "software_version": {
-                    "type": "integer",
-                    "format": "double",
-                    "example": 1,
-                    "description": "The version of the backend that was used"
-                },
-                "interface_version": {
-                    "type": "string",
-                    "example": "2.6.0b",
-                    "description": "The version of the frontend that was used"
-                },
-                "fix": {
-                    "type": "boolean",
-                    "example": true
-                },
-                "process_start": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "process_end": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "dealt_with": {
-                    "type": "boolean",
-                    "example": true,
-                    "description": "If the issue has been resolved"
-                },
-                "log": {
-                    "type": "string",
-                    "description": "The  log from the render job"
-                },
-                "preview_path": {
-                    "type": "string"
-                },
-                "file_path": {
-                    "type": "string"
-                },
-                "bought": {
-                    "type": "boolean",
-                    "example": true,
-                    "description": "If the user paid for the map with a credit"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "JobRevision": {
-            "type": "object",
-            "properties": {
-                "job_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "revision": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "object": {
-                    "type": "string",
-                    "format": "json"
-                },
-                "screenshot_url": {
-                    "type": "string",
-                    "example": "http://url.to/image.png"
-                },
-                "archived": {
-                    "type": "boolean",
-                    "description": "If the revision was used in a render job"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "JobShare": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "job": {
-                    "$ref": "#/definitions/Job"
-                },
-                "visibility": {
-                    "type": "string",
-                    "enum": [
-                        "private",
-                        "organisation",
-                        "public"
-                    ],
-                    "description": "Who can view the jobshare."
-                },
-                "hashkey": {
-                    "type": "integer",
-                    "example": 1769919554
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "Language": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "English"
-                },
-                "code": {
-                    "type": "string",
-                    "description": "3 character language code",
-                    "example": "eng"
-                },
-                "locale": {
-                    "type": "string",
-                    "example": "en_GB"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "Mapstyle": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "mapstyle_set_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "NEWS10k.xml"
-                },
-                "preview_image": {
-                    "type": "string",
-                    "description": "url to the mapstyle preview image"
-                },
-                "scale_min": {
-                    "minimum": 0,
-                    "example": 0,
-                    "description": "The lowest scale that the Mapstyle can be used at. Must be smaller than scale_min"
-                },
-                "scale_max": {
-                    "minimum": 1,
-                    "example": 16249,
-                    "description": "The highest scale that the Mapstyle can be used at. Must be greater than scale_min"
-                },
-                "description": {
-                    "type": "string",
-                    "example": 70
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "MapstyleSet": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "Clear News"
-                },
-                "description": {
-                    "type": "string",
-                    "example": "A clean and simplified bright map style."
-                },
-                "version": {
-                    "type": "number",
-                    "format": "double",
-                    "example": 2
-                },
-                "supports_svg": {
-                    "type": "boolean",
-                    "description": "Indicates if the MapstyleSet supports SVG output",
-                    "example": false
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "mapstyles": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Mapstyle"
-                    }
-                }
-            }
-        },
-        "Notification": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "title": {
-                    "type": "string",
-                    "example": "Maps4News Maintenance message"
-                },
-                "description": {
-                    "type": "string",
-                    "example": "Maps4News Maintenance Message: Maintenance is scheduled for Tuesday, 13 October 2015, between 05:00 AM and 05:30 AM GMT. {...}"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "Organisation": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "ACME Inc Editors"
-                },
-                "company": {
-                    "type": "string",
-                    "example": "ACME Inc"
-                },
-                "city": {
-                    "type": "string",
-                    "example": "New York City"
-                },
-                "country": {
-                    "type": "string",
-                    "example": "United States"
-                },
-                "address": {
-                    "type": "string",
-                    "example": "14 North Moore Street"
-                },
-                "credits": {
-                    "type": "integer",
-                    "description": "Availible credits",
-                    "example": 27
-                },
-                "sales_representative": {
-                    "$ref": "#/definitions/User"
-                },
-                "manager": {
-                    "$ref": "#/definitions/User"
-                },
-                "fonts": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Font"
-                    }
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "users": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/User"
-                    }
-                }
-            }
-        },
-        "SingleSignOn": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "user": {
-                    "$ref": "#/definitions/User"
-                },
-                "sso_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "type": {
-                    "type": "string",
-                    "example": "accounts.google.com",
-                    "description": "The sso service"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "StudioLog": {
-            "type": "object"
-        },
-        "Svg": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "svg_set": {
-                    "$ref": "#/definitions/SvgSet"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "White Box",
-                    "description": "The name of the svg"
-                },
-                "svg_string": {
-                    "type": "string",
-                    "format": "svg"
-                },
-                "resize_factor": {
-                    "type": "integer",
-                    "format": "float",
-                    "example": 0.1
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "SvgSet": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "Textboxes",
-                    "description": "The name of the svg set"
-                },
-                "svg_set_type": {
-                    "$ref": "#/definitions/SvgSetType"
-                },
-                "supports_interactive": {
-                    "type": "boolean",
-                    "example": true,
-                    "description": "If the svg set is supported by interactive"
-                },
-                "import": {
-                    "type": "boolean",
-                    "example": true
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "SvgSetType": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "example": "Icons"
-                }
-            }
-        },
-        "User": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string",
-                    "description": "Full Name",
-                    "example": "John Doe"
-                },
-                "email": {
-                    "type": "string",
-                    "example": "john.doe@example.com"
-                },
-                "phone": {
-                    "type": "string",
-                    "example": "+1 555 2368",
-                    "description": "Who you gonna call? https://nnmm.nl/?F7p"
-                },
-                "profession": {
-                    "type": "string",
-                    "example": "Editor"
-                },
-                "organisation_id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "language": {
-                    "$ref": "#/definitions/Language"
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
-        },
-        "VectorLayer": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "example": 1
-                },
-                "name": {
-                    "type": "string"
-                },
-                "path": {
-                    "type": "string"
-                },
-                "bounding_box": {
-                    "type": "string"
-                },
-                "version": {
-                    "type": "integer",
-                    "format": "double"
-                },
-                "image": {
-                    "type": "string"
-                },
-                "scale_min": {
-                    "minimum": 0,
-                    "example": 0,
-                    "description": "The lowest scale that the vector layer can be used at. Must be smaller than scale_max."
-                },
-                "scale_max": {
-                    "minimum": 1,
-                    "example": 16249,
-                    "description": "The highest scale that the vector layer can be used at. Must be greater than scale_min."
-                },
-                "created_at": {
-                    "$ref": "#/definitions/timestamp"
-                },
-                "updated_at": {
-                    "$ref": "#/definitions/timestamp"
-                }
-            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
         }
+      },
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Create job",
+        "description": "Creates a single job based on a post request.",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/jobs"
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        },
+        "requiredFields": [
+          "Job First name",
+          "Job Last name",
+          "Job Address 1",
+          "Job City",
+          "Job State",
+          "Job Zip",
+          "Job Account id",
+          "Job Stage id",
+          "Job Company id"
+        ]
+      }
+    },
+    "/companies/{companyId}/job-templates": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "List of all job templates for a company",
+        "description": "",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/jobs"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Job",
+        "description": "All job data",
+        "parameters": [
+          {
+            "name": "jobId",
+            "description": "Job Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/jobs"
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/basedata": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Basedata",
+        "description": "All the simple data about the home - Not Base and Improved",
+        "parameters": [
+          {
+            "name": "jobId",
+            "description": "Job Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/basedata"
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/health": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Health",
+        "description": "Results from BPI tests and any other tests performed in the home.",
+        "parameters": [
+          {
+            "name": "jobId",
+            "description": "Job Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/health"
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/caz": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Caz",
+        "description": "Details of each combustion appliance zone",
+        "parameters": [
+          {
+            "name": "jobId",
+            "description": "Job Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/caz"
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/metrics-summary": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Metrics",
+        "description": "Data about the job",
+        "parameters": [
+          {
+            "name": "jobId",
+            "description": "Job Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/totals"
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/attics": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Attics",
+        "description": "All available attics for a job",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/attic"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/hvacs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Hvacs",
+        "description": "All available hvacs for a job",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/hvac"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/walls": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Walls",
+        "description": "All available walls for a job",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/wall"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/windows": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Windows",
+        "description": "All available windows for a job",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/window"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/concerns": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "x-swaggerUi": {
+          "hideTestEndpoints": true,
+          "hideReponseMessages": true
+        },
+        "summary": "Concerns",
+        "description": "All available concerns for a job",
+        "parameters": [
+          {
+            "name": "companyId",
+            "description": "Company Id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/concern"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        }
+      }
     }
+  },
+  "definitions": {
+    "attic": {
+      "properties": {
+        "atticInsulationDepth": {
+          "type": "string",
+          "example": "0",
+          "enum": [
+            "0",
+            "1-3",
+            "4-6",
+            "7-9",
+            "10-12",
+            "13-15",
+            "16+",
+            "Don't Know"
+          ],
+          "description": "\n        Enter the depth of all installed attic or ceiling insulation. If the insulation is not evenly distributed, estimate an average depth for the area. If the insulation is evenly distributed but has different depths installed in different area, use the depth of insulation that covers the largest area. If there is no attic and instead vaulted ceilings, enter an estimate of the thickness of insulation in the vaulted cavity.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "atticInsulationType": {
+          "type": "string",
+          "example": "Don't Know",
+          "enum": [
+            "Fiberglass or Rockwool (batts or blown)",
+            "Cellulose",
+            "Spray Foam",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of insulation that is installed in the attic or ceiling. If more than one type of insulation is installed, select the type that covers that largest area.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "atticModeledAtticArea": {
+          "type": "number",
+          "example": 468225.76,
+          "maximum": 1000000,
+          "minimum": 0,
+          "enum": false,
+          "description": "This field will be automatically calculated based on the data you entered in the input form for Conditioned Area and Number of Stories.<br><br>\n\nThis field designates the actual interior surface area of the ceiling. On the improved side, this is the new total sqft of the attic. Reduce this number if you're switching the attic from unconditioned to a conditioned space. For instance, if the original house had 1000 sqft of attic space and you converted it to a fully conditioned attic by spray foaming the roof deck and rafters, then set the base side to 1000 sqft and the improved side to 0. Then create a vaulted ceiling that is 0 on the base side and 1118 sqft on the improved side (adding 118 sqft for a 6/12 roof pitch). "
+        },
+        "atticInsulation": {
+          "type": "number",
+          "example": 33.35,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total R-value of insulation installed (BASE) or to be installed (IMPROVED) in this Attic. Framing factors have already been taken into account, so specify the R-value of the insulation within the cavity.<br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "atticKneeWallArea": {
+          "type": "number",
+          "example": 16498.14,
+          "maximum": 1000000,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total surface area of knee wall adjoining this attic space."
+        },
+        "atticKneeWallInsulation": {
+          "type": "number",
+          "example": 82.08,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total R-value of insulation installed (BASE) or to be installed (IMPROVED) in this Knee Wall cavity."
+        },
+        "atticKneeWallContinuousInsulation": {
+          "type": "number",
+          "example": 25.86,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total R-value of insulation installed (BASE) or to be installed (IMPROVED) in this Knee Wall cavity."
+        },
+        "atticHasKneeWall": {
+          "type": "string",
+          "example": "Yes",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Choose Yes if there is a knee wall in this attic space.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "atticRadiantBarrier": {
+          "type": "string",
+          "example": "Yes",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Please designate if the base or improved attic has a radiant barrier. Costs will not be adjusted for this nor will the R-Value of the attic insulation. The energy savings will be calculated in addition to the R-Value of the attic. \n        <br/>\n        \n        <br/>\n        "
+        },
+        "atticPercent": {
+          "type": "number",
+          "example": 28,
+          "enum": false,
+          "description": "Enter the % of the total footprint that is attributed to each attic or vault area."
+        },
+        "atticRoofAbsorptance": {
+          "type": "number",
+          "example": 0.8,
+          "maximum": 1,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the Solar Absorptance of the roofing material above this attic space. Solar Absorptance is equal to 1 - Solar Reflectance. For example, if the ENERGY STAR website gives a Initial Solar Reflectance of 0.27, enter 0.73. Default numbers will be supplied automatically, so don't change these settings unless you plan to specify a cool roof as an improvement."
+        },
+        "atticRoofEmissivity": {
+          "type": "number",
+          "example": 0.76,
+          "maximum": 1,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the Thermal Emittance or Emissivity of the roofing material above this attic space. Default numbers will be supplied automatically, so don't change these settings unless you plan to specify a cool roof as an improvement."
+        },
+        "atticCoolRoof": {
+          "type": "string",
+          "example": "Yes",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Choose yes if you would like to specify characteristics of a cool roof (such as ENERGY STAR qualified roof products) for either the base or improved home. Default numbers will be supplied automatically. Most contractors will not use this option unless they are actually planning to replace a roof as part of an improvement package. \n        <br/>\n        \n        <br/>\n        "
+        },
+        "atticKneeWallInsulationType": {
+          "type": "string",
+          "example": "Closed Cell Spray Foam",
+          "enum": [
+            "Fiberglass or Rockwool Batt",
+            "Blown Fiberglass or Rockwool",
+            "Cellulose",
+            "Open Cell Spray Foam",
+            "Closed Cell Spray Foam",
+            "Other"
+          ],
+          "description": "\n        Select the type of insulation that is installed in the knee wall cavity. If more than one type of insulation is installed, select the type that covers that largest area.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "atticKneeWallContinuousInsulationType": {
+          "type": "string",
+          "example": "Rigid EPS",
+          "enum": [
+            "Rigid XPS",
+            "Rigid EPS",
+            "Rigid Polyisocyanurate",
+            "Open Cell Spray Foam",
+            "Closed Cell Spray Foam",
+            "Other"
+          ],
+          "description": "\n        Select the type of continuous insulation that is installed on the knee wall. If more than one type of insulation is installed, select the type that covers that largest area.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "dhw": {
+      "properties": {
+        "dhwFuel": {
+          "type": "string",
+          "example": "Natural Gas",
+          "enum": [
+            "Electricity",
+            "Natural Gas",
+            "Fuel Oil",
+            "Propane",
+            "Solar",
+            "None",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of energy source used to provide domestic hot water for the home. Domestic hot water is typically the hot water that comes from the faucets, showers, bathtubs, washing machines and dishwashers in the home. If more than one type of energy source is used to provide hot water, select the type that provides the most gallons of hot water.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "dhwType": {
+          "type": "string",
+          "example": "Heat Pump",
+          "enum": [
+            "Standard tank",
+            "Tank with extra insulation",
+            "Heat Pump",
+            "Tankless (on-demand)",
+            "Sidearm Tank (set EF manually)",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of the hot water system that stores or delivers the domestic hot water for the home. If more than two type of system is used for hot water in the home, select the type for the one that delivers the most gallons of hot water to the home.<br><br>\n\n<strong>Note</strong>: If you have an Sidearm Tank to a Boiler (Indirect Tank), you will need to manually set the EF on the Water Heater Details. Please refer to the EF Calculator that's available in the knowledge base to determine the EF of the total system.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "dhwAge": {
+          "type": "string",
+          "example": "6-10",
+          "enum": [
+            "0-5",
+            "6-10",
+            "11-15",
+            "16-20",
+            "21-25",
+            "26-30",
+            "31-35",
+            "36+"
+          ],
+          "description": "\n        Select the age in years of the hot water system that stores or delivers the domestic hot water for the home. If more than one type of system is used for hot water in the home, select the age for the one that delivers the most gallons of hot water to the home.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "dhwLocation": {
+          "type": "string",
+          "example": "Outbuilding",
+          "enum": [
+            "Indoors and within heated area",
+            "Garage or Unconditioned Space",
+            "Outbuilding",
+            "Don't Know"
+          ],
+          "description": "\n        Select the where the hot water system that stores or delivers the domestic hot water for the home is located. If more than one type of system is used for hot water in the home, select the location for the one that delivers the most gallons of hot water to the home.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "dhwTemperatureSettings": {
+          "type": "string",
+          "example": "Medium (130-140 F)",
+          "enum": [
+            "Low (120-130 F)",
+            "Medium (130-140 F)",
+            "High (140-150 F)",
+            "Very High (150+ F)",
+            "Don't Know"
+          ],
+          "description": "\n        Select the temperature setting for the hot water system that stores or delivers the domestic hot water for the home. If more than one type of system is used for hot water in the home, select the temperature setting for the one that delivers the most gallons of hot water to the home.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "dhwEnergyFactor": {
+          "type": "integer",
+          "example": 56,
+          "maximum": 100,
+          "minimum": 1,
+          "enum": false,
+          "description": "Enter the rated Energy Factor of the water heater without a decimal. Sometimes, the Energy Factor of a water heater is expressed as 0.56 or 0.82. Enter it here as 56 or 82. The Min and Max values change based on the type of water heater. Energy Factors for most equipment can be found at ahridirectory.org."
+        },
+        "dhwTemp": {
+          "type": "integer",
+          "example": 107,
+          "maximum": 200,
+          "minimum": 100,
+          "enum": false,
+          "description": "Enter the temperature of the water produced by the water heating system."
+        },
+        "dhwManufacturer": {
+          "type": "string",
+          "example": "Noritz",
+          "enum": [
+            "Unknown",
+            "A.O. Smith",
+            "American",
+            "Bosch",
+            "Bradford White",
+            "Bryant",
+            "Comfort Maker",
+            "GE",
+            "Navien",
+            "Noritz",
+            "Rinnai",
+            "Sears",
+            "Rheem",
+            "State Industries",
+            "Stiebel Eltron",
+            "Takaji",
+            "Triangle Tube",
+            "Other"
+          ],
+          "description": "\n        Enter the Manufacturer of the water heater.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "dhwModel": {
+          "type": "string",
+          "enum": false,
+          "description": "Enter the Model number of the water heater."
+        },
+        "dhwModelYear": {
+          "type": "string",
+          "example": "1998",
+          "maximum": 2030,
+          "minimum": 1900,
+          "enum": false,
+          "description": "Enter the model year of the water heater."
+        },
+        "dhwType2": {
+          "type": "string",
+          "example": "Tankless Water Heater",
+          "enum": [
+            "Tank Water Heater",
+            "Tankless Water Heater",
+            "Heat Pump"
+          ],
+          "description": "\n        Enter the type of water heater installed (BASE) or to be installed (IMPROVED).<br><br>\n\n<strong>Note</strong>: If you have an Sidearm Tank to a Boiler (Indirect Tank), you will need to choose \"Standard tank\" as the DHW type and manually set the EF on for Base and Improved. Please refer to the EF Calculator that's available in the knowledge base to determine the EF of the total system.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "dhwPercentLoad": {
+          "type": "number",
+          "example": 40,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Percent of the annual DHW load met by this system. Both systems must add up to 100%."
+        },
+        "dhwEnergyStar": {
+          "type": "string",
+          "example": "Yes",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Select Yes if this Water Heater is ENERGY STAR Certified.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "dhwHeatingCapacity": {
+          "type": "integer",
+          "example": 36000,
+          "maximum": 9999999,
+          "minimum": 1,
+          "enum": false,
+          "description": "Enter the rated input capacity of the water heater in BTU/hr."
+        },
+        "dhwTankSize": {
+          "type": "integer",
+          "example": 40,
+          "maximum": 120,
+          "minimum": 1,
+          "enum": false,
+          "description": "Enter the tank size the water heater in gallons."
+        },
+        "dhwRecoveryEfficiency": {
+          "type": "number",
+          "example": 62,
+          "maximum": 100,
+          "minimum": 1,
+          "enum": false,
+          "description": "Enter the system recovery efficiency of the water heater. This field is optional for modeling but is required for some utility programs such as NYSERDA."
+        },
+        "dhwFuel2": {
+          "type": "string",
+          "example": "Natural Gas",
+          "enum": [
+            "Electricity",
+            "Natural Gas",
+            "Fuel Oil",
+            "Propane",
+            "Solar",
+            "None"
+          ],
+          "description": "\n        Select the type of energy source used to provide domestic hot water for the home. Domestic hot water is typically the hot water that comes from the faucets, showers, bathtubs, washing machines and dishwashers in the home. If more than one type of energy source is used to provide hot water, select the type that provides the most gallons of hot water.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "door": {
+      "properties": {
+        "doorType": {
+          "type": "string",
+          "example": "Wood",
+          "enum": [
+            "Steel, hollow",
+            "Steel, hollow with storm",
+            "Steel, insulated",
+            "Steel, insulated with Storm",
+            "Wood",
+            "Wood with Storm",
+            "Fiberglass",
+            "Fiberglass with Storm",
+            "1/2-Lite Steel, insulated",
+            "1/2-Lite Steel, insulated with Storm",
+            "1/2-Lite Wood",
+            "1/2-Lite Wood with Storm",
+            "1/2-Lite Fiberglass",
+            "1/2-Lite Fiberglass with Storm"
+          ],
+          "description": "\n        Select the type of door construction used for each door.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "doorUValue": {
+          "type": "number",
+          "example": 7.03,
+          "maximum": 9,
+          "minimum": 0.01,
+          "enum": false,
+          "description": "This field will be automatically calculated based on the data you entered in the input form. You may override this number with the actual door U-Value.<br><br>\n\n"
+        },
+        "doorArea": {
+          "type": "number",
+          "example": 736.5,
+          "maximum": 1000,
+          "minimum": 0,
+          "enum": false,
+          "description": "This field will be automatically calculated based on the data you entered in the input form. You may override this number with the actual door sizes for the home.<br><br>\n\nFor doors with glazing area of greater than or equal to 50% of the rough frame opening, model the entire door as a window with area equal to the rough frame opening. Note that even full-light swinging doors are usually less than 50% glazing."
+        },
+        "doorEnergyStar": {
+          "type": "string",
+          "example": "No",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Select Yes if this door is ENERGY STAR Certified.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "freezer": {
+      "properties": {
+        "freezerUsage": {
+          "type": "number",
+          "example": 1615.19,
+          "maximum": 10000,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the annual energy consumption for the freezer in kWh/yr. Search our knowledge base for \"Appliances Product Finder\" for more information.<br><br>\n\n<strong>Note:</strong><br>\nEdit this Base field in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "freezerManufacturer": {
+          "type": "string",
+          "example": "Whirlpool",
+          "enum": [
+            "Amana",
+            "Unknown",
+            "Asko",
+            "Bosch",
+            "Fridgidaire",
+            "GE",
+            "Igloo",
+            "LG",
+            "Maytag",
+            "Samsung",
+            "Sears",
+            "Sub-Zero",
+            "Thermador",
+            "Whirlpool",
+            "Other"
+          ],
+          "description": "\n        Enter the Manufacturer of the Freezer.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "freezerModelYear": {
+          "type": "string",
+          "example": "1998",
+          "maximum": 2030,
+          "minimum": 1900,
+          "enum": false,
+          "description": "Enter the Model Year of the Freezer."
+        },
+        "freezerModel": {
+          "type": "string",
+          "enum": false,
+          "description": "Enter the Model number for the Freezer."
+        },
+        "freezerName": {
+          "type": "string",
+          "enum": false
+        },
+        "freezerEnergyStar": {
+          "type": "string",
+          "example": "No",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        If a Freezer is installed in the home, choose if it is an ENERGY STAR model.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "hvac": {
+      "properties": {
+        "hvacSystemName": {
+          "type": "string",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Give this system a name that you can use to easily differentiate it from the others like: Old Heat Pump or Basement Furnace."
+        },
+        "hvacSystemEquipmentType": {
+          "type": "string",
+          "example": "Ductless Heat Pump",
+          "enum": [
+            "Boiler",
+            "Furnace with standalone ducts",
+            "Electric Resistance",
+            "Direct Heater",
+            "Stove or Insert",
+            "Solar Thermal",
+            "Central AC with standalone ducts",
+            "Room AC",
+            "Evaporative Cooler - Direct",
+            "Evaporative Cooler - Ducted",
+            "Ductless Heat Pump",
+            "Central Heat Pump (shared ducts)",
+            "Furnace / Central AC (shared ducts)"
+          ],
+          "description": "\n        Select which type of HVAC system you'd like to describe. This list shows every possible type of heating or cooling system (or combination thereof) that is available in our software. Pay attention to the “shared ducts” vs. “standalone ducts” component. Note: this is very similar to the “Both” option that was available in version 4.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "hvacUpgradeAction": {
+          "type": "string",
+          "example": "Remove a system permanently",
+          "enum": [
+            "Replace with a newer model",
+            "Keep an existing system as is",
+            "Remove a system permanently",
+            "Install a new non-existing system"
+          ],
+          "description": "\n        Choose an action that you plan to take for this HVAC system.<strong>Replace with a newer model:</strong><br>Replace the existing equipment with a new version of the same thing. Eg. replace a 78 AFUE furnace with a new 98 AFUE furnace<br><strong>Keep an existing system as is:</strong><br>Do nothing to a system or just change the percent of total load that that old system covers in the house.<br><strong>Remove a system permanently:</strong><br>Rip out an entire system and replace it with something completely new, like going from a direct heater and room AC to a central heat pump. In this instance you will have a system that is described on the base side, and the improved side will be blank. <br><strong>Install a new existing system:</strong><br>A brand new system that replaces the system that was removed when you chose: Remove a system permanently.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "hvacHeatingEnergySource": {
+          "type": "string",
+          "example": "Pellets",
+          "enum": [
+            "None",
+            "Electricity",
+            "Natural Gas",
+            "Propane",
+            "Fuel Oil",
+            "Pellets",
+            "Wood",
+            "Solar",
+            "Don't Know"
+          ],
+          "description": "\n        This is the primary fuel source. It is used to set prices and energy content.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "hvacPercentOfTotalHeatingLoad": {
+          "type": "number",
+          "example": 33,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the proportion of the total load for heating or cooling that this system represents. The combined heating load percentage for all heating systems specified must add up to 100%."
+        },
+        "hvacHeatingCapacity": {
+          "type": "integer",
+          "example": 48000,
+          "maximum": 1000000,
+          "minimum": 1000,
+          "enum": false,
+          "description": "Enter the output capacity of the heating equipment in (Btu/hr). <br><br><strong>NOTE:</strong> This has changed since v3 of Snugg Pro. v4 and later requires the number be in Btu/hr, not kBtu/hr. All v3 jobs that were migrated to v4 have been converted to the proper number by multiplying it by 1000."
+        },
+        "hvacDuctLocation": {
+          "type": "string",
+          "example": "50/50 Crawlspace (unconditioned) - Conditioned Space",
+          "enum": [
+            "Intentionally Conditioned Space",
+            "Attic (unconditioned)",
+            "Basement (unconditioned)",
+            "Crawlspace (unconditioned)",
+            "50/50 Attic - Basement (both unconditioned)",
+            "50/50 Attic (unconditioned) - Conditioned Space",
+            "50/50 Attic - Crawlspace (both unconditioned)",
+            "50/50 Basement (unconditioned) - Conditioned Space",
+            "50/50 Crawlspace (unconditioned) - Conditioned Space",
+            "70/30 Conditioned Space - Garage (unconditioned)"
+          ],
+          "description": "\n        Select the location of the duct work for this system.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "hvacDuctInsulation": {
+          "type": "string",
+          "example": "Duct Board 1.5\"",
+          "enum": [
+            "No Insulation",
+            "Duct Board 1\"",
+            "Duct Board 1.5\"",
+            "Duct Board 2\"",
+            "Fiberglass 1.25\"",
+            "Fiberglass 2\"",
+            "Fiberglass 2.5\"",
+            "Reflective bubble wrap",
+            "Measured (R Value)"
+          ],
+          "description": "\n        Select the type of insulation installed over the duct work for this system. Note: If ducts are covered wholly or partially by incidental insulation present in the cavity in which they are installed, then select the insulation type that most closely matches the average R-value of the insulation. If you know the actual duct insulation R-value, choose Measured (R-Value) and enter the data in the field below.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "hvacDuctLeakageValue": {
+          "type": "number",
+          "example": 5505.92,
+          "maximum": 9999,
+          "minimum": 0,
+          "enum": false,
+          "description": "If you perform a duct blaster test, please enter the tested leakage to outside at 25 Pa per RESNET Standard Section 803.7."
+        },
+        "hvacDuctEfficiency": {
+          "type": "number",
+          "example": 53,
+          "enum": false,
+          "description": "This is the overall delivery system efficiency for this distribution system. It is calculated based on the above duct leakage, location, and insulation values and is not editable. If you have chosen Intentionally Conditioned Space for the Duct Location, then the Duct Efficiency will always be 100% as the lost energy from the ducts is only lost into the building envelope and not to the outside.<br><br>\n\nAlso, if you have set the % of Total Load for this heating or cooling system to 0% (necessary when creating a brand new heating or cooling system or removing one), you will see the Duct Efficiency at 100%, since there is zero loss on a system that doesn't exist. "
+        },
+        "hvacPercentOfTotalCoolingLoad": {
+          "type": "number",
+          "example": 14,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the proportion of the total load for heating or cooling that this system represents. The combined cooling load percentage for all cooling systems specified DOES NOT need to add up to 100%. If you set the cooling load to 70% and don't add any other cooling system, then the model assumes you're not conditioning 30% of the home's cooling load."
+        },
+        "hvacCoolingCapacity": {
+          "type": "integer",
+          "example": 24000,
+          "maximum": 1000000,
+          "minimum": 1000,
+          "enum": false,
+          "description": "Enter the output capacity of the cooling equipment in (Btu/hr). <br><br>Reminder: cooling systems are often rated in tons. 1 ton = 12,000 Btu/hr.<br><br><strong>NOTE:</strong> This has changed since v3 of Snugg Pro. v4 and later requires the number be in Btu/hr, not kBtu/hr. All v3 jobs that were migrated to v4 have been converted to the proper number by multiplying it by 1000."
+        },
+        "hvacCoolingSystemEfficiency": {
+          "type": "number",
+          "example": 89.38,
+          "maximum": 100,
+          "minimum": 1,
+          "enum": false,
+          "description": "The Seasonal Energy Efficiency Ratio (SEER) is the average annual cooling efficiency of an air-conditioning or heat pump system as a weighted average of EERs over a range of rate outside air conditions following a standard test method. It includes energy of auxiliary systems such as the indoor and outdoor fans. Units: Btu/Wh. <br><br>\n\nThe Energy Efficiency Ratio (EER) is the measurement of the cooling capacity for a unit (in Btu/hour) divided by electrical energy it uses (in watts) at a specific temperature of 95ºF. Units: Btu/Wh. EER is only used for Room AC units.<br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "hvacHeatingSystemEfficiency": {
+          "type": "number",
+          "example": 78,
+          "maximum": 500,
+          "minimum": 0,
+          "enum": false,
+          "description": "Annual Fuel Utilization Efficiency (AFUE) is a percentage representing the ratio of heat energy units provided to the total energy value of fuel consumed in identical units. It is most commonly used for combustion based heating as well as electric resistance heating.<br><br>\n\nHeating Seasonal Performance Factor (HSPF) is the ratio of Btus of heat energy provided to the watt-hours of electricity consumed. It is most commonly used for air and ground source heat pumps.<br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "hvacDuctLeakage": {
+          "type": "string",
+          "example": "3% - Very tight",
+          "enum": [
+            "30% - Very leaky",
+            "15% - Somewhat leaky",
+            "6% - Well sealed",
+            "3% - Very tight",
+            "Measured (CFM25)"
+          ],
+          "description": "\n        Choose the estimated leakage to the outside through the duct system as a percentage of the total air handler flow. If you actually performed a duct blaster test, choose Measured (CFM25) and enter a value in the field below.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "hvacCoolingSystemManufacturer": {
+          "type": "string",
+          "example": "American Standard",
+          "enum": [
+            "Unknown",
+            "AirEase",
+            "Amana",
+            "American Standard",
+            "Bosch",
+            "Bryant",
+            "Carrier",
+            "Coleman",
+            "Comfort Maker",
+            "Coolerado",
+            "Daikin",
+            "Day & Night",
+            "Fridgidaire",
+            "Fujitsu",
+            "General Electric",
+            "Goodman",
+            "Janitrol",
+            "Lennox",
+            "LG",
+            "Luxaire",
+            "Mitsubishi",
+            "Panasonic",
+            "Payne",
+            "Peerless",
+            "Rheem",
+            "RUUD",
+            "Samsung",
+            "Sears Kenmore",
+            "Tappan",
+            "Trane",
+            "Utica",
+            "York",
+            "Other"
+          ],
+          "description": "\n        Enter the Manufacturer of the Cooling Equipment.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "hvacCoolingSystemModel": {
+          "type": "string",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Enter the Model # of the Cooling Equipment.<br><br>\n\n<strong>Pro-tip</strong>: Always capture an image of the nameplate on the existing equipment and store it in the photos section for future reference. "
+        },
+        "hvacCoolingSystemModelYear": {
+          "type": "string",
+          "example": "1995",
+          "maximum": 2030,
+          "minimum": 1900,
+          "enum": false,
+          "description": "Enter the Year the Cooling Equipment was built."
+        },
+        "hvacHeatingSystemManufacturer": {
+          "type": "string",
+          "example": "Lennox",
+          "enum": [
+            "Unknown",
+            "AirEase",
+            "Amana",
+            "American Standard",
+            "Bosch",
+            "Bryant",
+            "Carrier",
+            "Coleman",
+            "Comfort Master",
+            "Daikin",
+            "Day & Night",
+            "Fujitsu",
+            "General Electric",
+            "Goodman",
+            "Janitrol",
+            "Lennox",
+            "LG",
+            "Luxaire",
+            "Mitsubishi",
+            "Payne",
+            "Panasonic",
+            "Peerless",
+            "Rheem",
+            "RUUD",
+            "Samsung",
+            "Sears Kenmore",
+            "Tappan",
+            "Trane",
+            "Utica",
+            "York",
+            "Other"
+          ],
+          "description": "\n        Enter the Manufacturer of the Heating Equipment.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "hvacHeatingSystemModelYear": {
+          "type": "string",
+          "example": "1998",
+          "maximum": 2030,
+          "minimum": 1900,
+          "enum": false,
+          "description": "Enter the Year the Heating Equipment was built."
+        },
+        "hvacHeatingSystemModel": {
+          "type": "string",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Enter the Model # of the Heating Equipment.<br><br>\n\n<strong>Pro-tip</strong>: Always capture an image of the nameplate on the existing equipment and store it in the photos section for future reference. "
+        },
+        "hvacDuctInsulationValue": {
+          "type": "number",
+          "example": 70.94,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "If you know the actual R-value of the duct insulation, you may enter it here."
+        },
+        "hvacHeatPumpInverter": {
+          "type": "string",
+          "example": "No",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Select Yes if this heat pump has a variable speed or Inverter driven compressor. These extremely high efficiency units perform to much lower outside air temperatures than single speed units and require much less or no electric resistance backup heat.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "refrigerator": {
+      "properties": {
+        "refrigeratorAge": {
+          "type": "string",
+          "example": "0-14",
+          "enum": [
+            "0-14",
+            "15-21",
+            "22-24",
+            "25-26",
+            "27-30",
+            "31-34",
+            "35-42",
+            "42+",
+            "Don't Know"
+          ],
+          "description": "\n        Select the age range of this refrigerator.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "refrigeratorSize": {
+          "type": "string",
+          "example": "22+",
+          "enum": [
+            "1-5",
+            "6-12",
+            "13-15",
+            "16-18",
+            "19-21",
+            "22+",
+            "Don't Know"
+          ],
+          "description": "\n        Select the size range of this refrigerator.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "refrigeratorName": {
+          "type": "string",
+          "maxLength": 30,
+          "enum": false,
+          "description": "Select the age range and the size range in cubic feet of the refrigerator. For HPXML purposes, always enter the house's \"primary\" refrigerator first."
+        },
+        "refrigeratorUsage": {
+          "type": "number",
+          "example": 5203.1,
+          "maximum": 10000,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the annual energy consumption for the refrigerator in kWh/yr. Search our knowledge base for \"Appliances Product Finder\" for more information. <br><br>\n\n<strong>Note:</strong><br>\nEdit this Base field in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "refrigeratorManufacturer": {
+          "type": "string",
+          "example": "LG",
+          "enum": [
+            "Unknown",
+            "Amana",
+            "Asko",
+            "Bosch",
+            "Fridgidaire",
+            "GE",
+            "Hotpoint",
+            "KitchenAid",
+            "LG",
+            "Maytag",
+            "Samsung",
+            "Sears",
+            "Sub-Zero",
+            "Thermador",
+            "Whirlpool",
+            "Fisher & Paykel",
+            "Ikea",
+            "Liebherr",
+            "Other"
+          ],
+          "description": "\n        Enter the Manufacturer of the Refrigerator.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "refrigeratorModel": {
+          "type": "string",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Enter the Model number for the Refrigerator."
+        },
+        "refrigeratorEnergyStar": {
+          "type": "string",
+          "example": "No",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        If a Refrigerator is installed in the home, choose if it is an ENERGY STAR model.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "refrigeratorModelYear": {
+          "type": "string",
+          "maximum": 2030,
+          "minimum": 1900,
+          "enum": false,
+          "description": "Enter the Model Year of the Refrigerator."
+        }
+      }
+    },
+    "vault": {
+      "properties": {
+        "vaultModeledVaultArea": {
+          "type": "number",
+          "example": 432765.62,
+          "maximum": 1000000,
+          "minimum": 0,
+          "enum": false,
+          "description": "This field will be automatically calculated based on the data you entered in the input form for Conditioned Area and Number of Stories. This is the actual surface area of the vaulted ceiling. It includes a default roof pitch of 5/12. When you override this number, be sure to include the complete sqft of the vault that's covering conditioned space.<br><br>\n\nThis field designates the interior surface area of the vaulted ceiling. On the improved side, this is the new total sqft of the vaulted ceiling. Increase this number if you're switching the attic from unconditioned to a conditioned space.<br><br>\n\nFor instance, if the original house had 1000 sqft of attic space and you converted it to a fully conditioned attic by spray foaming the roof deck and rafters, then set the base side to 1000 sqft and the improved side to 0. Then create a vaulted ceiling that is 0 on the base side and 1118 sqft on the improved side (adding 118 sqft for a 6/12 roof pitch). "
+        },
+        "vaultCavityInsulation": {
+          "type": "number",
+          "example": 50.48,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total R-value of insulation installed (BASE) or to be installed (IMPROVED) in this Vaulted Ceiling.<br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "vaultContinuousInsulation": {
+          "type": "number",
+          "example": 95.33,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total R-value of continuous insulation installed or to be installed in this Vaulted Ceiling. Continuous insulation is any insulation like spray foam or rigid foam that is continuous and consistent in R-value across studs, joists, or any framing member.<br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>\n\n"
+        },
+        "vault": {
+          "type": "string",
+          "example": "Well",
+          "enum": [
+            "Well",
+            "Yes",
+            "Poorly",
+            "No"
+          ],
+          "description": "\n        Is there insulation in the vaulted ceiling cavities of this home? If so, how good is it? If unsure, please leave blank.<br><br>\n\n<strong>Well</strong>: All cavities contain insulation at full or near full depth with gaps and voids not exceeding 5%.<br><br>\n<strong>Poor</strong>: Majority of cavities contain insulation, but one or more of the following is suspected: low density, low depth, poor installation.<br><br>\n<strong>Yes</strong>: You can confirm that insulation exists, but are unsure of the installation quality.<br><br>\n<strong>No</strong> - No insulation value is applied to cavities.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "vaultPercent": {
+          "type": "number",
+          "example": 30,
+          "enum": false,
+          "description": "Enter the % of the total footprint that is attributed to each attic or vault area."
+        },
+        "vaultRoofAbsorptance": {
+          "type": "number",
+          "example": 0.8,
+          "maximum": 1,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the Solar Absorptance of the roofing material above this vaulted ceiling. Solar Absorptance is equal to 1 - Solar Reflectance. For example, if the ENERGY STAR website gives a Initial Solar Reflectance of 0.27, enter 0.73. Default numbers will be supplied automatically, so don't change these settings unless you plan to specify a cool roof as an improvement."
+        },
+        "vaultRoofEmissivity": {
+          "type": "number",
+          "example": 0.76,
+          "maximum": 1,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the Thermal Emittance or Emissivity of the roofing material above this vaulted ceiling. Default numbers will be supplied automatically, so don't change these settings unless you plan to specify a cool roof as an improvement."
+        },
+        "vaultCoolRoof": {
+          "type": "string",
+          "example": "No",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Choose yes if you would like to specify characteristics of a cool roof (such as ENERGY STAR qualified roof products) for either the base or improved home. Default numbers will be supplied automatically. Most contractors will not use this option unless they are actually planning to replace a roof as part of an improvement package. \n        <br/>\n        \n        <br/>\n        "
+        },
+        "vaultCavityInsulationType": {
+          "type": "string",
+          "example": "Other",
+          "enum": [
+            "Fiberglass or Rockwool Batt",
+            "Blown Fiberglass or Rockwool",
+            "Cellulose",
+            "Open Cell Spray Foam",
+            "Closed Cell Spray Foam",
+            "Other"
+          ],
+          "description": "\n        Select the type of insulation that is installed in the vault. If more than one type of insulation is installed, select the type that covers that largest area.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "vaultContinuousInsulationType": {
+          "type": "string",
+          "example": "Closed Cell Spray Foam",
+          "enum": [
+            "Rigid XPS",
+            "Rigid EPS",
+            "Rigid Polyisocyanurate",
+            "Open Cell Spray Foam",
+            "Closed Cell Spray Foam",
+            "Other"
+          ],
+          "description": "\n        Select the type of continuous insulation that is installed on the vault. If more than one type of insulation is installed, select the type that covers that largest area.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "wall": {
+      "properties": {
+        "wallExteriorWallSiding": {
+          "type": "string",
+          "example": "Don't Know",
+          "enum": [
+            "Brick Veneer",
+            "Metal/vinyl siding",
+            "Shingle/Composition",
+            "Stone veneer",
+            "Stucco",
+            "Wood/Fiber Cement siding",
+            "Other",
+            "None",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of exterior finish material that covers the outside of this home.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "wallExteriorWallConstruction": {
+          "type": "string",
+          "example": "Concrete Block",
+          "enum": [
+            "Concrete Block",
+            "Full Brick",
+            "2x4 Frame",
+            "2x6 Frame",
+            "Log",
+            "Straw Bale",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of construction material used to build the exterior walls of the home that are above grade (above ground).\n        <br/>\n        \n        <br/>\n        "
+        },
+        "wallsInsulated": {
+          "type": "string",
+          "example": "Poorly",
+          "enum": [
+            "Well",
+            "Poorly",
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Is there insulation in the wall cavities of this home? If so, how good is it? If unsure, please leave blank.<br><br>\n\n<strong>Well</strong>: All cavities contain insulation at full or near full depth with gaps and voids not exceeding 5%.<br><br>\n<strong>Poor</strong>: Majority of cavities contain insulation, but one or more of the following is suspected: low density, low depth, poor installation.<br><br>\n<strong>Yes</strong>: You can confirm that insulation exists, but are unsure of the installation quality.<br><br>\n<strong>No</strong> - No insulation value is applied to cavities.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "wallCavityInsulation": {
+          "type": "number",
+          "example": 69.59,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total R-value of insulation installed (BASE) or to be installed (IMPROVED) in this Wall System.<br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "wallContinuousInsulation": {
+          "type": "number",
+          "example": 97.56,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total R-value of continuous insulation installed or to be installed in this Wall System. Continuous insulation is any insulation like spray foam or rigid foam that is continuous and consistent in R-value across studs, joists, or any framing member.<br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>\n\n"
+        },
+        "wallModeledWallArea": {
+          "type": "number",
+          "example": 730058.39,
+          "maximum": 1000000,
+          "minimum": 10,
+          "enum": false,
+          "description": "This field will be automatically calculated based on the data you entered in the input form for House Length, House Width, and Average Wall Height.<br><br>\n\nThis field designates the total gross exterior wall area, including all window and door openings. It does not include walls shared in common with other conditioned dwelling units. An additional 1' of wall height is automatically included for every story beyond the first to account for rim joists. First floor (foundation) rim joists are included separately in the basement or crawl space wall areas. <br><br>\n\nThe BASE area designates the sqft of this wall system on the house. The IMPROVED area designates only the sqft that will be improved. If you're not improving all of that wall, enter only the sqft that is actually being improved. The IMPROVED area cannot be used to reduce or increase the sqft of wall area in the home. "
+        },
+        "wallSystemPercentOfTotal": {
+          "type": "number",
+          "example": 40,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "If there is more than one wall system type, enter the % of all walls that this system represents. Both wall systems must add up to 100%. If there is only one type of wall system in the house, then enter 100%."
+        },
+        "wallCavityInsulationType": {
+          "type": "string",
+          "example": "Other",
+          "enum": [
+            "Fiberglass or Rockwool Batt",
+            "Blown Fiberglass or Rockwool",
+            "Cellulose",
+            "Open Cell Spray Foam",
+            "Closed Cell Spray Foam",
+            "Other"
+          ],
+          "description": "\n        Select the type of insulation that is installed in the wall cavity. If more than one type of insulation is installed, select the type that covers that largest area.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "wallContinuousInsulationType": {
+          "type": "string",
+          "example": "Closed Cell Spray Foam",
+          "enum": [
+            "Rigid XPS",
+            "Rigid EPS",
+            "Rigid Polyisocyanurate",
+            "Open Cell Spray Foam",
+            "Closed Cell Spray Foam",
+            "Other"
+          ],
+          "description": "\n        Select the type of continuous insulation that is installed on the wall. If more than one type of insulation is installed, select the type that covers that largest area.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "window": {
+      "properties": {
+        "windowType": {
+          "type": "string",
+          "example": "Single pane + storm",
+          "enum": [
+            "Single pane",
+            "Single pane + storm",
+            "Double pane",
+            "Double pane + low e",
+            "Triple pane + low e",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of windows that are installed in the home. If more than one type of window is installed, add a second window system.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "windowFrame": {
+          "type": "string",
+          "example": "Wood or metal clad",
+          "enum": [
+            "Metal",
+            "Vinyl",
+            "Wood or metal clad",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of window frame material that is used for the windows installed in the home. If more than one type of window is installed, add a second window system.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "windowNorthAreaPercent": {
+          "type": "number",
+          "example": 0,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the % of EXPOSED wall area for each orientation that is made up of window glass area. If some of the wall is shared with another conditioned unit (multi-family, townhome, etc.) put in the % of the exposed area only."
+        },
+        "windowEfficiency": {
+          "type": "number",
+          "example": 1.28,
+          "maximum": 2,
+          "minimum": 0.01,
+          "enum": false,
+          "description": "Enter the average gross window (including frame effects) U-value of the windows installed (BASE) or to be installed (IMPROVED). <br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "windowAreaNorth": {
+          "type": "number",
+          "example": 1362.46,
+          "maximum": 10000,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total area of windows for this orientation of this Window System. BASE values determine the area of the existing windows in the house. The IMPROVED values represent the area of windows in this orientation that are actually going to be improved. The difference in sqft between BASE and IMPROVED will be assumed as unchanged. \n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "windowAreaEast": {
+          "type": "number",
+          "example": 8651.24,
+          "maximum": 10000,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total area of windows for this orientation of this Window System. BASE values determine the area of the existing windows in the house. The IMPROVED values represent the area of windows in this orientation that are actually going to be improved. The difference in sqft between BASE and IMPROVED will be assumed as unchanged. \n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "windowAreaSouth": {
+          "type": "number",
+          "example": 1136.29,
+          "maximum": 10000,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total area of windows for this orientation of this Window System. BASE values determine the area of the existing windows in the house. The IMPROVED values represent the area of windows in this orientation that are actually going to be improved. The difference in sqft between BASE and IMPROVED will be assumed as unchanged. \n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "windowAreaWest": {
+          "type": "number",
+          "example": 9762.9,
+          "maximum": 10000,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the total area of windows for this orientation of this Window System. BASE values determine the area of the existing windows in the house. The IMPROVED values represent the area of windows in this orientation that are actually going to be improved. The difference in sqft between BASE and IMPROVED will be assumed as unchanged. \n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "windowSolarHeatGainCoefficient": {
+          "type": "number",
+          "example": 0.74,
+          "maximum": 0.99,
+          "minimum": 0.01,
+          "enum": false,
+          "description": "Enter the average gross window (including frame effects) Solar Heat Gain Coefficient (SHGC) of the windows installed (BASE) or to be installed (IMPROVED). IMPORTANT! Do not adjust this number to account for the affects of solar screens or shades. Use the Exterior Treatment fields below for this and only change the SHGC if the window unit itself is being replaced.<br><br>\n\n<strong>Note:</strong><br>\nEdit Base fields in the Details section only if you're confident of the actual value that is entered. The modeling engine utilizes utility data and input form data to determine the \"effective\" values on the Base side.<br><br>\n\nEdit Improved fields in the Details section with the details of what you recommend be installed in the house. These values are only used if the item is Recommended. Default values are supplied by the modeling engine, but can be overridden.<br><br>"
+        },
+        "windowEastAreaPercent": {
+          "type": "number",
+          "example": 92,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the % of EXPOSED wall area for each orientation that is made up of window glass area. If some of the wall is shared with another conditioned unit (multi-family, townhome, etc.) put in the % of the exposed area only."
+        },
+        "windowSouthAreaPercent": {
+          "type": "number",
+          "example": 32,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the % of EXPOSED wall area for each orientation that is made up of window glass area. If some of the wall is shared with another conditioned unit (multi-family, townhome, etc.) put in the % of the exposed area only."
+        },
+        "windowWestAreaPercent": {
+          "type": "number",
+          "example": 5,
+          "maximum": 100,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the % of EXPOSED wall area for each orientation that is made up of window glass area. If some of the wall is shared with another conditioned unit (multi-family, townhome, etc.) put in the % of the exposed area only."
+        },
+        "windowNorthOverhangDepth": {
+          "type": "number",
+          "example": 18.63,
+          "maximum": 20,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the average window overhang width (feet) on the exterior walls for this orientation."
+        },
+        "windowEastOverhangDepth": {
+          "type": "number",
+          "example": 0.75,
+          "maximum": 20,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the average window overhang width (feet) on the exterior walls for this orientation."
+        },
+        "windowSouthOverhangDepth": {
+          "type": "number",
+          "example": 9.92,
+          "maximum": 20,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the average window overhang width (feet) on the exterior walls for this orientation."
+        },
+        "windowWestOverhangDepth": {
+          "type": "number",
+          "example": 19.65,
+          "maximum": 20,
+          "minimum": 0,
+          "enum": false,
+          "description": "Enter the average window overhang width (feet) on the exterior walls for this orientation."
+        },
+        "windowExteriorTreatmentNorth": {
+          "type": "string",
+          "example": "Solar Screen (all year)",
+          "enum": [
+            "Insect Screen (full)",
+            "Insect Screen (half)",
+            "Solar Screen (summer only)",
+            "Solar Screen (all year)",
+            "Solar Shades, Vertical Roller (summer only)",
+            "Solar Shades, Vertical Roller (all year)",
+            "Solar Shades, Louvered (summer only)",
+            "Solar Shades, Louvered (all year)",
+            "Solar Film (all year)",
+            "No Treatment"
+          ],
+          "description": "\n        Choose the type of exterior shading device that's attached to windows on this side of the home. IMPORTANT! Do not adjust the SHGC number to account for the affects of solar screens or shades and only change the SHGC if the window unit itself is being replaced.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "windowExteriorTreatmentEast": {
+          "type": "string",
+          "example": "Solar Shades, Vertical Roller (all year)",
+          "enum": [
+            "Insect Screen (full)",
+            "Insect Screen (half)",
+            "Solar Screen (summer only)",
+            "Solar Screen (all year)",
+            "Solar Shades, Vertical Roller (summer only)",
+            "Solar Shades, Vertical Roller (all year)",
+            "Solar Shades, Louvered (summer only)",
+            "Solar Shades, Louvered (all year)",
+            "Solar Film (all year)",
+            "No Treatment"
+          ],
+          "description": "\n        Choose the type of exterior shading device that's attached to windows on this side of the home. IMPORTANT! Do not adjust the SHGC number to account for the affects of solar screens or shades and only change the SHGC if the window unit itself is being replaced.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "windowExteriorTreatmentSouth": {
+          "type": "string",
+          "example": "Solar Shades, Vertical Roller (all year)",
+          "enum": [
+            "Insect Screen (full)",
+            "Insect Screen (half)",
+            "Solar Screen (summer only)",
+            "Solar Screen (all year)",
+            "Solar Shades, Vertical Roller (summer only)",
+            "Solar Shades, Vertical Roller (all year)",
+            "Solar Shades, Louvered (summer only)",
+            "Solar Shades, Louvered (all year)",
+            "Solar Film (all year)",
+            "No Treatment"
+          ],
+          "description": "\n        Choose the type of exterior shading device that's attached to windows on this side of the home. IMPORTANT! Do not adjust the SHGC number to account for the affects of solar screens or shades and only change the SHGC if the window unit itself is being replaced.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "windowExteriorTreatmentWest": {
+          "type": "string",
+          "example": "Solar Shades, Louvered (all year)",
+          "enum": [
+            "Insect Screen (full)",
+            "Insect Screen (half)",
+            "Solar Screen (summer only)",
+            "Solar Screen (all year)",
+            "Solar Shades, Vertical Roller (summer only)",
+            "Solar Shades, Vertical Roller (all year)",
+            "Solar Shades, Louvered (summer only)",
+            "Solar Shades, Louvered (all year)",
+            "Solar Film (all year)",
+            "No Treatment"
+          ],
+          "description": "\n        Choose the type of exterior shading device that's attached to windows on this side of the home. IMPORTANT! Do not adjust the SHGC number to account for the affects of solar screens or shades and only change the SHGC if the window unit itself is being replaced.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "windowEnergyStar": {
+          "type": "string",
+          "example": "No",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Select Yes if this window system is ENERGY STAR Certified.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "caz": {
+      "properties": {
+        "cazName": {
+          "type": "string",
+          "enum": false
+        },
+        "cazAmbientCo": {
+          "type": "integer",
+          "example": 24385,
+          "enum": false,
+          "description": "Ambient Carbon Monoxide in Parts Per Million. Should not exceed 35 ppm per BPI Protocol."
+        },
+        "cazPoorCaseTest": {
+          "type": "number",
+          "example": 896.06,
+          "enum": false,
+          "description": "The poor case CAZ depressurization test is configured by determining the largest combustion appliance zone depressurization attainable at the time of testing due to the combined effects of door position, exhaust appliance operation, and air handler fan operation. A base pressure must be measured with all fans off and doors open. The poor case CAZ depressurization measurement is the pressure difference between the largest depressurization attained at the time of testing and the base pressure."
+        },
+        "cazNotes": {
+          "type": "string",
+          "enum": false,
+          "description": "CAZ Zone Notes"
+        }
+      }
+    },
+    "hes_scores": {
+      "properties": {
+        "hesBaseScore": {
+          "type": "integer",
+          "example": 3088,
+          "enum": false,
+          "description": "The Home Energy Score for the home."
+        },
+        "hesLabelNumber": {
+          "type": "integer",
+          "example": 12156,
+          "enum": false,
+          "description": "The identification number for this specific home energy score."
+        },
+        "hesHescoreVersion": {
+          "type": "number",
+          "example": 2.61,
+          "maximum": 100,
+          "enum": false,
+          "description": "The Home Energy Score version for this score."
+        },
+        "hesSourceEnergyTotalBase": {
+          "type": "number",
+          "example": 870.81,
+          "enum": false,
+          "description": "The total source energy calculated by the Home Energy Score."
+        },
+        "hesSourceEnergyAssetBase": {
+          "type": "number",
+          "example": 398.24,
+          "enum": false,
+          "description": "The source energy calculated by the Home Energy Score."
+        },
+        "hesBuildingId": {
+          "type": "number",
+          "example": 77.63,
+          "enum": false,
+          "description": "The building id generated by the Home Energy Score."
+        }
+      }
+    },
+    "basedata": {
+      "properties": {
+        "yearBuilt": {
+          "type": "string",
+          "example": "1923",
+          "maximum": 2017,
+          "minimum": 1800,
+          "enum": false,
+          "description": "Enter the year the home or building was constructed. If there was a major addition made to the home, the \"Year built\" should be entered as the year the majority of the area that is heated and air conditioned was built."
+        }
+      }
+    },
+    "accounts": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 37879,
+          "enum": false,
+          "description": "This is the unique Snugg Pro ID assigned to the user."
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Shane",
+          "enum": false
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Bowman",
+          "enum": false
+        },
+        "email": {
+          "type": "string",
+          "example": "Ernesto_Mraz@hotmail.com",
+          "enum": false,
+          "description": "This is the user's login email address, which may be different from the address displayed in the report."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "example": "(421) 259-4548",
+          "enum": false
+        },
+        "title": {
+          "type": "string",
+          "example": "Energy Auditor",
+          "enum": false
+        },
+        "certifications": {
+          "type": "string",
+          "example": "Program-certified",
+          "enum": false
+        },
+        "hoursOfOperation": {
+          "type": "string",
+          "example": "9-5 Monday thru Friday",
+          "enum": false
+        }
+      }
+    },
+    "health": {
+      "properties": {
+        "healthAmbientCarbonMonoxide": {
+          "type": "string",
+          "example": "Warning",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthNaturalConditionSpillage": {
+          "type": "string",
+          "example": "Warning",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthWorstCaseDepressurization": {
+          "type": "string",
+          "example": "Warning",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthWorstCaseSpillage": {
+          "type": "string",
+          "example": "Failed",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthUndilutedFlueCo": {
+          "type": "string",
+          "example": "Passed",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthDraftPressure": {
+          "type": "string",
+          "example": "Passed",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthGasLeak": {
+          "type": "string",
+          "example": "Failed",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthVenting": {
+          "type": "string",
+          "example": "Warning",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthMoldMoisture": {
+          "type": "string",
+          "example": "Warning",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthRadon": {
+          "type": "string",
+          "example": "Not Tested",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthAsbestos": {
+          "type": "string",
+          "example": "Failed",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthLead": {
+          "type": "string",
+          "example": "Passed",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        },
+        "healthElectrical": {
+          "type": "string",
+          "example": "Passed",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Warning",
+            "Not Tested"
+          ],
+          "description": "\n        Choose the appropriate description for this test. If you performed an actual test and it passed, then choose \"Passed\", if the test failed, then choose \"Failed\". If you did not perform this test, but suspect there might be issues or have notes to provide the homeowner or contractor, then choose \"Warning\". If you did not perform this test and do not want the test information to show up on the homeowner report, then choose \"Not Tested\".\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "concern": {
+      "properties": {
+        "concernSummary": {
+          "type": "string",
+          "example": "Heating system is old",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Type a short sentence that details a concern from the homeowner. This could be regarding comfort, health and safety, energy savings, aesthetics, noise, etc. There is no right or wrong answer."
+        },
+        "concernDetail": {
+          "type": "string",
+          "example": "Furnace needs to be replaced for additional comfort and health & safety issues.",
+          "enum": false,
+          "description": "Type a more detailed description of this concern from the homeowner."
+        }
+      }
+    },
+    "programs": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 73466,
+          "enum": false,
+          "description": "The unique numeric Snugg Pro ID assigned to the program"
+        },
+        "name": {
+          "type": "string",
+          "example": "NYSERDA",
+          "enum": false,
+          "description": "The name of the program"
+        },
+        "website": {
+          "type": "string",
+          "example": "https://www.nyserda.ny.gov/All-Programs/Programs/Home-Performance-With-ENERGY-STAR",
+          "enum": false,
+          "description": "The website of the program"
+        },
+        "phone": {
+          "type": "string",
+          "example": "(618) 244-9170",
+          "enum": false,
+          "description": "The phone number of the program"
+        }
+      }
+    },
+    "jobs": {
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "Eva",
+          "enum": false
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Bryant",
+          "enum": false
+        },
+        "renterOwner": {
+          "type": "string",
+          "example": 1,
+          "enum": [
+            1
+          ],
+          "description": "\n        Does the customer own or rent this property.\n        <br/>\n        Field options:\n        <br/>\n         0 → Renter <br/> 1 → Owner <br/>"
+        },
+        "serviceTime": {
+          "type": "string",
+          "example": "2017-06-09T13:41:29.846Z",
+          "enum": false,
+          "description": "Time at which the appointment will take place."
+        },
+        "email": {
+          "type": "string",
+          "example": "Juston_Daugherty9@hotmail.com",
+          "enum": false,
+          "description": "The email address of the homeowner (or tenant)."
+        },
+        "homePhone": {
+          "type": "string",
+          "example": "(446) 793-2090",
+          "enum": false,
+          "description": "Phone number of the home in this format (555) 555-5555."
+        },
+        "address1": {
+          "type": "string",
+          "example": "57 Dorothy Crescent",
+          "enum": false,
+          "description": "First line of the home address."
+        },
+        "address2": {
+          "type": "string",
+          "example": "Fleetwood Greens",
+          "enum": false,
+          "description": "Second line of the home address."
+        },
+        "city": {
+          "type": "string",
+          "example": "Evieland",
+          "enum": false,
+          "description": "City of the home."
+        },
+        "state": {
+          "type": "string",
+          "enum": false,
+          "description": "State of the home."
+        },
+        "zip": {
+          "type": "string",
+          "example": "94328",
+          "enum": false,
+          "description": "Zip code of the home."
+        },
+        "accountId": {
+          "type": "integer",
+          "example": 12475,
+          "enum": false,
+          "description": "Unique identifier of the Snugg Pro user who owns this job."
+        },
+        "stageId": {
+          "type": "string",
+          "example": 7,
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "description": "\n        Current stage ID of the job.\n        <br/>\n        Field options:\n        <br/>\n         1 → Lead <br/> 2 → Audit <br/> 3 → Bid Proposed <br/> 4 → Bid Approved <br/> 5 → Retrofit In Progress <br/> 6 → Retrofit Complete <br/> 7 → QA <br/> 8 → Uncategorized <br/> 9 → Archived Won <br/> 10 → Archived Lost <br/>"
+        },
+        "companyId": {
+          "type": "integer",
+          "example": 1791,
+          "enum": false,
+          "description": "Unique identifier of the Snugg Pro company who owns the job."
+        }
+      }
+    },
+    "recommendations": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": 3,
+          "enum": [
+            1,
+            2,
+            3
+          ],
+          "description": "\n        <p><strong>Recommend</strong> a measure to feature it in the report's upgrade details section. This measure will factor into the job's total cost, savings and SIR.</p><p><strong>Note</strong> a measure to list it in the report as 'Additional Notes'. Noted measures do not count towards the job's total cost, savings and SIR.</p><p><strong>Decline</strong> a measure to hide it altogether report. Declined measures do not count towards the job's total cost, savings and SIR.</p>\n        <br/>\n        Field options:\n        <br/>\n         1 → Recommend <br/> 2 → Note <br/> 3 → Decline <br/>"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 255,
+          "enum": false,
+          "description": "The title will appear throughout the audit report. When appropriate, consider wording this as an actionable sentence. For instance, instead of 'Programmable Thermostat', you could write 'Program your thermostat'."
+        },
+        "cost": {
+          "type": "number",
+          "example": 885.19,
+          "enum": false
+        },
+        "measureCode": {
+          "type": "string",
+          "enum": false,
+          "description": "Used to identify a measure with a custom code."
+        },
+        "homeownerNotes": {
+          "type": "string",
+          "enum": false,
+          "description": "Add a note to the homeowner about this recommendation"
+        },
+        "contractorNotes": {
+          "type": "string",
+          "enum": false,
+          "description": "This field is intended to communicate details with other professionals. It can be turned on or off in the report so you can chose to hide technical jargon or other information when presenting to the homeowner. "
+        },
+        "whyItMatters": {
+          "type": "string",
+          "enum": false,
+          "description": "Best kept short and concise, this field is largely educational and appears in the sidebar of the recommendation."
+        }
+      }
+    },
+    "oven": {
+      "properties": {
+        "ovenFuelType": {
+          "type": "string",
+          "example": "Propane",
+          "enum": [
+            "Natural Gas",
+            "Electricity",
+            "Propane",
+            "None",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of energy source used by the oven. If the home has more than oven, select the one that is used the most. If the range and oven are dual fuel (i.e., have both a fuel heating source and an electricity heating source) select the type that is used to cook most often.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "range": {
+      "properties": {
+        "rangeFuelType": {
+          "type": "string",
+          "example": "None",
+          "enum": [
+            "Natural Gas",
+            "Electricity",
+            "Propane",
+            "None",
+            "Don't Know"
+          ],
+          "description": "\n        Select the type of energy source used by the range and oven in the home. If the home has more than one range and oven, select the one that is used the most. If the range and oven are dual fuel (i.e., have both a fuel heating source and an electricity heating source) select the type that is used to cook most often.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "pv": {
+      "properties": {
+        "pv": {
+          "type": "string",
+          "example": "Yes",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "description": "\n        Does the home have a Solar PV System?\n        <br/>\n        \n        <br/>\n        "
+        },
+        "pvArraySize": {
+          "type": "number",
+          "example": 3.52,
+          "maximum": 999,
+          "minimum": 0.01,
+          "enum": false,
+          "description": "PV system size in kW."
+        },
+        "pvAnnualProduction": {
+          "type": "integer",
+          "example": 73283,
+          "enum": false,
+          "description": "PV system annual production in kWh."
+        },
+        "pvArraySlope": {
+          "type": "integer",
+          "example": 32,
+          "maximum": 90,
+          "minimum": 30,
+          "enum": false,
+          "description": "Slope of the collector surface. Warning: 0-30 degrees is outside the range of analysis."
+        },
+        "pvArrayOrientation": {
+          "type": "integer",
+          "example": 183,
+          "maximum": 360,
+          "minimum": 0,
+          "enum": false,
+          "description": "Orientation from North. South is 180 degrees. Facing East of South is less than 180."
+        },
+        "pvModuleYear": {
+          "type": "string",
+          "maximum": 2030,
+          "minimum": 1950,
+          "enum": false,
+          "description": "Year the PV modules were manufactured. Taken into condieration for derating of system over time."
+        }
+      }
+    },
+    "totals": {
+      "properties": {
+        "annualFuelThermsUsed": {
+          "type": "number",
+          "example": 681.07,
+          "enum": false,
+          "description": "The amount of therms used by the existing home per year"
+        },
+        "annualFuelThermsImproved": {
+          "type": "number",
+          "example": 607.57,
+          "enum": false,
+          "description": "The amount of therms used by the improved home per year."
+        },
+        "annualFuelThermsSaved": {
+          "type": "number",
+          "example": 936.77,
+          "enum": false,
+          "description": "The amount of therms saved by the improved home per year compared to the existing home."
+        },
+        "annualElectricKWhUsed": {
+          "type": "number",
+          "example": 42.66,
+          "enum": false,
+          "description": "The amount of kWh used by the existing home per year"
+        },
+        "annualElectricKWhImproved": {
+          "type": "number",
+          "example": 607.17,
+          "enum": false,
+          "description": "The amount of kWh used by the improved home per year."
+        },
+        "savedKwh": {
+          "type": "number",
+          "example": 427.71,
+          "enum": false,
+          "description": "The amount of kWh saved by the improved home per year compared to the existing home."
+        },
+        "mbtuBase": {
+          "type": "number",
+          "example": 15.25,
+          "enum": false,
+          "description": "The amount of MMBtu used by the existing home per year."
+        },
+        "mbtuImproved": {
+          "type": "number",
+          "example": 768.24,
+          "enum": false,
+          "description": "The amount of MMBtu used by the improved home per year."
+        },
+        "savedMbtu": {
+          "type": "number",
+          "example": 422.09,
+          "enum": false,
+          "description": "The amount of MMBtu saved by the improved home per year compared to the existing home."
+        },
+        "annualFuelDollarsSpent": {
+          "type": "integer",
+          "example": 41293,
+          "enum": false,
+          "description": "The cost of the fuel energy used by the existing home per year."
+        },
+        "annualFuelDollarsImproved": {
+          "type": "integer",
+          "example": 72056,
+          "enum": false,
+          "description": "The cost of the fuel energy used by the improved home per year"
+        },
+        "annualFuelDollarsSpentSaved": {
+          "type": "integer",
+          "example": 74014,
+          "enum": false,
+          "description": "The cost of the fuel energy saved by the improved home per year compared to the existing home."
+        },
+        "annualElectricDollarsSpent": {
+          "type": "integer",
+          "example": 35565,
+          "enum": false,
+          "description": "The cost of the electric energy used by the existing home per year."
+        },
+        "annualElectricDollarsImproved": {
+          "type": "integer",
+          "example": 54158,
+          "enum": false,
+          "description": "The cost of the electric energy used by the improved home per year"
+        },
+        "annualElectricDollarsSpentSaved": {
+          "type": "integer",
+          "example": 11210,
+          "enum": false,
+          "description": "The cost of the electric energy saved by the improved home per year compared to the existing home."
+        },
+        "yearlyEnergyCost": {
+          "type": "number",
+          "example": 810.41,
+          "enum": false,
+          "description": "The total CO2 used by the existing home per year."
+        },
+        "yearlyEnergyCostImproved": {
+          "type": "number",
+          "example": 617.41,
+          "enum": false,
+          "description": "The total CO2 used by the improved home per year"
+        },
+        "totalSavings": {
+          "type": "number",
+          "example": 540.15,
+          "enum": false,
+          "description": "The total CO2 saved by the improved home per year compared to the existing home."
+        },
+        "installedCosts": {
+          "type": "integer",
+          "example": 34020,
+          "enum": false,
+          "description": "The total cost for all of the improvements recommended or installed."
+        },
+        "savedMbtuPercent": {
+          "type": "number",
+          "example": 74,
+          "enum": false,
+          "description": "The percent of total energy saved by all of the improvements recommended or installed."
+        },
+        "savedCo2Percent": {
+          "type": "number",
+          "example": 92,
+          "enum": false,
+          "description": "The percent of total CO2 saved by all of the improvements recommended or installed."
+        },
+        "paybackYears": {
+          "type": "number",
+          "example": 395.65,
+          "enum": false,
+          "description": "The fist year with non-negative cumulative cash flow which includes energy escalation."
+        },
+        "sir": {
+          "type": "number",
+          "example": 939.59,
+          "enum": false,
+          "description": "The Savings to Investment Ratio. If the SIR is 1 or greater, then the energy savings from the item will pay for itself before it needs to be replaced again."
+        },
+        "mirr": {
+          "type": "number",
+          "example": 24,
+          "enum": false,
+          "description": "The Modified Internal Rate of Return. This is the return on investment. Roughly speaking, if you invested the same amount of money for this project into a bank account, your equivalent interest rate from all of the energy savings would be the MIRR."
+        }
+      }
+    }
+  }
 }
