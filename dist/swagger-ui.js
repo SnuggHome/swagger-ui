@@ -198,8 +198,48 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
   stack1 = ((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
   return buffer + "</div>\n";
+},"7":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "                    <h4 data-control data-parm-toggle data-toggle=\"collapse\"\n                        data-target=\"#parm-"
+    + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
+    + "_"
+    + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
+    + "\">\n                        Parameters\n                    </h4>\n\n                    <div data-content class=\"operation-params collapse in\" id=\"parm-"
+    + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
+    + "_"
+    + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
+    + "\">\n                    </div>\n\n";
+},"9":function(depth0,helpers,partials,data) {
+  return "                        <div class=\"auth\">\n";
+  },"11":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "                            <div id=\"api_information_panel\" style=\"top: 526px; left: 776px; display: none;\">\n";
+  stack1 = helpers.each.call(depth0, depth0, {"name":"each","hash":{},"fn":this.program(12, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "                            </div>\n";
+},"12":function(depth0,helpers,partials,data) {
+  var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression, buffer = "                                    <div title='";
+  stack1 = lambda((depth0 != null ? depth0.description : depth0), depth0);
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "'>"
+    + escapeExpression(lambda((depth0 != null ? depth0.scope : depth0), depth0))
+    + "</div>\n";
+},"14":function(depth0,helpers,partials,data) {
+  return "                            <button type=\"button\" class=\"api-ic ic-off btn btn-default pull-right\">Oauth</button>\n                        </div>\n";
+  },"16":function(depth0,helpers,partials,data) {
+  return "                        <div class=\"response-content-type\"/>\n";
+  },"18":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "                    <div style=\"margin:0;padding:0;display:inline\"></div>\n                    <h4 data-control data-toggle=\"collapse\" data-target=\"#response-"
+    + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
+    + "_"
+    + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
+    + "\">\n                        Response Messages\n                    </h4>\n\n                    <div data-content class=\"responses-wrapper collapse in\" id=\"response-"
+    + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
+    + "_"
+    + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
+    + "\">\n                        <table class=\"fullwidth\">\n                            <tbody class=\"operation-status\">\n                            </tbody>\n                        </table>\n                    </div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<ul class='operations'>\n    <li class='"
+  var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, blockHelperMissing=helpers.blockHelperMissing, buffer = "<ul class='operations'>\n    <li class='"
     + escapeExpression(((helper = (helper = helpers.method || (depth0 != null ? depth0.method : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"method","hash":{},"data":data}) : helper)))
     + " operation' id='"
     + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
@@ -227,7 +267,35 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
   if (stack1 != null) { buffer += stack1; }
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.description : depth0), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "\n\n            <div class=\"sandbox\">\n\n            </div>\n\n        </div>\n\n        <div class=\"samples\">\n                <span class=\"model-signature\">\n                </span>\n        </div>\n\n        <div class=\"modal\" id=\"modal-"
+  buffer += "\n\n            <form accept-charset=\"UTF-8\" class=\"sandbox\">\n\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.parameters : depth0), {"name":"if","hash":{},"fn":this.program(7, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n                <h4 data-control data-toggle=\"collapse\" data-target=\"#test-"
+    + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
+    + "_"
+    + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
+    + "\">\n                    Test this endpoint\n                </h4>\n\n                <div id=\"test-"
+    + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
+    + "_"
+    + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
+    + "\">\n                    <div class=\"sandbox_header collapse in\" data-content>\n                        <input class=\"submit btn btn-primary\" name=\"commit\" type=\"submit\" value=\"Try\"\n                               data-target=\"#get_clients-modal-request\">\n                        <a href=\"#\" class=\"response_hider hide\" style=\"display: inline;\">Hide Response</a>\n                        <!--small class=\"curl-copy-message hide\" style=\"display:none;\">Copied to clipboard</small-->\n                        <!--span class=\"response_throbber hide\" style=\"display: none;\"></span-->\n\n";
+  stack1 = ((helper = (helper = helpers.oauth || (depth0 != null ? depth0.oauth : depth0)) != null ? helper : helperMissing),(options={"name":"oauth","hash":{},"fn":this.program(9, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  if (!helpers.oauth) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n";
+  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.oauth : depth0), {"name":"each","hash":{},"fn":this.program(11, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n";
+  stack1 = ((helper = (helper = helpers.oauth || (depth0 != null ? depth0.oauth : depth0)) != null ? helper : helperMissing),(options={"name":"oauth","hash":{},"fn":this.program(14, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
+  if (!helpers.oauth) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n                    </div>\n\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.type : depth0), {"name":"if","hash":{},"fn":this.program(16, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n                </div>\n\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.responseMessages : depth0), {"name":"if","hash":{},"fn":this.program(18, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "            </form>\n\n        </div>\n\n        <div class=\"samples\">\n                <span class=\"model-signature\">\n                </span>\n        </div>\n\n        <div class=\"modal\" id=\"modal-"
     + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
     + "_"
     + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
@@ -316,7 +384,7 @@ this["Handlebars"]["templates"]["param_readonly_required"] = Handlebars.template
     + escapeExpression(((helper = (helper = helpers['default'] || (depth0 != null ? depth0['default'] : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"default","hash":{},"data":data}) : helper)))
     + "\n";
 },"6":function(depth0,helpers,partials,data) {
-  return "                (empty)\n";
+  return "                Required\n";
   },"8":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "                <code class=\"code-signature\">"
@@ -348,7 +416,7 @@ this["Handlebars"]["templates"]["param_readonly"] = Handlebars.template({"1":fun
     + "</textarea>\n            <div class=\"parameter-content-type\"/>\n";
 },"3":function(depth0,helpers,partials,data) {
   var stack1, buffer = "";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0['default'] : depth0), {"name":"if","hash":{},"fn":this.program(4, data),"inverse":this.program(6, data),"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0['default'] : depth0), {"name":"if","hash":{},"fn":this.program(4, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer;
 },"4":function(depth0,helpers,partials,data) {
@@ -357,8 +425,6 @@ this["Handlebars"]["templates"]["param_readonly"] = Handlebars.template({"1":fun
     + escapeExpression(((helper = (helper = helpers['default'] || (depth0 != null ? depth0['default'] : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"default","hash":{},"data":data}) : helper)))
     + "\n";
 },"6":function(depth0,helpers,partials,data) {
-  return "                (empty)\n";
-  },"8":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "                <code class=\"code-signature\">"
     + escapeExpression(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"type","hash":{},"data":data}) : helper)))
@@ -372,7 +438,7 @@ this["Handlebars"]["templates"]["param_readonly"] = Handlebars.template({"1":fun
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.isBody : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.program(3, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "        <div class=\"small-description\">\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.type : depth0), {"name":"if","hash":{},"fn":this.program(8, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.type : depth0), {"name":"if","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "            <div class=\"markdown\">"
     + escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"description","hash":{},"data":data}) : helper)))
@@ -21675,7 +21741,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       model: param,
       tagName: 'div',
       className: 'parameter-item',
-      readOnly: this.model.isReadOnly,
+      readOnly: true, //this.model.isReadOnly,
       swaggerOptions: this.options.swaggerOptions
   });
     $('.operation-params', $(this.el)).append(paramView.render().el);
