@@ -273,7 +273,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       model: param,
       tagName: 'div',
       className: 'parameter-item',
-      readOnly: this.model.isReadOnly,
+      readOnly: true, //this.model.isReadOnly,
       swaggerOptions: this.options.swaggerOptions
   });
     $('.operation-params', $(this.el)).append(paramView.render().el);
