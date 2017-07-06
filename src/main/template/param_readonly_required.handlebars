@@ -8,14 +8,17 @@
             {{#if default}}
                 {{default}}
             {{else}}
-                Required
+                <span class="label label-danger" style="float: right">Required</span>
             {{/if}}
         {{/if}}
         <div class="small-description">
             {{#if type}}
-                <code class="code-signature">{{type}}</code>
+                <div>Type: <code class="code-signature">{{type}}</code></div>
             {{/if}}
-            <div class="markdown">{{description}}</div>
+            {{#if in}}
+              <div>In <code class="code-signature">{{in}}</code></div>
+            {{/if}}
+            <div class="markdown">Description: {{description}}</div>
         </div>
     </div>
 </div>

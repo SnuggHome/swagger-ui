@@ -68,3 +68,7 @@ a.btn.btn-primary:active {
   text-decoration: none;
   pointer: default;
 }
+.swagger-section .parameter-item .small-description {
+  line-height: 2.4em;
+  padding-top: 4px;
+}

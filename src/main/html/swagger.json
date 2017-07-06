@@ -28,7 +28,9 @@
           {
             "name": "accountId",
             "description": "Account Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -41,13 +43,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query acountQuery($accountId: Int!) {\n    account(accountId: $accountId) {\n      ...accountFragment\n    }\n  }\n  \n  fragment accountFragment on Account {\n     \n id \n firstName \n lastName \n email \n phoneNumber \n title \n certifications \n hoursOfOperation\n  }\n\n",
         "tags": [
-          "Users"
+          "User accounts"
         ]
       }
     },
@@ -58,7 +63,7 @@
         ],
         "name": "accounts",
         "summary": "Accounts",
-        "description": "Returns a list of all active Snugg Pro users for a company.",
+        "description": "Returns a list of all active Snugg Pro users for a company. These are not your customers, they are people who can log into Snugg Pro.",
         "parameters": [],
         "responses": {
           "200": {
@@ -73,14 +78,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query acountsQuery($companyId: Int!) {\n    accounts(companyId: $companyId) {\n      ...accountFragment\n    }\n  }\n  \n  fragment accountFragment on Account {\n     \n id \n firstName \n lastName \n email \n phoneNumber \n title \n certifications \n hoursOfOperation\n  }\n\n",
         "tags": [
-          "Users",
-          "Company"
+          "User accounts"
         ]
       }
     },
@@ -96,7 +103,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -109,13 +118,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
-        "graphqlQuery": "\n  query jobQuery($jobId: Int!) {\n    job(jobId: $jobId) {\n       \n id \n firstName \n lastName \n renterOwner \n serviceTime \n email \n homePhone \n address1 \n address2 \n city \n state \n zip \n accountId \n stageId \n companyId \n altId\n    }\n  }\n",
+        "graphqlQuery": "\n  query jobQuery($jobId: Int!) {\n    job(jobId: $jobId) {\n       \n id \n fromTemplateId \n firstName \n lastName \n renterOwner \n serviceTime \n email \n homePhone \n address1 \n address2 \n city \n state \n zip \n accountId \n stageId \n companyId \n programId \n altId\n    }\n  }\n",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -131,7 +143,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -147,13 +161,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query atticsQuery($jobId: Int!) {\n      attics(jobId: $jobId) {\n         \n uuid \n atticInsulationDepth \n atticInsulationType \n atticInsulationTypeImproved \n atticModeledAtticArea \n atticModeledAtticAreaImproved \n atticInsulation \n atticInsulationImproved \n atticKneeWallArea \n atticKneeWallAreaImproved \n atticKneeWallInsulation \n atticKneeWallInsulationImproved \n atticKneeWallContinuousInsulation \n atticKneeWallContinuousInsulationImproved \n atticHasKneeWall \n atticHasKneeWallImproved \n atticRadiantBarrier \n atticRadiantBarrierImproved \n atticPercent \n atticRoofAbsorptance \n atticRoofAbsorptanceImproved \n atticRoofEmissivity \n atticRoofEmissivityImproved \n atticCoolRoof \n atticCoolRoofImproved \n atticKneeWallInsulationType \n atticKneeWallInsulationTypeImproved \n atticKneeWallContinuousInsulationType \n atticKneeWallContinuousInsulationTypeImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -169,7 +186,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -182,13 +201,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query basedataQuery($jobId: Int!) {\n    basedata(jobId: $jobId) {\n       \n yearBuilt \n conditionedArea \n averageWallHeight \n houseLength \n houseWidth \n floorsAboveGrade \n numberOfOccupants \n typeOfHome \n frontOfBuildingOrientation \n tuckUnderGarage \n garageSize \n programmableThermostatInstalled \n heatingSetpointHigh \n heatingSetpointHighImproved \n heatingSetpointLow \n heatingSetpointLowImproved \n coolingSetpointHigh \n coolingSetpointHighImproved \n coolingSetpointLow \n coolingSetpointLowImproved \n totalNumberOfLightBulbs \n totalNumberOfLightBulbsImproved \n sharedWallsNorth \n percentOfCeilingsShared \n percentOfFloorsShared \n foundationBasement \n foundationAboveGradeHeight \n basementWallInsulation \n crawlspaceInsulation \n blowerDoorReading \n blowerDoorReadingImproved \n equivalentNach \n equivalentNachImproved \n conditionedAirVolume \n effectiveLeakageArea \n effectiveLeakageAreaImproved \n equivalentAch50 \n equivalentAch50Improved \n modeledBasementWallArea \n basementCavityInsulation \n basementCavityInsulationImproved \n basementContinuousInsulation \n basementContinuousInsulationImproved \n floorCavityInsulation \n floorCavityInsulationImproved \n floorContinuousInsulation \n floorContinuousInsulationImproved \n modeledFloorArea \n sharedWallsEast \n sharedWallsSouth \n sharedWallsWest \n foundationCrawlspace \n foundationSlab \n percentCflsOrLeds \n crawlCavityInsulation \n crawlCavityInsulationImproved \n crawlWallInsulation \n crawlWallInsulationImproved \n modeledCrawlWallArea \n modeledCrawlFloorArea \n crawlspaceType \n crawlspaceTypeImproved \n clothesWasherType \n clothesWasherTypeImproved \n clothesWasherEnergyStar \n clothesWasherEnergyStarImproved \n clothesWasherManufacturer \n clothesWasherManufacturerImproved \n clothesWasherModel \n clothesWasherModelImproved \n clothesWasherMef \n clothesWasherMefImproved \n clothesWasherEnergyUsage \n clothesWasherWaterUsage \n dishwasherEnergyStar \n dishwasherEnergyStarImproved \n dishwasherEnergyFactor \n dishwasherEnergyFactorImproved \n percentCflOrLed \n percentCflOrLedImproved \n windZone \n shielding \n nFactor \n numberOfBedrooms \n dishwasherModel \n dishwasherModelImproved \n dishwasherManufacturer \n dishwasherManufacturerImproved \n dishwasherModelYear \n dishwasherModelYearImproved \n clothesWasherModelYear \n clothesWasherModelYearImproved \n numberOfIncandescents \n numberOfIncandescentsImproved \n numberOfCflsInstalled \n numberOfCflsOrLeds \n numberOfCflsOrLedsImproved \n hotTub \n pool \n poolPumpType \n poolPumpTypeImproved \n poolPumpHorsepower \n poolPumpHorsepowerImproved \n basementHeating \n basementHeatingImproved \n basementCooling \n basementCoolingImproved \n poolSize \n poolPumpTurnover \n poolPumpTurnoverImproved \n poolPumpHours \n poolPumpHoursImproved \n poolPumpManufacturer \n poolPumpManufacturerImproved \n poolPumpModel \n poolPumpModelImproved \n poolPumpDaysPerYear \n poolPumpDaysPerYearImproved \n dishwasherInstalled \n dishwasherInstalledImproved \n modeledBasementFloorArea \n modeledBasementPerimeter \n includesBasement \n utilityPriceNaturalGas \n utilityPricePropane \n utilityPriceFuelOil \n utilityPriceElectricity \n heatingDesignLoad \n heatingDesignLoadImproved \n coolingSensibleDesignLoad \n coolingSensibleDesignLoadImproved \n coolingLatentDesignLoad \n coolingLatentDesignLoadImproved \n designTempWinterOutdoor \n designTempSummerOutdoor \n designTempWinterIndoor \n designTempSummerIndoor \n utilityPriceWood \n utilityPricePellets \n numberOfUnits \n numberOfLeds \n numberOfLedsImproved \n crawlspaceRimJoistLength \n crawlspaceRimJoistTreatment \n crawlspaceRimJoistTreatmentImproved \n crawlspaceRimJoistInsulation \n crawlspaceRimJoistInsulationImproved \n basementRimJoistLength \n basementRimJoistTreatment \n basementRimJoistTreatmentImproved \n basementRimJoistInsulation \n basementRimJoistInsulationImproved \n demandKW \n demandKWImproved \n demandKWSavings \n cazMaxAmbientCo \n cazMaxAmbientCoImproved \n ashrae622 \n ashraeKitchenFanCfm \n ashraeKitchenFanCfmImproved \n ashraeKitchenWindow \n ashraeKitchenWindowImproved \n ashraeNumberOfBathrooms \n ashraeBathroomFan1Cfm \n ashraeBathroomFan1CfmImproved \n ashraeBathroom1Window \n ashraeBathroom1WindowImproved \n ashraeBathroomFan2Cfm \n ashraeBathroomFan2CfmImproved \n ashraeBathroom2Window \n ashraeBathroom2WindowImproved \n ashraeBathroomFan3Cfm \n ashraeBathroomFan3CfmImproved \n ashraeBathroom3Window \n ashraeBathroom3WindowImproved \n ashraeBathroomFan4Cfm \n ashraeBathroomFan4CfmImproved \n ashraeBathroom4Window \n ashraeBathroom4WindowImproved \n ashraeRequiredAdditionalCfm \n ashraeRequiredAdditionalCfmImproved \n ashraeMinimumCfm50 \n blowerDoorTestPerformed \n blowerDoorTestPerformedImproved \n floorCavityInsulationType \n floorCavityInsulationTypeImproved \n floorContinuousInsulationType \n floorContinuousInsulationTypeImproved \n crawlCavityInsulationType \n crawlCavityInsulationTypeImproved \n crawlWallInsulationType \n crawlWallInsulationTypeImproved \n crawlspaceRimJoistInsulationType \n crawlspaceRimJoistInsulationTypeImproved \n basementCavityInsulationType \n basementCavityInsulationTypeImproved \n basementContinuousInsulationType \n basementContinuousInsulationTypeImproved \n basementRimJoistInsulationType \n basementRimJoistInsulationTypeImproved \n dishwasherEnergyUsage \n dishwasherWaterUsage \n windowVentingUsed \n windowVentingUsedImproved\n    }\n  }\n",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -204,7 +226,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -217,13 +241,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query acountQuery($jobId: Int!) {\n    caz(jobId: $jobId) {\n       \n uuid \n cazName \n cazAmbientCo \n cazAmbientCoImproved \n cazPoorCaseTest \n cazPoorCaseTestImproved \n cazNotes \n cazNotesImproved\n      systems {\n        ...cazSystemFragment\n      }\n    }\n  }\n  \n  fragment cazSystemFragment on CazSystem {\n     \n uuid \n cazApplianceCoCurrentCondition \n cazApplianceCoCurrentConditionImproved\n  }\n\n",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -239,7 +266,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -255,13 +284,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query clothesDryersQuery($jobId: Int!) {\n      clothesDryers(jobId: $jobId) {\n         \n uuid \n clothesDryerFuelType \n clothesDryerFuelTypeImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -277,7 +309,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -293,13 +327,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query concernsQuery($jobId: Int!) {\n      concerns(jobId: $jobId) {\n         \n uuid \n concernSummary \n concernDetail\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -313,111 +350,106 @@
         "description": "Creates a single job based on a post request.",
         "parameters": [
           {
+            "name": "fromTemplateId",
+            "type": "integer",
+            "required": false,
+            "description": "Specify a job template ID if you'd like to use a template for this new job."
+          },
+          {
             "name": "firstName",
             "type": "string",
-            "required": true,
-            "example": "Eva"
+            "required": true
           },
           {
             "name": "lastName",
             "type": "string",
-            "required": true,
-            "example": "Bryant"
+            "required": true
           },
           {
             "name": "renterOwner",
             "type": "string",
             "required": false,
-            "description": "Does the customer own or rent this property.",
-            "example": 1
+            "description": "Does the customer own or rent this property."
           },
           {
             "name": "serviceTime",
             "type": "string",
             "required": false,
-            "description": "Time at which the appointment will take place. Format: YYYY-MM-DD HH:MM:SS",
-            "example": "2017-06-26T15:44:04.919Z"
+            "description": "Time at which the appointment will take place. Format: YYYY-MM-DD HH:MM:SS"
           },
           {
             "name": "email",
             "type": "string",
             "required": false,
-            "description": "The email address of the homeowner (or tenant).",
-            "example": "Citlalli_Gerlach86@gmail.com"
+            "description": "The email address of the homeowner (or tenant)."
           },
           {
             "name": "homePhone",
             "type": "string",
             "required": false,
-            "description": "Phone number of the home in this format (555) 555-5555.",
-            "example": "(031) 700-4529"
+            "description": "Phone number of the home in this format (555) 555-5555."
           },
           {
             "name": "address1",
             "type": "string",
             "required": true,
-            "description": "First line of the home address.",
-            "example": "57 Dorothy Crescent"
+            "description": "First line of the home address."
           },
           {
             "name": "address2",
             "type": "string",
             "required": false,
-            "description": "Second line of the home address.",
-            "example": "Fleetwood Greens"
+            "description": "Second line of the home address."
           },
           {
             "name": "city",
             "type": "string",
             "required": true,
-            "description": "City of the home.",
-            "example": "Evieland"
+            "description": "City of the home."
           },
           {
             "name": "state",
             "type": "string",
             "required": true,
-            "description": "State of the home.",
-            "example": "ME"
+            "description": "State of the home."
           },
           {
             "name": "zip",
             "type": "string",
             "required": true,
-            "description": "Zip code of the home.",
-            "example": "59166-2043"
+            "description": "Zip code of the home."
           },
           {
             "name": "accountId",
             "type": "integer",
             "required": true,
-            "description": "Unique identifier of the Snugg Pro user who owns this job.",
-            "example": 28094
+            "description": "Unique identifier of the Snugg Pro user who owns this job."
           },
           {
             "name": "stageId",
             "type": "string",
             "required": true,
-            "description": "Current stage ID of the job.",
-            "example": 4
+            "description": "Current stage ID of the job."
           },
           {
-            "name": "companyId",
+            "name": "programId",
             "type": "integer",
             "required": true,
-            "description": "Unique identifier of the Snugg Pro company who owns the job.",
-            "example": 59729
+            "description": "Unique identifier for the program that this job is in. Pass the value \"1\" for no program"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/job"
+              "$ref": "#/definitions/createJob"
             }
           },
           "404": {
             "description": "Endpoint not found"
+          },
+          "500": {
+            "description": "Internal server error"
           },
           "501": {
             "description": "Unauthorized"
@@ -425,7 +457,7 @@
         },
         "graphqlQuery": "\n  mutation createJobQuery($input: CreateJobInput!) {\n    createJob(input: $input) {\n      id\n    }\n  }\n",
         "tags": [
-          "Job"
+          "Job POST"
         ]
       },
       "get": {
@@ -449,13 +481,15 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
-        "graphqlQuery": "\n  query jobsQuery($companyId: Int!) {\n    jobs(companyId: $companyId) {\n      id\n    }\n  }\n",
+        "graphqlQuery": "\n  query jobsQuery($companyId: Int!, $altId: String) {\n    jobs(companyId: $companyId, altId: $altId) {\n      id\n      altId\n    }\n  }\n",
         "tags": [
-          "Company",
           "Job Types"
         ]
       }
@@ -472,7 +506,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -488,13 +524,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query dhwsQuery($jobId: Int!) {\n      dhws(jobId: $jobId) {\n         \n uuid \n dhwFuel \n dhwType \n dhwAge \n dhwLocation \n dhwTemperatureSettings \n dhwEnergyFactor \n dhwEnergyFactorImproved \n dhwTemp \n dhwTempImproved \n dhwManufacturer \n dhwManufacturerImproved \n dhwModel \n dhwModelImproved \n dhwModelYear \n dhwModelYearImproved \n dhwType2 \n dhwType2Improved \n dhwPercentLoad \n dhwPercentLoadImproved \n dhwEnergyStar \n dhwEnergyStarImproved \n dhwHeatingCapacity \n dhwHeatingCapacityImproved \n dhwTankSize \n dhwTankSizeImproved \n dhwRecoveryEfficiency \n dhwRecoveryEfficiencyImproved \n dhwFuel2 \n dhwFuel2Improved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -510,7 +549,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -526,13 +567,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query doorsQuery($jobId: Int!) {\n      doors(jobId: $jobId) {\n         \n uuid \n doorType \n doorUValue \n doorUValueImproved \n doorArea \n doorAreaImproved \n doorEnergyStar \n doorEnergyStarImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -548,7 +592,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -564,13 +610,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query freezersQuery($jobId: Int!) {\n      freezers(jobId: $jobId) {\n         \n uuid \n freezerUsage \n freezerUsageImproved \n freezerManufacturer \n freezerManufacturerImproved \n freezerModelYear \n freezerModelYearImproved \n freezerModel \n freezerModelImproved \n freezerName \n freezerEnergyStar \n freezerEnergyStarImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -579,33 +628,41 @@
         "produces": [
           "application/json"
         ],
-        "name": "hesScore",
+        "name": "hesScores",
         "summary": "HES Score",
         "description": "HES Score",
         "parameters": [
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/hesScores"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/hesScores"
+              }
             }
           },
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
-        "graphqlQuery": "\n  query hesScoreQuery($jobId: Int!) {\n    hesScore(jobId: $jobId) {\n      hesBaseScore\n    }\n  }\n",
+        "graphqlQuery": "\n  query hesScoresQuery($jobId: Int!) {\n    hesScores(jobId: $jobId) {\n       \n hesHpxmlEventType1 \n hesHpxmlEventType2 \n hesAssessmentTypeCode \n hesHpxmlBuildingNode \n hesXmlTransactionType \n hesBaseScore \n hesAssessmentType \n hesCity \n hesState \n hesZipCode \n hesConditionedFloorArea \n hesYearBuilt \n hesCoolingPresent \n hesAssessmentDate \n hesLabelNumber \n hesQualifiedAssessorId \n hesHescoreVersion \n hesUtilityElectric \n hesUtilityNaturalGas \n hesUtilityFuelOil \n hesUtilityLpg \n hesUtilityCordWood \n hesUtilityPelletWood \n hesSourceEnergyTotalBase \n hesSourceEnergyAssetBase \n hesBuildingId\n      hesType\n    }\n  }\n",
         "tags": [
-          "Job",
+          "Job GET",
           "Home Energy Score"
         ]
       }
@@ -622,7 +679,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -635,13 +694,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query healthQuery($jobId: Int!) {\n    health(jobId: $jobId) {\n       \n healthAmbientCarbonMonoxide \n healthNaturalConditionSpillage \n healthWorstCaseDepressurization \n healthWorstCaseSpillage \n healthUndilutedFlueCo \n healthDraftPressure \n healthGasLeak \n healthVenting \n healthMoldMoisture \n healthRadon \n healthAsbestos \n healthLead \n healthElectrical\n    }\n  }\n",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -657,7 +719,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -673,13 +737,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query hvacsQuery($jobId: Int!) {\n      hvacs(jobId: $jobId) {\n         \n uuid \n hvacSystemName \n hvacSystemEquipmentType \n hvacUpgradeAction \n hvacHeatingEnergySource \n hvacHeatingEnergySourceImproved \n hvacPercentOfTotalHeatingLoad \n hvacPercentOfTotalHeatingLoadImproved \n hvacHeatingCapacity \n hvacHeatingCapacityImproved \n hvacDuctLocation \n hvacDuctLocationImproved \n hvacDuctInsulation \n hvacDuctInsulationImproved \n hvacDuctLeakageValue \n hvacDuctLeakageValueImproved \n hvacDuctEfficiency \n hvacDuctEfficiencyImproved \n hvacPercentOfTotalCoolingLoad \n hvacPercentOfTotalCoolingLoadImproved \n hvacCoolingCapacity \n hvacCoolingCapacityImproved \n hvacCoolingSystemEfficiency \n hvacCoolingSystemEfficiencyImproved \n hvacHeatingSystemEfficiency \n hvacHeatingSystemEfficiencyImproved \n hvacDuctLeakage \n hvacDuctLeakageImproved \n hvacCoolingSystemManufacturer \n hvacCoolingSystemManufacturerImproved \n hvacCoolingSystemModel \n hvacCoolingSystemModelImproved \n hvacCoolingSystemModelYear \n hvacCoolingSystemModelYearImproved \n hvacHeatingSystemManufacturer \n hvacHeatingSystemManufacturerImproved \n hvacHeatingSystemModelYear \n hvacHeatingSystemModelYearImproved \n hvacHeatingSystemModel \n hvacHeatingSystemModelImproved \n hvacDuctInsulationValue \n hvacDuctInsulationValueImproved \n hvacHeatPumpInverter \n hvacHeatPumpInverterImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -695,7 +762,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -708,13 +777,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query jobFinancingsQuery($jobId: Int!) {\n    jobFinancings(jobId: $jobId) {\n       \n uuid \n title \n isShown \n cashDown\n    }\n  }\n",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -740,13 +812,15 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query jobTemplatesQuery($companyId: Int!) {\n    jobTemplates(companyId: $companyId) {\n      id\n      firstName\n      lastName\n    }\n  }\n",
         "tags": [
-          "Company",
           "Job Types"
         ]
       }
@@ -763,7 +837,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -776,13 +852,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query totalsQuery($jobId: Int!) {\n    totals(jobId: $jobId) {\n       \n annualFuelThermsUsed \n annualFuelThermsImproved \n annualFuelThermsSaved \n annualElectricKWhUsed \n annualElectricKWhImproved \n savedKwh \n mbtuBase \n mbtuImproved \n savedMbtu \n annualFuelDollarsSpent \n annualFuelDollarsImproved \n annualFuelDollarsSpentSaved \n annualElectricDollarsSpent \n annualElectricDollarsImproved \n annualElectricDollarsSpentSaved \n yearlyEnergyCost \n yearlyEnergyCostImproved \n totalSavings \n yearlyEnergyCost \n yearlyEnergyCostImproved \n totalSavings \n installedCosts \n savedMbtuPercent \n savedCo2Percent \n paybackYears \n sir \n mirr\n    }\n  }\n",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -798,7 +877,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -814,13 +895,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query ovensQuery($jobId: Int!) {\n      ovens(jobId: $jobId) {\n         \n uuid \n ovenFuelType \n ovenFuelTypeImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -846,13 +930,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
-        "graphqlQuery": "\n  query programsQuery($companyId: Int!) {\n    programs(companyId: $companyId) {\n      ...programFragment\n    }\n  }\n  \n  fragment programFragment on Program {\n    name\n  }\n\n",
+        "graphqlQuery": "\n  query programsQuery($companyId: Int!) {\n    programs(companyId: $companyId) {\n      ...programFragment\n    }\n  }\n  \n  fragment programFragment on Program {\n     \n id \n name \n website \n phone\n  }\n\n",
         "tags": [
-          "Company"
+          "Programs"
         ]
       }
     },
@@ -868,7 +955,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -884,13 +973,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query pvsQuery($jobId: Int!) {\n      pvs(jobId: $jobId) {\n         \n uuid \n pv \n pvImproved \n pvArraySize \n pvArraySizeImproved \n pvAnnualProduction \n pvAnnualProductionImproved \n pvArraySlope \n pvArraySlopeImproved \n pvArrayOrientation \n pvArrayOrientationImproved \n pvModuleYear\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -906,7 +998,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -922,13 +1016,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query rangesQuery($jobId: Int!) {\n      ranges(jobId: $jobId) {\n         \n uuid \n rangeFuelType \n rangeFuelTypeImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -939,12 +1036,19 @@
         ],
         "name": "recommendations",
         "summary": "Recommendations",
-        "description": "recommendations",
+        "description": "Recommendations can be filtered by status.  For recommended measures, you could enter something like `/jobs/jobId/recommendations?status=0,1`. <br/>Recommendation status `0` is the default system recommended state, when the user has not selected a status.",
         "parameters": [
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Whether the measure is recommended, noted or declined."
           }
         ],
         "responses": {
@@ -960,13 +1064,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
-        "graphqlQuery": "\n  query recommendationsQuery($jobId: Int!, $status: Int) {\n    recommendations(jobId: $jobId, status: $status) {\n       \n uuid \n status \n title \n cost \n costType \n measureCode \n homeownerNotes \n contractorNotes \n whyItMatters\n      captions {\n         \n uuid \n caption\n      }\n    }\n  }\n",
+        "graphqlQuery": "\n  query recommendationsQuery($jobId: Int!, $status: String) {\n    recommendations(jobId: $jobId, status: $status) {\n       \n uuid \n status \n title \n cost \n costType \n measureCode \n homeownerNotes \n contractorNotes \n whyItMatters\n      captions {\n         \n uuid \n caption \n leftPhotoUrl \n rightPhotoUrl\n      }\n      detailedCosts {\n         \n uuid \n name \n code \n category \n description \n costPerUnit \n quantity \n unit \n collectionUuid\n      }\n    }\n  }\n",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -982,7 +1089,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -998,13 +1107,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query refrigeratorsQuery($jobId: Int!) {\n      refrigerators(jobId: $jobId) {\n         \n uuid \n refrigeratorAge \n refrigeratorSize \n refrigeratorName \n refrigeratorUsage \n refrigeratorUsageImproved \n refrigeratorManufacturer \n refrigeratorManufacturerImproved \n refrigeratorModel \n refrigeratorModelImproved \n refrigeratorEnergyStar \n refrigeratorEnergyStarImproved \n refrigeratorModelYear \n refrigeratorModelYearImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -1020,7 +1132,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -1033,13 +1147,56 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "\n  query reportQuery($jobId: Int!) {\n    report(jobId: $jobId) {\n       \n titleCover \n coverTextArea \n titleConcerns \n concernsSidebar \n titleSolutions \n solutionsTitle \n titleFinancing \n additionalNotesOverviewTitle \n additionalNotesOverview \n titleTechSpecs \n titleMetrics \n titleGlossary \n titleHes \n titleCoc \n titleWorkOrder \n serviceDateTitle \n servicedByTitle \n elementCosts \n elementSavings \n elementSir \n elementCo2 \n elementWhyItMatters \n elementPhotos \n elementHomeownerNotes \n elementContractorNotes \n elementNowAndGoal \n pageCover \n pageConcerns \n pageSolutions \n pageUpgradeDetails \n pageHealth \n pageAdditionalNotes \n pageRebates \n pageFinancing \n pageMetrics \n pageTechSpecs \n pageHes \n pageCoc \n pageWorkOrder \n pageGlossary \n safetyOverview\n    }\n  }\n",
         "tags": [
-          "Job"
+          "Job GET"
+        ]
+      }
+    },
+    "/jobs/{jobId}/utilities": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "name": "utilities",
+        "summary": "Utilities",
+        "description": "Utilities",
+        "parameters": [
+          {
+            "name": "jobId",
+            "description": "Job Id",
+            "type": "integer",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/utilities"
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        },
+        "graphqlQuery": "\n  query utilitiesQuery($jobId: Int!) {\n    utilities(jobId: $jobId) {\n       \n billEntryType \n electricUtilityProviderName \n electricAccountNumber \n highestMonthlySummerElectricBill \n lowestMonthlyElectricBill \n electricBillUnits \n startElectricDate1 \n endElectricDate1 \n endElectricBill1 \n endElectricDate2 \n endElectricBill2 \n endElectricDate3 \n endElectricBill3 \n endElectricDate4 \n endElectricBill4 \n endElectricDate5 \n endElectricBill5 \n endElectricDate6 \n endElectricBill6 \n endElectricDate7 \n endElectricBill7 \n endElectricDate8 \n endElectricBill8 \n endElectricDate9 \n endElectricBill9 \n endElectricDate10 \n endElectricBill10 \n endElectricDate11 \n endElectricBill11 \n endElectricDate12 \n endElectricBill12 \n startFuelDate1 \n endFuelDate1 \n endFuelBill1 \n endFuelDate2 \n endFuelBill2 \n endFuelDate3 \n endFuelBill3 \n endFuelDate4 \n endFuelBill4 \n endFuelDate5 \n endFuelBill5 \n endFuelDate6 \n endFuelBill6 \n endFuelDate7 \n endFuelBill7 \n endFuelDate8 \n endFuelBill8 \n endFuelDate9 \n endFuelBill9 \n endFuelDate10 \n endFuelBill10 \n endFuelDate11 \n endFuelBill11 \n endFuelDate12 \n endFuelBill12 \n primaryHeatingFuelType \n fuelUtilityProviderName \n fuelAccountNumber \n highestMonthlyWinterElectricBill \n highestMonthlyWinterNaturalGasBill \n lowestMonthlyNaturalGasBill \n simpleFuelUnits \n totalSimpleFuelUsedInLast12Months \n fuelBillUnits\n    }\n  }\n",
+        "tags": [
+          "Job GET"
         ]
       }
     },
@@ -1055,7 +1212,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -1071,13 +1230,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query vaultsQuery($jobId: Int!) {\n      vaults(jobId: $jobId) {\n         \n uuid \n vaultModeledVaultArea \n vaultModeledVaultAreaImproved \n vaultCavityInsulation \n vaultCavityInsulationImproved \n vaultContinuousInsulation \n vaultContinuousInsulationImproved \n vault \n vaultPercent \n vaultRoofAbsorptance \n vaultRoofAbsorptanceImproved \n vaultRoofEmissivity \n vaultRoofEmissivityImproved \n vaultCoolRoof \n vaultCoolRoofImproved \n vaultCavityInsulationType \n vaultCavityInsulationTypeImproved \n vaultContinuousInsulationType \n vaultContinuousInsulationTypeImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -1093,7 +1255,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -1109,13 +1273,16 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query wallsQuery($jobId: Int!) {\n      walls(jobId: $jobId) {\n         \n uuid \n wallExteriorWallSiding \n wallExteriorWallConstruction \n wallsInsulated \n wallCavityInsulation \n wallCavityInsulationImproved \n wallContinuousInsulation \n wallContinuousInsulationImproved \n wallModeledWallArea \n wallModeledWallAreaImproved \n wallSystemPercentOfTotal \n wallCavityInsulationType \n wallCavityInsulationTypeImproved \n wallContinuousInsulationType \n wallContinuousInsulationTypeImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
         ]
       }
     },
@@ -1131,7 +1298,9 @@
           {
             "name": "jobId",
             "description": "Job Id",
-            "type": "integer"
+            "type": "integer",
+            "in": "path",
+            "required": true
           }
         ],
         "responses": {
@@ -1147,13 +1316,59 @@
           "404": {
             "description": "Endpoint not found"
           },
+          "500": {
+            "description": "Internal server error"
+          },
           "501": {
             "description": "Unauthorized"
           }
         },
         "graphqlQuery": "query windowsQuery($jobId: Int!) {\n      windows(jobId: $jobId) {\n         \n uuid \n windowType \n windowFrame \n windowNorthAreaPercent \n windowEfficiency \n windowEfficiencyImproved \n windowAreaNorth \n windowAreaNorthImproved \n windowAreaEast \n windowAreaEastImproved \n windowAreaSouth \n windowAreaSouthImproved \n windowAreaWest \n windowAreaWestImproved \n windowSolarHeatGainCoefficient \n windowSolarHeatGainCoefficientImproved \n windowEastAreaPercent \n windowSouthAreaPercent \n windowWestAreaPercent \n windowNorthOverhangDepth \n windowEastOverhangDepth \n windowSouthOverhangDepth \n windowWestOverhangDepth \n windowExteriorTreatmentNorth \n windowExteriorTreatmentNorthImproved \n windowExteriorTreatmentEast \n windowExteriorTreatmentEastImproved \n windowExteriorTreatmentSouth \n windowExteriorTreatmentSouthImproved \n windowExteriorTreatmentWest \n windowExteriorTreatmentWestImproved \n windowEnergyStar \n windowEnergyStarImproved\n      }\n    }\n  ",
         "tags": [
-          "Job"
+          "Job GET"
+        ]
+      }
+    },
+    "/jobs/{jobId}/work-orders": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "name": "workOrders",
+        "summary": "Work Orders",
+        "description": "Work Orders",
+        "parameters": [
+          {
+            "name": "jobId",
+            "description": "Job Id",
+            "type": "integer",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/workOrders"
+              }
+            }
+          },
+          "404": {
+            "description": "Endpoint not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "501": {
+            "description": "Unauthorized"
+          }
+        },
+        "graphqlQuery": "\n  query workOrdersQuery($jobId: Int!) {\n    workOrders(jobId: $jobId) {\n       \n paymentInfo \n legalInfo \n altId \n workOrderDate \n discountPercentage \n discountDollar \n stateTax \n countyTax \n cityTax\n    }\n  }\n",
+        "tags": [
+          "Job GET"
         ]
       }
     }
@@ -1163,13 +1378,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "e73fe466-2265-436a-b055-0a21f40bb92a",
+          "example": "7c3dd7f2-8025-459e-baae-bd33c0265c58",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "atticInsulationDepth": {
           "type": "string",
-          "example": "13-15",
+          "example": "10-12",
           "enum": [
             "0",
             "1-3",
@@ -1184,7 +1399,7 @@
         },
         "atticInsulationType": {
           "type": "string",
-          "example": "Spray Foam",
+          "example": "Don't Know",
           "enum": [
             "Fiberglass or Rockwool (batts or blown)",
             "Cellulose",
@@ -1195,7 +1410,7 @@
         },
         "atticInsulationTypeImproved": {
           "type": "string",
-          "example": "Spray Foam",
+          "example": "Don't Know",
           "enum": [
             "Fiberglass or Rockwool (batts or blown)",
             "Cellulose",
@@ -1206,7 +1421,7 @@
         },
         "atticModeledAtticArea": {
           "type": "number",
-          "example": 502595.27,
+          "example": 994260.95,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -1214,7 +1429,7 @@
         },
         "atticModeledAtticAreaImproved": {
           "type": "number",
-          "example": 20380.82,
+          "example": 758995.71,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -1222,7 +1437,7 @@
         },
         "atticInsulation": {
           "type": "number",
-          "example": 47.91,
+          "example": 29.52,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -1230,7 +1445,7 @@
         },
         "atticInsulationImproved": {
           "type": "number",
-          "example": 70.49,
+          "example": 68.81,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -1238,7 +1453,7 @@
         },
         "atticKneeWallArea": {
           "type": "number",
-          "example": 880183.94,
+          "example": 969513.01,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -1246,7 +1461,7 @@
         },
         "atticKneeWallAreaImproved": {
           "type": "number",
-          "example": 377907.02,
+          "example": 300705.23,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -1254,7 +1469,7 @@
         },
         "atticKneeWallInsulation": {
           "type": "number",
-          "example": 50.12,
+          "example": 4.17,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -1262,7 +1477,7 @@
         },
         "atticKneeWallInsulationImproved": {
           "type": "number",
-          "example": 22.31,
+          "example": 80.76,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -1270,7 +1485,7 @@
         },
         "atticKneeWallContinuousInsulation": {
           "type": "number",
-          "example": 85.73,
+          "example": 97.69,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -1278,7 +1493,7 @@
         },
         "atticKneeWallContinuousInsulationImproved": {
           "type": "number",
-          "example": 79.32,
+          "example": 34.01,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -1286,7 +1501,7 @@
         },
         "atticHasKneeWall": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -1304,7 +1519,7 @@
         },
         "atticRadiantBarrier": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -1322,7 +1537,7 @@
         },
         "atticPercent": {
           "type": "number",
-          "example": 52,
+          "example": 89,
           "enum": false,
           "description": "Enter the % of the total footprint that is attributed to each attic or vault area."
         },
@@ -1369,7 +1584,7 @@
         },
         "atticCoolRoofImproved": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -1378,7 +1593,7 @@
         },
         "atticKneeWallInsulationType": {
           "type": "string",
-          "example": "Open Cell Spray Foam",
+          "example": "Blown Fiberglass or Rockwool",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -1391,7 +1606,7 @@
         },
         "atticKneeWallInsulationTypeImproved": {
           "type": "string",
-          "example": "Closed Cell Spray Foam",
+          "example": "Blown Fiberglass or Rockwool",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -1417,7 +1632,7 @@
         },
         "atticKneeWallContinuousInsulationTypeImproved": {
           "type": "string",
-          "example": "Rigid EPS",
+          "example": "Rigid XPS",
           "enum": [
             "Rigid XPS",
             "Rigid EPS",
@@ -1434,13 +1649,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "47488cb7-36d0-4d7c-9b8a-02abd3069e10",
+          "example": "df9a58c3-8be1-448e-95e1-46153a325fc4",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "clothesDryerFuelType": {
           "type": "string",
-          "example": "Don't Know",
+          "example": "Electricity",
           "enum": [
             "Natural Gas",
             "Electricity",
@@ -1452,7 +1667,7 @@
         },
         "clothesDryerFuelTypeImproved": {
           "type": "string",
-          "example": "Electricity",
+          "example": "Propane",
           "enum": [
             "Natural Gas",
             "Electricity",
@@ -1468,7 +1683,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "2aa24f0e-52b7-41e7-baa2-c6a6589884d0",
+          "example": "a0cac7e2-d1e7-4fdc-bade-b0f1610cd754",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
@@ -1491,13 +1706,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "33c0279b-5241-40b1-9bf2-c8a23a381947",
+          "example": "b2208a99-4700-4ef4-b967-68f59f750c20",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "dhwFuel": {
           "type": "string",
-          "example": "Fuel Oil",
+          "example": "Don't Know",
           "enum": [
             "Electricity",
             "Natural Gas",
@@ -1511,7 +1726,7 @@
         },
         "dhwType": {
           "type": "string",
-          "example": "Don't Know",
+          "example": "Tankless (on-demand)",
           "enum": [
             "Standard tank",
             "Tank with extra insulation",
@@ -1524,7 +1739,7 @@
         },
         "dhwAge": {
           "type": "string",
-          "example": "36+",
+          "example": "31-35",
           "enum": [
             "0-5",
             "6-10",
@@ -1550,7 +1765,7 @@
         },
         "dhwTemperatureSettings": {
           "type": "string",
-          "example": "Low (120-130 F)",
+          "example": "Very High (150+ F)",
           "enum": [
             "Low (120-130 F)",
             "Medium (130-140 F)",
@@ -1578,7 +1793,7 @@
         },
         "dhwTemp": {
           "type": "integer",
-          "example": 116,
+          "example": 167,
           "maximum": 200,
           "minimum": 100,
           "enum": false,
@@ -1586,7 +1801,7 @@
         },
         "dhwTempImproved": {
           "type": "integer",
-          "example": 180,
+          "example": 156,
           "maximum": 200,
           "minimum": 100,
           "enum": false,
@@ -1594,7 +1809,7 @@
         },
         "dhwManufacturer": {
           "type": "string",
-          "example": "Bosch",
+          "example": "State Industries",
           "enum": [
             "Unknown",
             "A.O. Smith",
@@ -1619,7 +1834,7 @@
         },
         "dhwManufacturerImproved": {
           "type": "string",
-          "example": "State Industries",
+          "example": "Takaji",
           "enum": [
             "Unknown",
             "A.O. Smith",
@@ -1672,7 +1887,7 @@
         },
         "dhwType2": {
           "type": "string",
-          "example": "Tank Water Heater",
+          "example": "Heat Pump",
           "enum": [
             "Tank Water Heater",
             "Tankless Water Heater",
@@ -1682,7 +1897,7 @@
         },
         "dhwType2Improved": {
           "type": "string",
-          "example": "Heat Pump",
+          "example": "Tankless Water Heater",
           "enum": [
             "Tank Water Heater",
             "Tankless Water Heater",
@@ -1717,7 +1932,7 @@
         },
         "dhwEnergyStarImproved": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -1787,7 +2002,7 @@
         },
         "dhwFuel2Improved": {
           "type": "string",
-          "example": "Electricity",
+          "example": "Propane",
           "enum": [
             "Electricity",
             "Natural Gas",
@@ -1804,13 +2019,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "771c7d48-e9dc-448a-92a3-03a34e8f5f77",
+          "example": "1c918b5b-d0fc-4473-aa7a-d9b8f4abc619",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "doorType": {
           "type": "string",
-          "example": "Fiberglass",
+          "example": "Steel, hollow with storm",
           "enum": [
             "Steel, hollow",
             "Steel, hollow with storm",
@@ -1831,7 +2046,7 @@
         },
         "doorUValue": {
           "type": "number",
-          "example": 2.36,
+          "example": 8.03,
           "maximum": 9,
           "minimum": 0.01,
           "enum": false,
@@ -1839,7 +2054,7 @@
         },
         "doorUValueImproved": {
           "type": "number",
-          "example": 0.89,
+          "example": 8.51,
           "maximum": 9,
           "minimum": 0.01,
           "enum": false,
@@ -1847,7 +2062,7 @@
         },
         "doorArea": {
           "type": "number",
-          "example": 612.63,
+          "example": 298.23,
           "maximum": 1000,
           "minimum": 0,
           "enum": false,
@@ -1855,7 +2070,7 @@
         },
         "doorAreaImproved": {
           "type": "number",
-          "example": 273.31,
+          "example": 135.32,
           "maximum": 1000,
           "minimum": 0,
           "enum": false,
@@ -1872,7 +2087,7 @@
         },
         "doorEnergyStarImproved": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -1885,13 +2100,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "92d8c366-ad89-4640-a3e3-d5d96623fe95",
+          "example": "121924e1-d55d-4a0a-9617-aae2dcae9a75",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "freezerUsage": {
           "type": "number",
-          "example": 4663.58,
+          "example": 4087.83,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -1899,7 +2114,7 @@
         },
         "freezerUsageImproved": {
           "type": "number",
-          "example": 5005.83,
+          "example": 6822.89,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -1907,7 +2122,7 @@
         },
         "freezerManufacturer": {
           "type": "string",
-          "example": "Thermador",
+          "example": "Other",
           "enum": [
             "Amana",
             "Unknown",
@@ -1929,7 +2144,7 @@
         },
         "freezerManufacturerImproved": {
           "type": "string",
-          "example": "Thermador",
+          "example": "Asko",
           "enum": [
             "Amana",
             "Unknown",
@@ -1984,7 +2199,7 @@
         },
         "freezerEnergyStar": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -2006,7 +2221,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "0db0ecf0-fdc4-4681-926b-7ee436e223bc",
+          "example": "0589101a-3a06-4609-845b-68ef8e2cc9d2",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
@@ -2019,7 +2234,7 @@
         },
         "hvacSystemEquipmentType": {
           "type": "string",
-          "example": "Electric Resistance",
+          "example": "Furnace / Central AC (shared ducts)",
           "enum": [
             "Boiler",
             "Furnace with standalone ducts",
@@ -2039,7 +2254,7 @@
         },
         "hvacUpgradeAction": {
           "type": "string",
-          "example": "Remove a system permanently",
+          "example": "Keep an existing system as is",
           "enum": [
             "Replace with a newer model",
             "Keep an existing system as is",
@@ -2049,22 +2264,6 @@
           "description": "\n        Choose an action that you plan to take for this HVAC system.<strong>Replace with a newer model:</strong><br>Replace the existing equipment with a new version of the same thing. Eg. replace a 78 AFUE furnace with a new 98 AFUE furnace<br><strong>Keep an existing system as is:</strong><br>Do nothing to a system or just change the percent of total load that that old system covers in the house.<br><strong>Remove a system permanently:</strong><br>Rip out an entire system and replace it with something completely new, like going from a direct heater and room AC to a central heat pump. In this instance you will have a system that is described on the base side, and the improved side will be blank. <br><strong>Install a new existing system:</strong><br>A brand new system that replaces the system that was removed when you chose: Remove a system permanently.\n        <br/>\n        \n        <br/>\n        "
         },
         "hvacHeatingEnergySource": {
-          "type": "string",
-          "example": "Pellets",
-          "enum": [
-            "None",
-            "Electricity",
-            "Natural Gas",
-            "Propane",
-            "Fuel Oil",
-            "Pellets",
-            "Wood",
-            "Solar",
-            "Don't Know"
-          ],
-          "description": "\n        This is the primary fuel source. It is used to set prices and energy content.\n        <br/>\n        \n        <br/>\n        "
-        },
-        "hvacHeatingEnergySourceImproved": {
           "type": "string",
           "example": "Natural Gas",
           "enum": [
@@ -2080,9 +2279,25 @@
           ],
           "description": "\n        This is the primary fuel source. It is used to set prices and energy content.\n        <br/>\n        \n        <br/>\n        "
         },
+        "hvacHeatingEnergySourceImproved": {
+          "type": "string",
+          "example": "Wood",
+          "enum": [
+            "None",
+            "Electricity",
+            "Natural Gas",
+            "Propane",
+            "Fuel Oil",
+            "Pellets",
+            "Wood",
+            "Solar",
+            "Don't Know"
+          ],
+          "description": "\n        This is the primary fuel source. It is used to set prices and energy content.\n        <br/>\n        \n        <br/>\n        "
+        },
         "hvacPercentOfTotalHeatingLoad": {
           "type": "number",
-          "example": 34,
+          "example": 57,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2090,7 +2305,7 @@
         },
         "hvacPercentOfTotalHeatingLoadImproved": {
           "type": "number",
-          "example": 15,
+          "example": 43,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2131,7 +2346,7 @@
         },
         "hvacDuctLocationImproved": {
           "type": "string",
-          "example": "50/50 Crawlspace (unconditioned) - Conditioned Space",
+          "example": "Attic (unconditioned)",
           "enum": [
             "Intentionally Conditioned Space",
             "Attic (unconditioned)",
@@ -2148,7 +2363,7 @@
         },
         "hvacDuctInsulation": {
           "type": "string",
-          "example": "Duct Board 1.5\"",
+          "example": "Fiberglass 1.25\"",
           "enum": [
             "No Insulation",
             "Duct Board 1\"",
@@ -2164,7 +2379,7 @@
         },
         "hvacDuctInsulationImproved": {
           "type": "string",
-          "example": "Fiberglass 2\"",
+          "example": "Duct Board 1\"",
           "enum": [
             "No Insulation",
             "Duct Board 1\"",
@@ -2180,7 +2395,7 @@
         },
         "hvacDuctLeakageValue": {
           "type": "number",
-          "example": 3365.66,
+          "example": 4162.77,
           "maximum": 9999,
           "minimum": 0,
           "enum": false,
@@ -2188,7 +2403,7 @@
         },
         "hvacDuctLeakageValueImproved": {
           "type": "number",
-          "example": 6017.81,
+          "example": 6253.2,
           "maximum": 9999,
           "minimum": 0,
           "enum": false,
@@ -2196,19 +2411,19 @@
         },
         "hvacDuctEfficiency": {
           "type": "number",
-          "example": 15,
+          "example": 35,
           "enum": false,
           "description": "This is the overall delivery system efficiency for this distribution system. It is calculated based on the above duct leakage, location, and insulation values and is not editable. If you have chosen Intentionally Conditioned Space for the Duct Location, then the Duct Efficiency will always be 100% as the lost energy from the ducts is only lost into the building envelope and not to the outside.<br><br>\n\nAlso, if you have set the % of Total Load for this heating or cooling system to 0% (necessary when creating a brand new heating or cooling system or removing one), you will see the Duct Efficiency at 100%, since there is zero loss on a system that doesn't exist. "
         },
         "hvacDuctEfficiencyImproved": {
           "type": "number",
-          "example": 67,
+          "example": 14,
           "enum": false,
           "description": "This is the overall delivery system efficiency for this distribution system. It is calculated based on the above duct leakage, location, and insulation values and is not editable. If you have chosen Intentionally Conditioned Space for the Duct Location, then the Duct Efficiency will always be 100% as the lost energy from the ducts is only lost into the building envelope and not to the outside.<br><br>\n\nAlso, if you have set the % of Total Load for this heating or cooling system to 0% (necessary when creating a brand new heating or cooling system or removing one), you will see the Duct Efficiency at 100%, since there is zero loss on a system that doesn't exist. "
         },
         "hvacPercentOfTotalCoolingLoad": {
           "type": "number",
-          "example": 0,
+          "example": 79,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2216,7 +2431,7 @@
         },
         "hvacPercentOfTotalCoolingLoadImproved": {
           "type": "number",
-          "example": 89,
+          "example": 23,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2240,7 +2455,7 @@
         },
         "hvacCoolingSystemEfficiency": {
           "type": "number",
-          "example": 72.03,
+          "example": 81.52,
           "maximum": 100,
           "minimum": 1,
           "enum": false,
@@ -2248,7 +2463,7 @@
         },
         "hvacCoolingSystemEfficiencyImproved": {
           "type": "number",
-          "example": 16.4,
+          "example": 42.59,
           "maximum": 100,
           "minimum": 1,
           "enum": false,
@@ -2272,7 +2487,7 @@
         },
         "hvacDuctLeakage": {
           "type": "string",
-          "example": "15% - Somewhat leaky",
+          "example": "6% - Well sealed",
           "enum": [
             "30% - Very leaky",
             "15% - Somewhat leaky",
@@ -2284,7 +2499,7 @@
         },
         "hvacDuctLeakageImproved": {
           "type": "string",
-          "example": "6% - Well sealed",
+          "example": "15% - Somewhat leaky",
           "enum": [
             "30% - Very leaky",
             "15% - Somewhat leaky",
@@ -2296,7 +2511,7 @@
         },
         "hvacCoolingSystemManufacturer": {
           "type": "string",
-          "example": "Fridgidaire",
+          "example": "Coleman",
           "enum": [
             "Unknown",
             "AirEase",
@@ -2336,7 +2551,7 @@
         },
         "hvacCoolingSystemManufacturerImproved": {
           "type": "string",
-          "example": "Fridgidaire",
+          "example": "Comfort Maker",
           "enum": [
             "Unknown",
             "AirEase",
@@ -2406,7 +2621,7 @@
         },
         "hvacHeatingSystemManufacturer": {
           "type": "string",
-          "example": "RUUD",
+          "example": "Coleman",
           "enum": [
             "Unknown",
             "AirEase",
@@ -2444,7 +2659,7 @@
         },
         "hvacHeatingSystemManufacturerImproved": {
           "type": "string",
-          "example": "Amana",
+          "example": "Lennox",
           "enum": [
             "Unknown",
             "AirEase",
@@ -2512,7 +2727,7 @@
         },
         "hvacDuctInsulationValue": {
           "type": "number",
-          "example": 3.12,
+          "example": 23.95,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2520,7 +2735,7 @@
         },
         "hvacDuctInsulationValueImproved": {
           "type": "number",
-          "example": 10.41,
+          "example": 90.08,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2528,7 +2743,7 @@
         },
         "hvacHeatPumpInverter": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -2550,13 +2765,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "ec19cc69-3a09-420f-b3f0-8246beb35961",
+          "example": "ced0a3e8-1a19-4843-a21c-711d237f5dd6",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "ovenFuelType": {
           "type": "string",
-          "example": "Propane",
+          "example": "Don't Know",
           "enum": [
             "Natural Gas",
             "Electricity",
@@ -2584,7 +2799,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "9fd03f11-a03a-4f7f-9193-466b346e2f7a",
+          "example": "b8ace283-ecfc-4160-a207-774a0aa47a27",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
@@ -2624,13 +2839,13 @@
         },
         "pvAnnualProduction": {
           "type": "integer",
-          "example": 77053,
+          "example": 54844,
           "enum": false,
           "description": "PV system annual production in kWh."
         },
         "pvAnnualProductionImproved": {
           "type": "integer",
-          "example": 4594,
+          "example": 48065,
           "enum": false,
           "description": "PV system annual production in kWh."
         },
@@ -2679,13 +2894,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "8c6dfafa-4a4a-4a25-9a34-65314b4941bf",
+          "example": "d988f999-762b-4fd4-b23c-ef0200184918",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "rangeFuelType": {
           "type": "string",
-          "example": "Electricity",
+          "example": "Propane",
           "enum": [
             "Natural Gas",
             "Electricity",
@@ -2713,13 +2928,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "48972ec1-37e9-4d7a-9852-424201465b4e",
+          "example": "ff6cd18a-5bec-4f3a-86c1-33d7f71ee4c8",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "refrigeratorAge": {
           "type": "string",
-          "example": "31-34",
+          "example": "25-26",
           "enum": [
             "0-14",
             "15-21",
@@ -2735,7 +2950,7 @@
         },
         "refrigeratorSize": {
           "type": "string",
-          "example": "13-15",
+          "example": "22+",
           "enum": [
             "1-5",
             "6-12",
@@ -2756,7 +2971,7 @@
         },
         "refrigeratorUsage": {
           "type": "number",
-          "example": 1731.58,
+          "example": 7166.34,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -2764,7 +2979,7 @@
         },
         "refrigeratorUsageImproved": {
           "type": "number",
-          "example": 1764.47,
+          "example": 9563.83,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -2772,7 +2987,7 @@
         },
         "refrigeratorManufacturer": {
           "type": "string",
-          "example": "Fridgidaire",
+          "example": "Hotpoint",
           "enum": [
             "Unknown",
             "Amana",
@@ -2798,7 +3013,7 @@
         },
         "refrigeratorManufacturerImproved": {
           "type": "string",
-          "example": "Hotpoint",
+          "example": "Whirlpool",
           "enum": [
             "Unknown",
             "Amana",
@@ -2838,7 +3053,7 @@
         },
         "refrigeratorEnergyStar": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -2874,13 +3089,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "c1643440-c906-4d44-ba0c-ba59c2a58f4a",
+          "example": "f00b50c5-5b7b-47f4-8467-9cfc39d7efa3",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "vaultModeledVaultArea": {
           "type": "number",
-          "example": 395815.31,
+          "example": 290623.79,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -2888,7 +3103,7 @@
         },
         "vaultModeledVaultAreaImproved": {
           "type": "number",
-          "example": 797910.35,
+          "example": 146146.99,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -2896,7 +3111,7 @@
         },
         "vaultCavityInsulation": {
           "type": "number",
-          "example": 96.5,
+          "example": 96.09,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2904,7 +3119,7 @@
         },
         "vaultCavityInsulationImproved": {
           "type": "number",
-          "example": 30.01,
+          "example": 93.05,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2912,7 +3127,7 @@
         },
         "vaultContinuousInsulation": {
           "type": "number",
-          "example": 25.99,
+          "example": 12.41,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2920,7 +3135,7 @@
         },
         "vaultContinuousInsulationImproved": {
           "type": "number",
-          "example": 2.35,
+          "example": 15.63,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -2928,7 +3143,7 @@
         },
         "vault": {
           "type": "string",
-          "example": "No",
+          "example": "Well",
           "enum": [
             "Well",
             "Yes",
@@ -2939,7 +3154,7 @@
         },
         "vaultPercent": {
           "type": "number",
-          "example": 34,
+          "example": 28,
           "enum": false,
           "description": "Enter the % of the total footprint that is attributed to each attic or vault area."
         },
@@ -2995,7 +3210,7 @@
         },
         "vaultCavityInsulationType": {
           "type": "string",
-          "example": "Fiberglass or Rockwool Batt",
+          "example": "Closed Cell Spray Foam",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -3021,7 +3236,7 @@
         },
         "vaultContinuousInsulationType": {
           "type": "string",
-          "example": "Rigid EPS",
+          "example": "Other",
           "enum": [
             "Rigid XPS",
             "Rigid EPS",
@@ -3034,7 +3249,7 @@
         },
         "vaultContinuousInsulationTypeImproved": {
           "type": "string",
-          "example": "Rigid XPS",
+          "example": "Closed Cell Spray Foam",
           "enum": [
             "Rigid XPS",
             "Rigid EPS",
@@ -3051,13 +3266,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "02771a6c-d2af-4185-9a5b-7ef906a6f8c5",
+          "example": "bce66c4e-74c2-4332-bc60-ae4a41bc7d01",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "wallExteriorWallSiding": {
           "type": "string",
-          "example": "Shingle/Composition",
+          "example": "Don't Know",
           "enum": [
             "Brick Veneer",
             "Metal/vinyl siding",
@@ -3087,7 +3302,7 @@
         },
         "wallsInsulated": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Well",
             "Poorly",
@@ -3098,7 +3313,7 @@
         },
         "wallCavityInsulation": {
           "type": "number",
-          "example": 16.17,
+          "example": 65.35,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -3106,7 +3321,7 @@
         },
         "wallCavityInsulationImproved": {
           "type": "number",
-          "example": 80.19,
+          "example": 92.83,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -3114,7 +3329,7 @@
         },
         "wallContinuousInsulation": {
           "type": "number",
-          "example": 90.32,
+          "example": 99.33,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -3122,7 +3337,7 @@
         },
         "wallContinuousInsulationImproved": {
           "type": "number",
-          "example": 55.7,
+          "example": 90.86,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -3130,7 +3345,7 @@
         },
         "wallModeledWallArea": {
           "type": "number",
-          "example": 277412.44,
+          "example": 711968.34,
           "maximum": 1000000,
           "minimum": 10,
           "enum": false,
@@ -3138,7 +3353,7 @@
         },
         "wallModeledWallAreaImproved": {
           "type": "number",
-          "example": 868539.8,
+          "example": 962426.36,
           "maximum": 1000000,
           "minimum": 10,
           "enum": false,
@@ -3167,7 +3382,7 @@
         },
         "wallCavityInsulationTypeImproved": {
           "type": "string",
-          "example": "Cellulose",
+          "example": "Fiberglass or Rockwool Batt",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -3180,7 +3395,7 @@
         },
         "wallContinuousInsulationType": {
           "type": "string",
-          "example": "Rigid XPS",
+          "example": "Closed Cell Spray Foam",
           "enum": [
             "Rigid XPS",
             "Rigid EPS",
@@ -3193,7 +3408,7 @@
         },
         "wallContinuousInsulationTypeImproved": {
           "type": "string",
-          "example": "Closed Cell Spray Foam",
+          "example": "Rigid EPS",
           "enum": [
             "Rigid XPS",
             "Rigid EPS",
@@ -3210,7 +3425,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "465c4ba3-4f99-47cb-b4fe-763977e6cbe0",
+          "example": "29ce4ee0-09f0-4cb9-aea2-56ec8c429d51",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
@@ -3240,7 +3455,7 @@
         },
         "windowNorthAreaPercent": {
           "type": "number",
-          "example": 33,
+          "example": 30,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -3248,7 +3463,7 @@
         },
         "windowEfficiency": {
           "type": "number",
-          "example": 1.26,
+          "example": 1.3,
           "maximum": 2,
           "minimum": 0.01,
           "enum": false,
@@ -3256,7 +3471,7 @@
         },
         "windowEfficiencyImproved": {
           "type": "number",
-          "example": 0.27,
+          "example": 1.98,
           "maximum": 2,
           "minimum": 0.01,
           "enum": false,
@@ -3264,7 +3479,7 @@
         },
         "windowAreaNorth": {
           "type": "number",
-          "example": 1134.4,
+          "example": 5956.86,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -3272,7 +3487,7 @@
         },
         "windowAreaNorthImproved": {
           "type": "number",
-          "example": 8701.03,
+          "example": 1200.92,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -3280,7 +3495,7 @@
         },
         "windowAreaEast": {
           "type": "number",
-          "example": 8903.01,
+          "example": 36.8,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -3288,7 +3503,7 @@
         },
         "windowAreaEastImproved": {
           "type": "number",
-          "example": 1365.96,
+          "example": 2839.9,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -3296,7 +3511,7 @@
         },
         "windowAreaSouth": {
           "type": "number",
-          "example": 9902.81,
+          "example": 1534.15,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -3304,7 +3519,7 @@
         },
         "windowAreaSouthImproved": {
           "type": "number",
-          "example": 6555.92,
+          "example": 6153.23,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -3312,7 +3527,7 @@
         },
         "windowAreaWest": {
           "type": "number",
-          "example": 9551.47,
+          "example": 7331.23,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -3320,7 +3535,7 @@
         },
         "windowAreaWestImproved": {
           "type": "number",
-          "example": 195.86,
+          "example": 742.79,
           "maximum": 10000,
           "minimum": 0,
           "enum": false,
@@ -3328,7 +3543,7 @@
         },
         "windowSolarHeatGainCoefficient": {
           "type": "number",
-          "example": 0.94,
+          "example": 0.28,
           "maximum": 0.99,
           "minimum": 0.01,
           "enum": false,
@@ -3336,7 +3551,7 @@
         },
         "windowSolarHeatGainCoefficientImproved": {
           "type": "number",
-          "example": 0.59,
+          "example": 0.55,
           "maximum": 0.99,
           "minimum": 0.01,
           "enum": false,
@@ -3344,7 +3559,7 @@
         },
         "windowEastAreaPercent": {
           "type": "number",
-          "example": 72,
+          "example": 96,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -3352,7 +3567,7 @@
         },
         "windowSouthAreaPercent": {
           "type": "number",
-          "example": 50,
+          "example": 17,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -3368,7 +3583,7 @@
         },
         "windowNorthOverhangDepth": {
           "type": "number",
-          "example": 7.93,
+          "example": 13.77,
           "maximum": 20,
           "minimum": 0,
           "enum": false,
@@ -3376,7 +3591,7 @@
         },
         "windowEastOverhangDepth": {
           "type": "number",
-          "example": 14.26,
+          "example": 19.28,
           "maximum": 20,
           "minimum": 0,
           "enum": false,
@@ -3384,7 +3599,7 @@
         },
         "windowSouthOverhangDepth": {
           "type": "number",
-          "example": 0.5,
+          "example": 13.6,
           "maximum": 20,
           "minimum": 0,
           "enum": false,
@@ -3392,7 +3607,7 @@
         },
         "windowWestOverhangDepth": {
           "type": "number",
-          "example": 14.25,
+          "example": 11.37,
           "maximum": 20,
           "minimum": 0,
           "enum": false,
@@ -3400,7 +3615,7 @@
         },
         "windowExteriorTreatmentNorth": {
           "type": "string",
-          "example": "Insect Screen (half)",
+          "example": "Solar Shades, Louvered (summer only)",
           "enum": [
             "Insect Screen (full)",
             "Insect Screen (half)",
@@ -3468,7 +3683,7 @@
         },
         "windowExteriorTreatmentSouth": {
           "type": "string",
-          "example": "Solar Shades, Louvered (summer only)",
+          "example": "Solar Screen (all year)",
           "enum": [
             "Insect Screen (full)",
             "Insect Screen (half)",
@@ -3485,7 +3700,7 @@
         },
         "windowExteriorTreatmentSouthImproved": {
           "type": "string",
-          "example": "Solar Shades, Louvered (all year)",
+          "example": "Solar Shades, Vertical Roller (summer only)",
           "enum": [
             "Insect Screen (full)",
             "Insect Screen (half)",
@@ -3502,7 +3717,7 @@
         },
         "windowExteriorTreatmentWest": {
           "type": "string",
-          "example": "Solar Shades, Louvered (all year)",
+          "example": "Solar Shades, Vertical Roller (all year)",
           "enum": [
             "Insect Screen (full)",
             "Insect Screen (half)",
@@ -3519,7 +3734,7 @@
         },
         "windowExteriorTreatmentWestImproved": {
           "type": "string",
-          "example": "Solar Shades, Louvered (summer only)",
+          "example": "Solar Screen (all year)",
           "enum": [
             "Insect Screen (full)",
             "Insect Screen (half)",
@@ -3536,7 +3751,7 @@
         },
         "windowEnergyStar": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -3545,7 +3760,7 @@
         },
         "windowEnergyStarImproved": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -3558,9 +3773,15 @@
       "properties": {
         "id": {
           "type": "integer",
-          "example": 3625,
+          "example": 8982,
           "enum": false,
           "description": "The unique Snugg Pro job identifier. Do not specify this when creating a job via API"
+        },
+        "fromTemplateId": {
+          "type": "integer",
+          "example": 30699,
+          "enum": false,
+          "description": "Specify a job template ID if you'd like to use a template for this new job."
         },
         "firstName": {
           "type": "string",
@@ -3583,19 +3804,19 @@
         },
         "serviceTime": {
           "type": "string",
-          "example": "2017-06-26T07:46:19.416Z",
+          "example": "2017-07-06 07:16:01",
           "enum": false,
           "description": "Time at which the appointment will take place. Format: YYYY-MM-DD HH:MM:SS"
         },
         "email": {
           "type": "string",
-          "example": "Crystal_MacGyver26@yahoo.com",
+          "example": "Josie86@gmail.com",
           "enum": false,
           "description": "The email address of the homeowner (or tenant)."
         },
         "homePhone": {
           "type": "string",
-          "example": "(363) 133-0180",
+          "example": "(887) 498-5133",
           "enum": false,
           "description": "Phone number of the home in this format (555) 555-5555."
         },
@@ -3619,7 +3840,7 @@
         },
         "state": {
           "type": "string",
-          "example": "MT",
+          "example": "NH",
           "enum": [
             "AL",
             "AK",
@@ -3677,19 +3898,19 @@
         },
         "zip": {
           "type": "string",
-          "example": "99151-2273",
+          "example": "86424",
           "enum": false,
           "description": "Zip code of the home."
         },
         "accountId": {
           "type": "integer",
-          "example": 24702,
+          "example": 32479,
           "enum": false,
           "description": "Unique identifier of the Snugg Pro user who owns this job."
         },
         "stageId": {
           "type": "string",
-          "example": 3,
+          "example": 2,
           "enum": [
             1,
             2,
@@ -3706,13 +3927,19 @@
         },
         "companyId": {
           "type": "integer",
-          "example": 25420,
+          "example": 87816,
           "enum": false,
           "description": "Unique identifier of the Snugg Pro company who owns the job."
         },
-        "altId": {
+        "programId": {
           "type": "integer",
-          "example": 37424,
+          "example": 91374,
+          "enum": false,
+          "description": "Unique identifier for the program that this job is in. Pass the value \"1\" for no program"
+        },
+        "altId": {
+          "type": "string",
+          "example": "Some text value",
           "enum": false,
           "description": "Store your own alternate job ID. This will not affect the Snugg Pro assigned Job ID."
         }
@@ -3722,7 +3949,7 @@
       "properties": {
         "id": {
           "type": "integer",
-          "example": 78463,
+          "example": 85030,
           "enum": false,
           "description": "This is the unique Snugg Pro ID assigned to the user."
         },
@@ -3738,13 +3965,13 @@
         },
         "email": {
           "type": "string",
-          "example": "Norris.Dibbert@yahoo.com",
+          "example": "Colt24@gmail.com",
           "enum": false,
           "description": "This is the user's login email address, which may be different from the address displayed in the report."
         },
         "phoneNumber": {
           "type": "string",
-          "example": "(597) 755-1151",
+          "example": "(699) 331-0702",
           "enum": false
         },
         "title": {
@@ -3768,7 +3995,7 @@
       "properties": {
         "id": {
           "type": "integer",
-          "example": 28622,
+          "example": 55281,
           "enum": false,
           "description": "The unique numeric Snugg Pro ID assigned to the program"
         },
@@ -3786,7 +4013,7 @@
         },
         "phone": {
           "type": "string",
-          "example": "(190) 229-3190",
+          "example": "(694) 433-7746",
           "enum": false,
           "description": "The phone number of the program"
         }
@@ -3796,7 +4023,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "15728d00-2eff-446a-a775-48226b0a7f59",
+          "example": "f0f9e4d3-f681-42c1-933d-ac703bd50426",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
@@ -3819,7 +4046,7 @@
         },
         "cost": {
           "type": "number",
-          "example": 43.15,
+          "example": 939.71,
           "enum": false
         },
         "costType": {
@@ -3856,6 +4083,12 @@
           "items": {
             "$ref": "#/definitions/recommendationCaption"
           }
+        },
+        "detailedCosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/recommendationLineItems"
+          }
         }
       }
     },
@@ -3863,7 +4096,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "9b3f8ae4-faba-473c-9be9-8466b3fc4e5d",
+          "example": "7d09d5f0-d4ad-423b-b676-4727e6bc0151",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
@@ -3875,7 +4108,7 @@
         },
         "isShown": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             0,
             1
@@ -3884,7 +4117,7 @@
         },
         "cashDown": {
           "type": "number",
-          "example": 216.29,
+          "example": 237.58,
           "enum": false
         }
       }
@@ -4018,7 +4251,7 @@
         },
         "elementSavings": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             1,
             4,
@@ -4028,7 +4261,7 @@
         },
         "elementSir": {
           "type": "string",
-          "example": 1,
+          "example": 3,
           "enum": [
             1,
             3,
@@ -4047,7 +4280,7 @@
         },
         "elementWhyItMatters": {
           "type": "string",
-          "example": 1,
+          "example": 0,
           "enum": [
             1,
             0
@@ -4074,7 +4307,7 @@
         },
         "elementContractorNotes": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             1,
             0
@@ -4083,7 +4316,7 @@
         },
         "elementNowAndGoal": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             1,
             0
@@ -4092,7 +4325,7 @@
         },
         "pageCover": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             1,
             0
@@ -4101,7 +4334,7 @@
         },
         "pageConcerns": {
           "type": "string",
-          "example": 1,
+          "example": 0,
           "enum": [
             1,
             0
@@ -4110,7 +4343,7 @@
         },
         "pageSolutions": {
           "type": "string",
-          "example": 1,
+          "example": 0,
           "enum": [
             1,
             0
@@ -4119,7 +4352,7 @@
         },
         "pageUpgradeDetails": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             1,
             0
@@ -4137,7 +4370,7 @@
         },
         "pageAdditionalNotes": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             1,
             0
@@ -4146,7 +4379,7 @@
         },
         "pageRebates": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             1,
             0
@@ -4173,7 +4406,7 @@
         },
         "pageTechSpecs": {
           "type": "string",
-          "example": 0,
+          "example": 1,
           "enum": [
             1,
             0
@@ -4182,7 +4415,7 @@
         },
         "pageHes": {
           "type": "string",
-          "example": 1,
+          "example": 0,
           "enum": [
             1,
             0
@@ -4200,7 +4433,7 @@
         },
         "pageWorkOrder": {
           "type": "string",
-          "example": 1,
+          "example": 0,
           "enum": [
             1,
             0
@@ -4227,145 +4460,145 @@
       "properties": {
         "annualFuelThermsUsed": {
           "type": "number",
-          "example": 246.06,
+          "example": 235.72,
           "enum": false,
           "description": "The amount of therms used by the existing home per year"
         },
         "annualFuelThermsImproved": {
           "type": "number",
-          "example": 176.03,
+          "example": 274.52,
           "enum": false,
           "description": "The amount of therms used by the improved home per year."
         },
         "annualFuelThermsSaved": {
           "type": "number",
-          "example": 184.93,
+          "example": 267.19,
           "enum": false,
           "description": "The amount of therms saved by the improved home per year compared to the existing home."
         },
         "annualElectricKWhUsed": {
           "type": "number",
-          "example": 383.47,
+          "example": 624.95,
           "enum": false,
           "description": "The amount of kWh used by the existing home per year"
         },
         "annualElectricKWhImproved": {
           "type": "number",
-          "example": 121.01,
+          "example": 695.85,
           "enum": false,
           "description": "The amount of kWh used by the improved home per year."
         },
         "savedKwh": {
           "type": "number",
-          "example": 137.5,
+          "example": 351.55,
           "enum": false,
           "description": "The amount of kWh saved by the improved home per year compared to the existing home."
         },
         "mbtuBase": {
           "type": "number",
-          "example": 700.44,
+          "example": 419.29,
           "enum": false,
           "description": "The amount of MMBtu used by the existing home per year."
         },
         "mbtuImproved": {
           "type": "number",
-          "example": 353.87,
+          "example": 969.08,
           "enum": false,
           "description": "The amount of MMBtu used by the improved home per year."
         },
         "savedMbtu": {
           "type": "number",
-          "example": 806.88,
+          "example": 532.53,
           "enum": false,
           "description": "The amount of MMBtu saved by the improved home per year compared to the existing home."
         },
         "annualFuelDollarsSpent": {
           "type": "integer",
-          "example": 73915,
+          "example": 99254,
           "enum": false,
           "description": "The cost of the fuel energy used by the existing home per year."
         },
         "annualFuelDollarsImproved": {
           "type": "integer",
-          "example": 51938,
+          "example": 35750,
           "enum": false,
           "description": "The cost of the fuel energy used by the improved home per year"
         },
         "annualFuelDollarsSpentSaved": {
           "type": "integer",
-          "example": 5669,
+          "example": 40485,
           "enum": false,
           "description": "The cost of the fuel energy saved by the improved home per year compared to the existing home."
         },
         "annualElectricDollarsSpent": {
           "type": "integer",
-          "example": 54668,
+          "example": 39733,
           "enum": false,
           "description": "The cost of the electric energy used by the existing home per year."
         },
         "annualElectricDollarsImproved": {
           "type": "integer",
-          "example": 67303,
+          "example": 92864,
           "enum": false,
           "description": "The cost of the electric energy used by the improved home per year"
         },
         "annualElectricDollarsSpentSaved": {
           "type": "integer",
-          "example": 36255,
+          "example": 81642,
           "enum": false,
           "description": "The cost of the electric energy saved by the improved home per year compared to the existing home."
         },
         "yearlyEnergyCost": {
           "type": "number",
-          "example": 95.48,
+          "example": 66.23,
           "enum": false,
           "description": "The total CO2 used by the existing home per year."
         },
         "yearlyEnergyCostImproved": {
           "type": "number",
-          "example": 783.49,
+          "example": 706.63,
           "enum": false,
           "description": "The total CO2 used by the improved home per year"
         },
         "totalSavings": {
           "type": "number",
-          "example": 466.17,
+          "example": 824.18,
           "enum": false,
           "description": "The total CO2 saved by the improved home per year compared to the existing home."
         },
         "installedCosts": {
           "type": "integer",
-          "example": 19110,
+          "example": 50431,
           "enum": false,
           "description": "The total cost for all of the improvements recommended or installed."
         },
         "savedMbtuPercent": {
           "type": "number",
-          "example": 12,
+          "example": 69,
           "enum": false,
           "description": "The percent of total energy saved by all of the improvements recommended or installed."
         },
         "savedCo2Percent": {
           "type": "number",
-          "example": 29,
+          "example": 12,
           "enum": false,
           "description": "The percent of total CO2 saved by all of the improvements recommended or installed."
         },
         "paybackYears": {
           "type": "number",
-          "example": 837.83,
+          "example": 960.21,
           "enum": false,
           "description": "The fist year with non-negative cumulative cash flow which includes energy escalation."
         },
         "sir": {
           "type": "number",
-          "example": 102.13,
+          "example": 765.86,
           "enum": false,
           "description": "The Savings to Investment Ratio. If the SIR is 1 or greater, then the energy savings from the item will pay for itself before it needs to be replaced again."
         },
         "mirr": {
           "type": "number",
-          "example": 42,
+          "example": 5,
           "enum": false,
           "description": "The Modified Internal Rate of Return. This is the return on investment. Roughly speaking, if you invested the same amount of money for this project into a bank account, your equivalent interest rate from all of the energy savings would be the MIRR."
         }
@@ -4375,7 +4608,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "d65b8bc0-e32b-44eb-af61-efb1b18347ed",
+          "example": "87a6946e-beac-4d8e-a0db-a7fd5c73f257",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
@@ -4386,25 +4619,25 @@
         },
         "cazAmbientCo": {
           "type": "integer",
-          "example": 836,
+          "example": 51542,
           "enum": false,
           "description": "Ambient Carbon Monoxide in Parts Per Million. Should not exceed 35 ppm per BPI Protocol."
         },
         "cazAmbientCoImproved": {
           "type": "integer",
-          "example": 64098,
+          "example": 97032,
           "enum": false,
           "description": "Ambient Carbon Monoxide in Parts Per Million. Should not exceed 35 ppm per BPI Protocol."
         },
         "cazPoorCaseTest": {
           "type": "number",
-          "example": 668.78,
+          "example": 66.45,
           "enum": false,
           "description": "The poor case CAZ depressurization test is configured by determining the largest combustion appliance zone depressurization attainable at the time of testing due to the combined effects of door position, exhaust appliance operation, and air handler fan operation. A base pressure must be measured with all fans off and doors open. The poor case CAZ depressurization measurement is the pressure difference between the largest depressurization attained at the time of testing and the base pressure."
         },
         "cazPoorCaseTestImproved": {
           "type": "number",
-          "example": 646.35,
+          "example": 136.43,
           "enum": false,
           "description": "The poor case CAZ depressurization test is configured by determining the largest combustion appliance zone depressurization attainable at the time of testing due to the combined effects of door position, exhaust appliance operation, and air handler fan operation. A base pressure must be measured with all fans off and doors open. The poor case CAZ depressurization measurement is the pressure difference between the largest depressurization attained at the time of testing and the base pressure."
         },
@@ -4430,7 +4663,7 @@
       "properties": {
         "healthAmbientCarbonMonoxide": {
           "type": "string",
-          "example": "Warning",
+          "example": "Not Tested",
           "enum": [
             "Passed",
             "Failed",
@@ -4452,7 +4685,7 @@
         },
         "healthWorstCaseDepressurization": {
           "type": "string",
-          "example": "Warning",
+          "example": "Failed",
           "enum": [
             "Passed",
             "Failed",
@@ -4474,7 +4707,7 @@
         },
         "healthUndilutedFlueCo": {
           "type": "string",
-          "example": "Passed",
+          "example": "Failed",
           "enum": [
             "Passed",
             "Failed",
@@ -4485,7 +4718,7 @@
         },
         "healthDraftPressure": {
           "type": "string",
-          "example": "Warning",
+          "example": "Not Tested",
           "enum": [
             "Passed",
             "Failed",
@@ -4507,7 +4740,7 @@
         },
         "healthVenting": {
           "type": "string",
-          "example": "Not Tested",
+          "example": "Failed",
           "enum": [
             "Passed",
             "Failed",
@@ -4518,7 +4751,7 @@
         },
         "healthMoldMoisture": {
           "type": "string",
-          "example": "Not Tested",
+          "example": "Failed",
           "enum": [
             "Passed",
             "Failed",
@@ -4529,7 +4762,7 @@
         },
         "healthRadon": {
           "type": "string",
-          "example": "Warning",
+          "example": "Passed",
           "enum": [
             "Passed",
             "Failed",
@@ -4540,7 +4773,7 @@
         },
         "healthAsbestos": {
           "type": "string",
-          "example": "Failed",
+          "example": "Not Tested",
           "enum": [
             "Passed",
             "Failed",
@@ -4551,7 +4784,7 @@
         },
         "healthLead": {
           "type": "string",
-          "example": "Passed",
+          "example": "Not Tested",
           "enum": [
             "Passed",
             "Failed",
@@ -4562,7 +4795,7 @@
         },
         "healthElectrical": {
           "type": "string",
-          "example": "Passed",
+          "example": "Failed",
           "enum": [
             "Passed",
             "Failed",
@@ -4633,7 +4866,7 @@
         },
         "typeOfHome": {
           "type": "string",
-          "example": "Apartment",
+          "example": "Mobile Home",
           "enum": [
             "Apartment",
             "Condominium",
@@ -4646,7 +4879,7 @@
         },
         "frontOfBuildingOrientation": {
           "type": "string",
-          "example": "South West",
+          "example": "North West",
           "enum": [
             "North",
             "North East",
@@ -4670,7 +4903,7 @@
         },
         "garageSize": {
           "type": "string",
-          "example": "4-car",
+          "example": "1-car",
           "enum": [
             "1-car",
             "2-car",
@@ -4767,7 +5000,7 @@
         },
         "sharedWallsNorth": {
           "type": "number",
-          "example": 15,
+          "example": 23,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -4791,7 +5024,7 @@
         },
         "foundationBasement": {
           "type": "number",
-          "example": 40,
+          "example": 60,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -4807,7 +5040,7 @@
         },
         "basementWallInsulation": {
           "type": "string",
-          "example": "Unfinished frame wall with fiberglass batts",
+          "example": "Don't Know",
           "enum": [
             "None or Bare Walls",
             "Fiberglass blanket",
@@ -4820,7 +5053,7 @@
         },
         "crawlspaceInsulation": {
           "type": "string",
-          "example": "Crawlspace has insulation installed under only the living space floor",
+          "example": "Don't Know",
           "enum": [
             "Crawlspace has insulation installed on the exterior wall area",
             "Crawlspace has insulation installed under only the living space floor",
@@ -4847,19 +5080,19 @@
         },
         "equivalentNach": {
           "type": "number",
-          "example": 468.13,
+          "example": 414.3,
           "enum": false,
           "description": "NACH is the number of times in one hour the entire volume of air inside the building leaks to the outside naturally. It is calculated from the Air Infiltration number in CFM50, the number of stories, the wind zone and type of shielding the house has."
         },
         "equivalentNachImproved": {
           "type": "number",
-          "example": 533.81,
+          "example": 745.67,
           "enum": false,
           "description": "NACH is the number of times in one hour the entire volume of air inside the building leaks to the outside naturally. It is calculated from the Air Infiltration number in CFM50, the number of stories, the wind zone and type of shielding the house has."
         },
         "conditionedAirVolume": {
           "type": "number",
-          "example": 381083.72,
+          "example": 685760.55,
           "maximum": 1000000,
           "minimum": 100,
           "enum": false,
@@ -4867,31 +5100,31 @@
         },
         "effectiveLeakageArea": {
           "type": "number",
-          "example": 51.67,
+          "example": 656.56,
           "enum": false,
           "description": "Effective (or Equivalent) Leakage Area in square inches. This is the area of a theoretical hole (with rounded edges) in the building envelope that would produce a leakage equivalent to that produced by the actual building at 4 Pascals of pressure."
         },
         "effectiveLeakageAreaImproved": {
           "type": "number",
-          "example": 597.78,
+          "example": 578.76,
           "enum": false,
           "description": "Effective (or Equivalent) Leakage Area in square inches. This is the area of a theoretical hole (with rounded edges) in the building envelope that would produce a leakage equivalent to that produced by the actual building at 4 Pascals of pressure."
         },
         "equivalentAch50": {
           "type": "number",
-          "example": 832.51,
+          "example": 38.17,
           "enum": false,
           "description": "ACH50 is the number of times in one hour the entire volume of air inside the building leaks to the outside when depressurized to 50 Pascals. This number is automatically calculated based on the house volume and the Air Infiltration number in CFM50."
         },
         "equivalentAch50Improved": {
           "type": "number",
-          "example": 68.9,
+          "example": 542.6,
           "enum": false,
           "description": "ACH50 is the number of times in one hour the entire volume of air inside the building leaks to the outside when depressurized to 50 Pascals. This number is automatically calculated based on the house volume and the Air Infiltration number in CFM50."
         },
         "modeledBasementWallArea": {
           "type": "number",
-          "example": 732039.95,
+          "example": 347278.85,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -4899,7 +5132,7 @@
         },
         "basementCavityInsulation": {
           "type": "number",
-          "example": 32.41,
+          "example": 9.43,
           "maximum": 50,
           "minimum": 0,
           "enum": false,
@@ -4907,7 +5140,7 @@
         },
         "basementCavityInsulationImproved": {
           "type": "number",
-          "example": 35.93,
+          "example": 33.13,
           "maximum": 50,
           "minimum": 0,
           "enum": false,
@@ -4915,7 +5148,7 @@
         },
         "basementContinuousInsulation": {
           "type": "number",
-          "example": 36.67,
+          "example": 47.57,
           "maximum": 50,
           "minimum": 0,
           "enum": false,
@@ -4923,7 +5156,7 @@
         },
         "basementContinuousInsulationImproved": {
           "type": "number",
-          "example": 12.31,
+          "example": 8.51,
           "maximum": 50,
           "minimum": 0,
           "enum": false,
@@ -4971,7 +5204,7 @@
         },
         "sharedWallsEast": {
           "type": "number",
-          "example": 64,
+          "example": 66,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -4979,7 +5212,7 @@
         },
         "sharedWallsSouth": {
           "type": "number",
-          "example": 83,
+          "example": 55,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -4987,7 +5220,7 @@
         },
         "sharedWallsWest": {
           "type": "number",
-          "example": 45,
+          "example": 60,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -4995,7 +5228,7 @@
         },
         "foundationCrawlspace": {
           "type": "number",
-          "example": 30,
+          "example": 87,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -5011,7 +5244,7 @@
         },
         "percentCflsOrLeds": {
           "type": "string",
-          "example": "100%",
+          "example": "76-99%",
           "enum": [
             "0%",
             "1-25%",
@@ -5025,7 +5258,7 @@
         },
         "crawlCavityInsulation": {
           "type": "number",
-          "example": 9.68,
+          "example": 35.34,
           "maximum": 50,
           "minimum": 0,
           "enum": false,
@@ -5033,7 +5266,7 @@
         },
         "crawlCavityInsulationImproved": {
           "type": "number",
-          "example": 12.52,
+          "example": 23.88,
           "maximum": 50,
           "minimum": 0,
           "enum": false,
@@ -5041,7 +5274,7 @@
         },
         "crawlWallInsulation": {
           "type": "number",
-          "example": 44.97,
+          "example": 35.16,
           "maximum": 50,
           "minimum": 0,
           "enum": false,
@@ -5049,7 +5282,7 @@
         },
         "crawlWallInsulationImproved": {
           "type": "number",
-          "example": 3.79,
+          "example": 31.22,
           "maximum": 50,
           "minimum": 0,
           "enum": false,
@@ -5057,7 +5290,7 @@
         },
         "modeledCrawlWallArea": {
           "type": "number",
-          "example": 692562.49,
+          "example": 18674.57,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -5065,7 +5298,7 @@
         },
         "modeledCrawlFloorArea": {
           "type": "number",
-          "example": 940167.83,
+          "example": 225648.19,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -5084,7 +5317,7 @@
         },
         "crawlspaceTypeImproved": {
           "type": "string",
-          "example": "Unvented - Unconditioned Crawl",
+          "example": "Vented - Summer Only",
           "enum": [
             "Unvented - Unconditioned Crawl",
             "Vented - Year Round",
@@ -5124,7 +5357,7 @@
         },
         "clothesWasherEnergyStarImproved": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -5133,7 +5366,7 @@
         },
         "clothesWasherManufacturer": {
           "type": "string",
-          "example": "Bosch",
+          "example": "Other",
           "enum": [
             "Unknown",
             "Amana",
@@ -5154,7 +5387,7 @@
         },
         "clothesWasherManufacturerImproved": {
           "type": "string",
-          "example": "Maytag",
+          "example": "Bosch",
           "enum": [
             "Unknown",
             "Amana",
@@ -5219,7 +5452,7 @@
         },
         "dishwasherEnergyStar": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -5253,7 +5486,7 @@
         },
         "percentCflOrLed": {
           "type": "number",
-          "example": 90,
+          "example": 80,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5261,7 +5494,7 @@
         },
         "percentCflOrLedImproved": {
           "type": "number",
-          "example": 9,
+          "example": 32,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5269,7 +5502,7 @@
         },
         "windZone": {
           "type": "string",
-          "example": "2",
+          "example": "4",
           "enum": [
             "1",
             "2",
@@ -5280,7 +5513,7 @@
         },
         "shielding": {
           "type": "string",
-          "example": "Well-Shielded",
+          "example": "Exposed",
           "enum": [
             "Well-Shielded",
             "Normal",
@@ -5290,7 +5523,7 @@
         },
         "nFactor": {
           "type": "number",
-          "example": 686.67,
+          "example": 954.83,
           "enum": false,
           "description": "Correlation Factor developed by Lawrence Berkeley Laboratory for the calculation of NACH."
         },
@@ -5316,7 +5549,7 @@
         },
         "dishwasherManufacturer": {
           "type": "string",
-          "example": "Sears",
+          "example": "Fridgidaire",
           "enum": [
             "Unknown",
             "Amana",
@@ -5392,7 +5625,7 @@
         },
         "numberOfIncandescents": {
           "type": "integer",
-          "example": 234,
+          "example": 735,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5400,7 +5633,7 @@
         },
         "numberOfIncandescentsImproved": {
           "type": "integer",
-          "example": 139,
+          "example": 113,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5408,7 +5641,7 @@
         },
         "numberOfCflsInstalled": {
           "type": "integer",
-          "example": 309,
+          "example": 535,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5416,7 +5649,7 @@
         },
         "numberOfCflsOrLeds": {
           "type": "integer",
-          "example": 607,
+          "example": 672,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5424,7 +5657,7 @@
         },
         "numberOfCflsOrLedsImproved": {
           "type": "integer",
-          "example": 237,
+          "example": 631,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5441,7 +5674,7 @@
         },
         "pool": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -5450,7 +5683,7 @@
         },
         "poolPumpType": {
           "type": "string",
-          "example": "Single Speed",
+          "example": "No Pool Pump",
           "enum": [
             "Single Speed",
             "Two Speed",
@@ -5472,7 +5705,7 @@
         },
         "poolPumpHorsepower": {
           "type": "string",
-          "example": "2",
+          "example": "1.5",
           "enum": [
             "0.5",
             "0.75",
@@ -5485,7 +5718,7 @@
         },
         "poolPumpHorsepowerImproved": {
           "type": "string",
-          "example": "1",
+          "example": "0.75",
           "enum": [
             "0.5",
             "0.75",
@@ -5498,7 +5731,7 @@
         },
         "basementHeating": {
           "type": "string",
-          "example": "Intentional",
+          "example": "None or Undesired Incidental",
           "enum": [
             "Intentional",
             "Intentional w/ continuous circulation",
@@ -5509,7 +5742,7 @@
         },
         "basementHeatingImproved": {
           "type": "string",
-          "example": "Incidental-Desired (e.g. leaky ducts)",
+          "example": "Intentional w/ continuous circulation",
           "enum": [
             "Intentional",
             "Intentional w/ continuous circulation",
@@ -5520,7 +5753,7 @@
         },
         "basementCooling": {
           "type": "string",
-          "example": "Intentional",
+          "example": "Intentional w/ continuous circulation",
           "enum": [
             "Intentional",
             "Intentional w/ continuous circulation",
@@ -5531,7 +5764,7 @@
         },
         "basementCoolingImproved": {
           "type": "string",
-          "example": "Intentional",
+          "example": "None or Undesired Incidental",
           "enum": [
             "Intentional",
             "Intentional w/ continuous circulation",
@@ -5542,7 +5775,7 @@
         },
         "poolSize": {
           "type": "integer",
-          "example": 159000,
+          "example": 482559,
           "maximum": 1000000,
           "minimum": 100,
           "enum": false,
@@ -5550,7 +5783,7 @@
         },
         "poolPumpTurnover": {
           "type": "number",
-          "example": 1.52,
+          "example": 4.8,
           "maximum": 24,
           "minimum": 0.5,
           "enum": false,
@@ -5558,7 +5791,7 @@
         },
         "poolPumpTurnoverImproved": {
           "type": "number",
-          "example": 1.15,
+          "example": 2.8,
           "maximum": 24,
           "minimum": 0.5,
           "enum": false,
@@ -5566,7 +5799,7 @@
         },
         "poolPumpHours": {
           "type": "number",
-          "example": 2.65,
+          "example": 23.3,
           "maximum": 24,
           "minimum": 0,
           "enum": false,
@@ -5574,7 +5807,7 @@
         },
         "poolPumpHoursImproved": {
           "type": "number",
-          "example": 18.58,
+          "example": 23.69,
           "maximum": 24,
           "minimum": 0,
           "enum": false,
@@ -5612,7 +5845,7 @@
         },
         "poolPumpDaysPerYear": {
           "type": "integer",
-          "example": 5,
+          "example": 131,
           "maximum": 365,
           "minimum": 0,
           "enum": false,
@@ -5620,7 +5853,7 @@
         },
         "poolPumpDaysPerYearImproved": {
           "type": "integer",
-          "example": 247,
+          "example": 295,
           "maximum": 365,
           "minimum": 0,
           "enum": false,
@@ -5628,7 +5861,7 @@
         },
         "dishwasherInstalled": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -5637,7 +5870,7 @@
         },
         "dishwasherInstalledImproved": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -5646,7 +5879,7 @@
         },
         "modeledBasementFloorArea": {
           "type": "number",
-          "example": 71345.55,
+          "example": 803652.58,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -5654,7 +5887,7 @@
         },
         "modeledBasementPerimeter": {
           "type": "number",
-          "example": 119.11,
+          "example": 171.49,
           "maximum": 780,
           "minimum": 0,
           "enum": false,
@@ -5703,12 +5936,12 @@
         },
         "heatingDesignLoad": {
           "type": "integer",
-          "example": 87886,
+          "example": 90473,
           "enum": false
         },
         "heatingDesignLoadImproved": {
           "type": "integer",
-          "example": 66719,
+          "example": 53511,
           "enum": false
         },
         "coolingSensibleDesignLoad": {
@@ -5777,7 +6010,7 @@
         },
         "numberOfLeds": {
           "type": "integer",
-          "example": 331,
+          "example": 191,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5785,7 +6018,7 @@
         },
         "numberOfLedsImproved": {
           "type": "integer",
-          "example": 736,
+          "example": 832,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5793,22 +6026,13 @@
         },
         "crawlspaceRimJoistLength": {
           "type": "number",
-          "example": 314014.76,
+          "example": 677828.5,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
           "description": "This field will be automatically calculated based on the data you entered in the input form for House Length and House Width. This is the total length of the exposed perimeter of the rim joist for the crawlspace.<br><br>\n\n<strong>Note</strong>: This field is always displayed, regardless if the Rim Joist is actually insulated in the Crawlspace. In order for the Rim Joist to be counted in the modeling and be designated in the HPXML output, the Crawlspace Type must be set as Conditioned Crawl. Otherwise, the Rim Joist is counted as part of the Frame Floor (the crawlspace ceiling). "
         },
         "crawlspaceRimJoistTreatment": {
-          "type": "string",
-          "example": "Same as Crawl Wall",
-          "enum": [
-            "Same as Crawl Wall",
-            "Separately"
-          ],
-          "description": "\n        Choose whether or not the Rim Joist is treated in the same was as the Crawlspace Wall or separately.<br><br>\n\n<strong>Note</strong>: This field is triggered by the Crawlspace Type. In order for the Rim Joist to be counted in the modeling and be designated in the HPXML output, the Crawlspace Type must be set as Conditioned Crawl. Otherwise, the Rim Joist is counted as part of the Frame Floor (the crawlspace ceiling). \n        <br/>\n        \n        <br/>\n        "
-        },
-        "crawlspaceRimJoistTreatmentImproved": {
           "type": "string",
           "example": "Separately",
           "enum": [
@@ -5817,9 +6041,18 @@
           ],
           "description": "\n        Choose whether or not the Rim Joist is treated in the same was as the Crawlspace Wall or separately.<br><br>\n\n<strong>Note</strong>: This field is triggered by the Crawlspace Type. In order for the Rim Joist to be counted in the modeling and be designated in the HPXML output, the Crawlspace Type must be set as Conditioned Crawl. Otherwise, the Rim Joist is counted as part of the Frame Floor (the crawlspace ceiling). \n        <br/>\n        \n        <br/>\n        "
         },
+        "crawlspaceRimJoistTreatmentImproved": {
+          "type": "string",
+          "example": "Same as Crawl Wall",
+          "enum": [
+            "Same as Crawl Wall",
+            "Separately"
+          ],
+          "description": "\n        Choose whether or not the Rim Joist is treated in the same was as the Crawlspace Wall or separately.<br><br>\n\n<strong>Note</strong>: This field is triggered by the Crawlspace Type. In order for the Rim Joist to be counted in the modeling and be designated in the HPXML output, the Crawlspace Type must be set as Conditioned Crawl. Otherwise, the Rim Joist is counted as part of the Frame Floor (the crawlspace ceiling). \n        <br/>\n        \n        <br/>\n        "
+        },
         "crawlspaceRimJoistInsulation": {
           "type": "integer",
-          "example": 54,
+          "example": 95,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -5827,7 +6060,7 @@
         },
         "crawlspaceRimJoistInsulationImproved": {
           "type": "integer",
-          "example": 41,
+          "example": 73,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -5835,7 +6068,7 @@
         },
         "basementRimJoistLength": {
           "type": "number",
-          "example": 463563.47,
+          "example": 508319.28,
           "maximum": 1000000,
           "minimum": 0,
           "enum": false,
@@ -5843,7 +6076,7 @@
         },
         "basementRimJoistTreatment": {
           "type": "string",
-          "example": "Same as Basement Wall",
+          "example": "Separately",
           "enum": [
             "Same as Basement Wall",
             "Separately"
@@ -5861,7 +6094,7 @@
         },
         "basementRimJoistInsulation": {
           "type": "integer",
-          "example": 81,
+          "example": 22,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -5869,7 +6102,7 @@
         },
         "basementRimJoistInsulationImproved": {
           "type": "integer",
-          "example": 68,
+          "example": 84,
           "maximum": 100,
           "minimum": 0,
           "enum": false,
@@ -5877,12 +6110,12 @@
         },
         "demandKw": {
           "type": "number",
-          "example": 956.54,
+          "example": 218.37,
           "enum": false
         },
         "demandKwImproved": {
           "type": "number",
-          "example": 147.51,
+          "example": 725,
           "enum": false
         },
         "demandKwSavings": {
@@ -5892,13 +6125,13 @@
         },
         "cazMaxAmbientCo": {
           "type": "number",
-          "example": 236.08,
+          "example": 540.61,
           "enum": false,
           "description": "Ambient Carbon Monoxide in Parts Per Million. Monitored throughout assessment, not just appliance testing"
         },
         "cazMaxAmbientCoImproved": {
           "type": "number",
-          "example": 729.34,
+          "example": 64.66,
           "enum": false,
           "description": "Ambient Carbon Monoxide in Parts Per Million. Monitored throughout assessment, not just appliance testing"
         },
@@ -5913,7 +6146,7 @@
         },
         "ashraeKitchenFanCfm": {
           "type": "integer",
-          "example": 806,
+          "example": 108,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5921,7 +6154,7 @@
         },
         "ashraeKitchenFanCfmImproved": {
           "type": "integer",
-          "example": 438,
+          "example": 204,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5929,7 +6162,7 @@
         },
         "ashraeKitchenWindow": {
           "type": "string",
-          "example": "No",
+          "example": "Yes",
           "enum": [
             "Yes",
             "No"
@@ -5938,7 +6171,7 @@
         },
         "ashraeKitchenWindowImproved": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -5958,7 +6191,7 @@
         },
         "ashraeBathroomFan1Cfm": {
           "type": "integer",
-          "example": 820,
+          "example": 138,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5966,7 +6199,7 @@
         },
         "ashraeBathroomFan1CfmImproved": {
           "type": "integer",
-          "example": 187,
+          "example": 206,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -5974,7 +6207,7 @@
         },
         "ashraeBathroom1Window": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -5983,7 +6216,7 @@
         },
         "ashraeBathroom1WindowImproved": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -5992,7 +6225,7 @@
         },
         "ashraeBathroomFan2Cfm": {
           "type": "integer",
-          "example": 685,
+          "example": 277,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -6000,7 +6233,7 @@
         },
         "ashraeBathroomFan2CfmImproved": {
           "type": "integer",
-          "example": 321,
+          "example": 250,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -6008,7 +6241,7 @@
         },
         "ashraeBathroom2Window": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -6026,7 +6259,7 @@
         },
         "ashraeBathroomFan3Cfm": {
           "type": "integer",
-          "example": 838,
+          "example": 557,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -6034,7 +6267,7 @@
         },
         "ashraeBathroomFan3CfmImproved": {
           "type": "integer",
-          "example": 699,
+          "example": 553,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -6051,7 +6284,7 @@
         },
         "ashraeBathroom3WindowImproved": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -6060,7 +6293,7 @@
         },
         "ashraeBathroomFan4Cfm": {
           "type": "integer",
-          "example": 13,
+          "example": 457,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -6068,7 +6301,7 @@
         },
         "ashraeBathroomFan4CfmImproved": {
           "type": "integer",
-          "example": 774,
+          "example": 282,
           "maximum": 999,
           "minimum": 0,
           "enum": false,
@@ -6076,7 +6309,7 @@
         },
         "ashraeBathroom4Window": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -6094,19 +6327,19 @@
         },
         "ashraeRequiredAdditionalCfm": {
           "type": "number",
-          "example": 288.48,
+          "example": 152.38,
           "enum": false,
           "description": "Minimum ventilation flow rate in CFM of continuous whole house ventilation required to satisfy the ASHRAE 62.2-2013 standard. If this field shows \"N/A\", then you likely did not fill out all of the AHSHRAE fields below. You must choose Yes or No for the Operable windows and set the Fan CFM to 0 or more."
         },
         "ashraeRequiredAdditionalCfmImproved": {
           "type": "number",
-          "example": 944.2,
+          "example": 144.15,
           "enum": false,
           "description": "Minimum ventilation flow rate in CFM of continuous whole house ventilation required to satisfy the ASHRAE 62.2-2013 standard. If this field shows \"N/A\", then you likely did not fill out all of the AHSHRAE fields below. You must choose Yes or No for the Operable windows and set the Fan CFM to 0 or more."
         },
         "ashraeMinimumCfm50": {
           "type": "number",
-          "example": 90252,
+          "example": 26414.93,
           "maximum": 99999,
           "minimum": 0,
           "enum": false,
@@ -6132,7 +6365,7 @@
         },
         "floorCavityInsulationType": {
           "type": "string",
-          "example": "Open Cell Spray Foam",
+          "example": "Closed Cell Spray Foam",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6145,7 +6378,7 @@
         },
         "floorCavityInsulationTypeImproved": {
           "type": "string",
-          "example": "Fiberglass or Rockwool Batt",
+          "example": "Other",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6158,7 +6391,7 @@
         },
         "floorContinuousInsulationType": {
           "type": "string",
-          "example": "Closed Cell Spray Foam",
+          "example": "Rigid EPS",
           "enum": [
             "Fiberglass Drape",
             "Rigid XPS",
@@ -6186,7 +6419,7 @@
         },
         "crawlCavityInsulationType": {
           "type": "string",
-          "example": "Cellulose",
+          "example": "Blown Fiberglass or Rockwool",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6199,7 +6432,7 @@
         },
         "crawlCavityInsulationTypeImproved": {
           "type": "string",
-          "example": "Cellulose",
+          "example": "Blown Fiberglass or Rockwool",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6212,7 +6445,7 @@
         },
         "crawlWallInsulationType": {
           "type": "string",
-          "example": "Rigid XPS",
+          "example": "Fiberglass Drape",
           "enum": [
             "Fiberglass Drape",
             "Rigid XPS",
@@ -6240,7 +6473,7 @@
         },
         "crawlspaceRimJoistInsulationType": {
           "type": "string",
-          "example": "Closed Cell Spray Foam",
+          "example": "Cellulose",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6256,7 +6489,7 @@
         },
         "crawlspaceRimJoistInsulationTypeImproved": {
           "type": "string",
-          "example": "Cellulose",
+          "example": "Closed Cell Spray Foam",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6272,7 +6505,7 @@
         },
         "basementCavityInsulationType": {
           "type": "string",
-          "example": "Other",
+          "example": "Blown Fiberglass or Rockwool",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6285,7 +6518,7 @@
         },
         "basementCavityInsulationTypeImproved": {
           "type": "string",
-          "example": "Open Cell Spray Foam",
+          "example": "Fiberglass or Rockwool Batt",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6298,7 +6531,7 @@
         },
         "basementContinuousInsulationType": {
           "type": "string",
-          "example": "Fiberglass Drape",
+          "example": "Rigid XPS",
           "enum": [
             "Fiberglass Drape",
             "Rigid XPS",
@@ -6312,7 +6545,7 @@
         },
         "basementContinuousInsulationTypeImproved": {
           "type": "string",
-          "example": "Rigid EPS",
+          "example": "Closed Cell Spray Foam",
           "enum": [
             "Fiberglass Drape",
             "Rigid XPS",
@@ -6326,7 +6559,7 @@
         },
         "basementRimJoistInsulationType": {
           "type": "string",
-          "example": "Open Cell Spray Foam",
+          "example": "Closed Cell Spray Foam",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6342,7 +6575,7 @@
         },
         "basementRimJoistInsulationTypeImproved": {
           "type": "string",
-          "example": "Rigid XPS",
+          "example": "Rigid Polyisocyanurate",
           "enum": [
             "Fiberglass or Rockwool Batt",
             "Blown Fiberglass or Rockwool",
@@ -6374,7 +6607,7 @@
         },
         "windowVentingUsed": {
           "type": "string",
-          "example": "Yes",
+          "example": "No",
           "enum": [
             "Yes",
             "No"
@@ -6426,7 +6659,7 @@
         },
         "hesBaseScore": {
           "type": "integer",
-          "example": 0,
+          "example": 3,
           "maximum": 10,
           "minimum": 0,
           "enum": false,
@@ -6478,7 +6711,7 @@
         },
         "hesLabelNumber": {
           "type": "integer",
-          "example": 61437,
+          "example": 88701,
           "enum": false,
           "description": "The identification number for this specific home energy score."
         },
@@ -6489,8 +6722,8 @@
           "enum": false
         },
         "hesHescoreVersion": {
-          "type": "number",
-          "example": 7.68,
+          "type": "string",
+          "example": "Some text value",
           "maximum": 100,
           "enum": false,
           "description": "The Home Energy Score version for this score."
@@ -6527,21 +6760,26 @@
         },
         "hesSourceEnergyTotalBase": {
           "type": "number",
-          "example": 976.37,
+          "example": 971.24,
           "enum": false,
           "description": "The total source energy calculated by the Home Energy Score."
         },
         "hesSourceEnergyAssetBase": {
           "type": "number",
-          "example": 496.16,
+          "example": 263.94,
           "enum": false,
           "description": "The source energy calculated by the Home Energy Score."
         },
         "hesBuildingId": {
           "type": "number",
-          "example": 371.96,
+          "example": 948.09,
           "enum": false,
           "description": "The building id generated by the Home Energy Score."
+        },
+        "type": {
+          "hesType": "string",
+          "example": "final",
+          "description": "HES type"
         }
       }
     },
@@ -6549,19 +6787,19 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "2c5ff6f0-fe3b-478f-aa0c-24f544f0cbb5",
+          "example": "af463635-038a-406f-87f2-6d2b40849c10",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "cazApplianceCoCurrentCondition": {
           "type": "integer",
-          "example": 92553,
+          "example": 14208,
           "enum": false,
           "description": "CAZ Appliance CO Current Condition"
         },
         "cazApplianceCoCurrentConditionImproved": {
           "type": "integer",
-          "example": 26976,
+          "example": 27152,
           "enum": false,
           "description": "CAZ Appliance CO Current Condition"
         }
@@ -6571,13 +6809,550 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "example": "d28f4a70-c3d8-42a9-a688-0927de3e5435",
+          "example": "134d5d49-2ac5-411e-855b-947cb5207303",
           "enum": false,
           "description": "This is a universally unique ID for this item (UUID)."
         },
         "caption": {
           "type": "string",
           "enum": false
+        },
+        "leftPhotoUrl": {
+          "type": "string",
+          "example": "Some text value",
+          "enum": false
+        },
+        "rightPhotoUrl": {
+          "type": "string",
+          "example": "Some text value",
+          "enum": false
+        }
+      }
+    },
+    "recommendationLineItems": {
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "example": "3ddd568e-de19-47af-8ae1-35e53f484741",
+          "enum": false,
+          "description": "This is a universally unique ID for this item (UUID)."
+        },
+        "name": {
+          "type": "string",
+          "example": "Some text value",
+          "enum": false,
+          "description": ""
+        },
+        "code": {
+          "type": "string",
+          "example": "Some text value",
+          "enum": false,
+          "description": ""
+        },
+        "category": {
+          "type": "string",
+          "example": "rebatesIncentives",
+          "enum": [
+            "directInstalls",
+            "rebatesIncentives",
+            "costs"
+          ],
+          "description": "\n        \n        <br/>\n        Field options:\n        <br/>\n         directInstalls → Direct Installs <br/> rebatesIncentives → Rebates & Incentives <br/> costs → Costs <br/>"
+        },
+        "description": {
+          "type": "string",
+          "enum": false,
+          "description": ""
+        },
+        "costPerUnit": {
+          "type": "number",
+          "example": 518.54,
+          "enum": false,
+          "description": ""
+        },
+        "quantity": {
+          "type": "number",
+          "example": 645.35,
+          "enum": false,
+          "description": ""
+        },
+        "unit": {
+          "type": "string",
+          "example": "BDFT",
+          "enum": [
+            "ft",
+            "sq. ft",
+            "cu. ft",
+            "BDFT",
+            "hour",
+            "each",
+            "$ per kBtu/h",
+            "$ per lf Pipe Length",
+            "mile",
+            "job",
+            "%",
+            "day"
+          ],
+          "description": "\n        \n        <br/>\n        \n        <br/>\n        "
+        },
+        "collectionUuid": {
+          "type": "string",
+          "enum": false,
+          "description": ""
+        }
+      }
+    },
+    "workOrders": {
+      "properties": {
+        "paymentInfo": {
+          "type": "string",
+          "example": "Some text value",
+          "maxLength": 300,
+          "enum": false
+        },
+        "legalInfo": {
+          "type": "string",
+          "enum": false
+        },
+        "altId": {
+          "type": "string",
+          "example": "Some text value",
+          "enum": false
+        },
+        "workOrderDate": {
+          "type": "string",
+          "example": "Some text value",
+          "enum": false
+        },
+        "discountPercentage": {
+          "type": "number",
+          "example": 6,
+          "enum": false
+        },
+        "discountDollar": {
+          "type": "number",
+          "example": 387.47,
+          "enum": false
+        },
+        "stateTax": {
+          "type": "number",
+          "example": 74,
+          "enum": false
+        },
+        "countyTax": {
+          "type": "number",
+          "example": 69,
+          "enum": false
+        },
+        "cityTax": {
+          "type": "number",
+          "example": 95,
+          "enum": false
+        }
+      }
+    },
+    "utilities": {
+      "properties": {
+        "billEntryType": {
+          "type": "string",
+          "example": "Simple",
+          "enum": [
+            "Detailed",
+            "Simple",
+            "No Bills"
+          ],
+          "description": "\n        Choose a method of utility bill entry. Always use detailed bills if you have 13 months of meter read dates with associated fuel and electricity usage. Detailed bills will provide more accurate energy savings estimates. If you can get monthly bills that cover the primary heating and cooling season, then choose detailed bills.<br><br> Simple Bills can be used if the home has not been occupied by the current occupants for more than 13 months or you don't have access to detailed bills for the current occupants. You can typically get the high and low bills for gas and electric for any address by calling the utility's customer service number and requesting it (even without permission of the tenants at the time).\n        <br/>\n        \n        <br/>\n        "
+        },
+        "electricUtilityProviderName": {
+          "type": "string",
+          "example": "Some text value",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Enter the name of the electric utility provider. This is an optional field for most users, but could be required for certain efficiency programs."
+        },
+        "electricAccountNumber": {
+          "type": "string",
+          "example": "Some text value",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Enter the utility account number for the meter that these bills correspond to. This is an optional field for most users, but could be required for certain efficiency programs."
+        },
+        "highestMonthlySummerElectricBill": {
+          "type": "number",
+          "example": 275.72,
+          "enum": false,
+          "description": "Enter the amount of the highest monthly summertime electricity bill for the home during the past 12 months.  Summertime is typically those months when many buildings would use air conditioning to cool the building.<br/><br/>If the home is on a budget plan where the monthly electricity bills are all the same, the highest bill can be estimated by looking for the summer month with the highest electricity usage and then multiplying that amount by the electricity rate being charged."
+        },
+        "lowestMonthlyElectricBill": {
+          "type": "number",
+          "example": 776.35,
+          "enum": false,
+          "description": "Enter the amount of the lowest of all the monthly electricity bills for the home during the past 12 months. If the home is on a budget plan where the monthly electricity bills are all the same, the lowest bill can be estimated by looking for the month with the lowest electricity usage and then multiplying that amount by the electricity rate being charged."
+        },
+        "electricBillUnits": {
+          "type": "string",
+          "example": "kWh",
+          "enum": [
+            "kWh",
+            "Dollars"
+          ],
+          "description": "\n        Enter the units used for the electric bills. This is a required field if you're going to use Detailed Bills. For best results, utilize the kWh option instead of dollars for more accurate representations of the home.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "startElectricDate1": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<strong>Start with the oldest bill first.</strong><br/><br/>It's very important to enter meter read dates as opposed to billing dates.<br><ul><li>If you have 13 months of utility bills, enter the meter read date of the oldest of the 13 bills. </li><li>If you only have 12 months of utility bills, look at the oldest bill. Search for a previous meter read date. Enter that here. <br/>If you can't find a previous meter read date, then search \"number of days in billing period\". Enter a date that's this number of days prior to the meter read date you're looking at.</li></ul><em>See the knowledge base for more information on entering utility bills. </em>"
+        },
+        "endElectricDate1": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>If you only have 12 months of utility bills, enter the meter read date for <strong>the oldest bill</strong> you have.</li><li> If you have 13 months of bills, enter the meter read date and usage for the <strong>2nd oldest bill</strong>.</li><li>Then enter the energy usage from the corresponding date to the left. Be sure that this usage is for the time period between the End Bill Date to the left and the previous date in this list.</li></ul>"
+        },
+        "endElectricBill1": {
+          "type": "number",
+          "example": 250.12,
+          "enum": false
+        },
+        "endElectricDate2": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill2": {
+          "type": "number",
+          "example": 224.53,
+          "enum": false
+        },
+        "endElectricDate3": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill3": {
+          "type": "number",
+          "example": 459.57,
+          "enum": false
+        },
+        "endElectricDate4": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill4": {
+          "type": "number",
+          "example": 234.46,
+          "enum": false
+        },
+        "endElectricDate5": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill5": {
+          "type": "number",
+          "example": 590.37,
+          "enum": false
+        },
+        "endElectricDate6": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill6": {
+          "type": "number",
+          "example": 10.09,
+          "enum": false
+        },
+        "endElectricDate7": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill7": {
+          "type": "number",
+          "example": 376.57,
+          "enum": false
+        },
+        "endElectricDate8": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill8": {
+          "type": "number",
+          "example": 410.65,
+          "enum": false
+        },
+        "endElectricDate9": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill9": {
+          "type": "number",
+          "example": 703.64,
+          "enum": false
+        },
+        "endElectricDate10": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill10": {
+          "type": "number",
+          "example": 977.33,
+          "enum": false
+        },
+        "endElectricDate11": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill11": {
+          "type": "number",
+          "example": 756.03,
+          "enum": false
+        },
+        "endElectricDate12": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endElectricBill12": {
+          "type": "number",
+          "example": 275.43,
+          "enum": false
+        },
+        "startFuelDate1": {
+          "type": "string",
+          "example": "Some text value",
+          "enum": false,
+          "description": "<strong>Start with the oldest bill first.</strong><br/><br/>It's very important to enter meter read dates as opposed to billing dates.<br><ul><li>If you have 13 months of utility bills, enter the meter read date of the oldest of the 13 bills. </li><li>If you only have 12 months of utility bills, look at the oldest bill. Search for a previous meter read date. Enter that here. <br/>If you can't find a previous meter read date, then search \"number of days in billing period\". Enter a date that's this number of days prior to the meter read date you're looking at.</li></ul><em>See the tutorial (tutorial.snuggpro.com) for more information on entering utility bills. </em>"
+        },
+        "endFuelDate1": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>If you only have 12 months of utility bills, enter the meter read date for <strong>the oldest bill</strong> you have.</li><li> If you have 13 months of bills, enter the meter read date and usage for the <strong>2nd oldest bill</strong>.</li><li>Then enter the energy usage from the corresponding date to the left. Be sure that this usage is for the time period between the End Bill Date to the left and the previous date in this list.</li></ul>"
+        },
+        "endFuelBill1": {
+          "type": "number",
+          "example": 457.61,
+          "enum": false
+        },
+        "endFuelDate2": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill2": {
+          "type": "number",
+          "example": 669.49,
+          "enum": false
+        },
+        "endFuelDate3": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill3": {
+          "type": "number",
+          "example": 2.68,
+          "enum": false
+        },
+        "endFuelDate4": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill4": {
+          "type": "number",
+          "example": 748.62,
+          "enum": false
+        },
+        "endFuelDate5": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill5": {
+          "type": "number",
+          "example": 698.38,
+          "enum": false
+        },
+        "endFuelDate6": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill6": {
+          "type": "number",
+          "example": 614.95,
+          "enum": false
+        },
+        "endFuelDate7": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill7": {
+          "type": "number",
+          "example": 394.76,
+          "enum": false
+        },
+        "endFuelDate8": {
+          "type": "string",
+          "example": "2017-07-06",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill8": {
+          "type": "number",
+          "example": 175.54,
+          "enum": false
+        },
+        "endFuelDate9": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill9": {
+          "type": "number",
+          "example": 334.24,
+          "enum": false
+        },
+        "endFuelDate10": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill10": {
+          "type": "number",
+          "example": 894.39,
+          "enum": false
+        },
+        "endFuelDate11": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill11": {
+          "type": "number",
+          "example": 374.09,
+          "enum": false
+        },
+        "endFuelDate12": {
+          "type": "string",
+          "example": "2017-07-05",
+          "enum": false,
+          "description": "<ul><li>Fill out as many of these meter read dates as you have available.</li><li> This detailed input section can be used with any amount of available data.</li><li> Enter zero for missing or abnormal bills. The utility analysis will treat an entry of zero as missing and will do its best to compensate for missing bills. </li><li>To include a bill with actual zero usage, enter 0.01. </li><li>Be sure that you're entering the usage for the corresponding measurement that you designated in the Bill Units above (ie. dollars or kWh).</li></ul>"
+        },
+        "endFuelBill12": {
+          "type": "number",
+          "example": 207.97,
+          "enum": false
+        },
+        "primaryHeatingFuelType": {
+          "type": "string",
+          "example": "Solar",
+          "enum": [
+            "Natural Gas",
+            "Electricity",
+            "Fuel Oil",
+            "Propane",
+            "Wood",
+            "Pellets",
+            "Solar"
+          ],
+          "description": "\n        This is the primary fuel source. It is used to set prices and energy content.\n        <br/>\n        \n        <br/>\n        "
+        },
+        "fuelUtilityProviderName": {
+          "type": "string",
+          "example": "Some text value",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Enter the name of the fuel utility provider. This is an optional field for most users, but could be required for certain efficiency programs."
+        },
+        "fuelAccountNumber": {
+          "type": "string",
+          "example": "Some text value",
+          "maxLength": 255,
+          "enum": false,
+          "description": "Enter the utility account number for the meter that the fuel bills correspond to. This is an optional field for most users, but could be required for certain efficiency programs."
+        },
+        "highestMonthlyWinterElectricBill": {
+          "type": "number",
+          "example": 978.49,
+          "enum": false,
+          "description": "Enter the amount of the highest monthly winter electric bill for the home during the past 12 months.<br/><br/>If the home is on a budget plan where the monthly electricity bills are all the same, the highest bill can be estimated by looking for the winter month with the highest electricity usage and then multiplying that amount by the electricity rate being charged."
+        },
+        "highestMonthlyWinterNaturalGasBill": {
+          "type": "number",
+          "example": 214.09,
+          "enum": false,
+          "description": "Enter the amount of the highest monthly winter gas bill for the home during the past 12 months.<br/><br/>If the home is on a budget plan where the monthly gas bills are all the same, the highest bill can be estimated by looking for the winter month with the highest gas usage and then multiplying that amount by the gas rate being charged. If the home is heated by more than one type of fuel, use the bill from the type which provides the heat for the largest area of the home."
+        },
+        "lowestMonthlyNaturalGasBill": {
+          "type": "number",
+          "example": 162.17,
+          "enum": false,
+          "description": "This is typically in the summer time when you're only using fuel for hot water and cooking.<br/><br/> If the home uses more than one type, use the bill from the type which is used the most within the home."
+        },
+        "simpleFuelUnits": {
+          "type": "string",
+          "example": "Dollars",
+          "enum": [
+            "Gallons",
+            "Dollars"
+          ],
+          "description": "\n        undefined\n        <br/>\n        \n        <br/>\n        "
+        },
+        "totalSimpleFuelUsedInLast12Months": {
+          "type": "number",
+          "example": 502.95,
+          "enum": false,
+          "description": "Take a look at your delivery receipts and add up the total gallons delivered over the past 12 months. If you don't have information on the gallons, you can look at bank statements, etc. to total up how much you've spent on deliveries over the past 12 months."
+        },
+        "fuelBillUnits": {
+          "type": "string",
+          "example": "Gallons",
+          "enum": [
+            "Therms",
+            "Gallons",
+            "Dollars"
+          ],
+          "description": "\n        The units used for the fuel bills. This is a required field if you're going to use Detailed Bills. For best results, utilize the kWh option instead of dollars for more accurate representations of the home.\n        <br/>\n        \n        <br/>\n        "
+        }
+      }
+    },
+    "createJob": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 20713,
+          "description": "Created job with given id"
         }
       }
     }
