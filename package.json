@@ -49,6 +49,6 @@
     "less": "^2.4.0",
     "mocha": "^2.1.0",
     "selenium-webdriver": "^2.45.0",
-    "swagger-client": "git+https://github.com/SnuggHome/swagger-js.git"
+    "swagger-client": "git+https://github.com/SnuggHome/swagger-js.git#eec6c58de0bf97a7556599fa0b5a58d1fbb07653"
   }
 }
